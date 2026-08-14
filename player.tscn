@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://c5mste5xg54bn"]
+
+[ext_resource type="Script" uid="uid://cy11u207fa7ix" path="res://player.gd" id="1_b26j0"]
+[ext_resource type="Texture2D" uid="uid://b5pgb7b8wnefa" path="res://1000259006.png" id="2_n7ghd"]
+[ext_resource type="Texture2D" uid="uid://bjf4aepd01xrk" path="res://1000259007.png" id="3_nvl01"]
+[ext_resource type="Texture2D" uid="uid://kksag07n1q11" path="res://1000259013.png" id="4_ivps1"]
+[ext_resource type="Texture2D" uid="uid://cx1mpvyor7l16" path="res://1000259012.png" id="5_urp6f"]
+[ext_resource type="Texture2D" uid="uid://cuehj510v2jii" path="res://1000259009.png" id="6_bwjto"]
+[ext_resource type="Texture2D" uid="uid://cytxnlbnfkmxe" path="res://1000259008.png" id="7_606se"]
+[ext_resource type="Texture2D" uid="uid://gxdu5eyfrru3" path="res://1000259010.png" id="8_u1c27"]
+[ext_resource type="Texture2D" uid="uid://ccgrq2ghaw14s" path="res://1000259011.png" id="9_op7ga"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_n7ghd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_nvl01")
+}],
+"loop": 1,
+"name": &"WalkingDown",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ivps1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_urp6f")
+}],
+"loop": 1,
+"name": &"WalkingLeft",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_bwjto")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_606se")
+}],
+"loop": 1,
+"name": &"WalkingRight",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_u1c27")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_op7ga")
+}],
+"loop": 1,
+"name": &"WalkingUp",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody3D" unique_id=1477526133]
+script = ExtResource("1_b26j0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=21141536]
+shape = SubResource("CapsuleShape3D_g4v7s")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=805599003]
+transform = Transform3D(0.44630253, 0, 0, 0, 0.44630253, 0, 0, 0, 0.44630253, 0, 0, 0)
+sprite_frames = SubResource("SpriteFrames_g4v7s")
+animation = &"WalkingDown"
+frame_progress = 0.77530634
+speed_scale = 2.0
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1319799575]
+transform = Transform3D(1, 0, 0, 0, 0.6420837, 0.7666346, 0, -0.7666346, 0.6420837, 4.7683716e-07, 4.7394624, 4.137229)
