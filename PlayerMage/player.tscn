@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://c5mste5xg54bn"]
 
 [ext_resource type="Script" uid="uid://cy11u207fa7ix" path="res://PlayerMage/player.gd" id="1_b26j0"]
-[ext_resource type="Texture2D" uid="uid://b5pgb7b8wnefa" path="res://PlayerMage/1000259006.png" id="2_n7ghd"]
-[ext_resource type="Texture2D" uid="uid://bjf4aepd01xrk" path="res://PlayerMage/1000259007.png" id="3_nvl01"]
-[ext_resource type="Texture2D" uid="uid://kksag07n1q11" path="res://PlayerMage/1000259013.png" id="4_ivps1"]
-[ext_resource type="Texture2D" uid="uid://cx1mpvyor7l16" path="res://PlayerMage/1000259012.png" id="5_urp6f"]
-[ext_resource type="Texture2D" uid="uid://cuehj510v2jii" path="res://PlayerMage/1000259009.png" id="6_bwjto"]
-[ext_resource type="Texture2D" uid="uid://cytxnlbnfkmxe" path="res://PlayerMage/1000259008.png" id="7_606se"]
-[ext_resource type="Texture2D" uid="uid://gxdu5eyfrru3" path="res://PlayerMage/1000259010.png" id="8_u1c27"]
-[ext_resource type="Texture2D" uid="uid://ccgrq2ghaw14s" path="res://PlayerMage/1000259011.png" id="9_op7ga"]
+[ext_resource type="Texture2D" uid="uid://b5pgb7b8wnefa" path="res://PlayerMage/assets/1000259006.png" id="2_n7ghd"]
+[ext_resource type="Texture2D" uid="uid://bjf4aepd01xrk" path="res://PlayerMage/assets/1000259007.png" id="3_nvl01"]
+[ext_resource type="Texture2D" uid="uid://kksag07n1q11" path="res://PlayerMage/assets/1000259013.png" id="4_ivps1"]
+[ext_resource type="Texture2D" uid="uid://cx1mpvyor7l16" path="res://PlayerMage/assets/1000259012.png" id="5_urp6f"]
+[ext_resource type="Texture2D" uid="uid://cuehj510v2jii" path="res://PlayerMage/assets/1000259009.png" id="6_bwjto"]
+[ext_resource type="Texture2D" uid="uid://cytxnlbnfkmxe" path="res://PlayerMage/assets/1000259008.png" id="7_606se"]
+[ext_resource type="Texture2D" uid="uid://gxdu5eyfrru3" path="res://PlayerMage/assets/1000259010.png" id="8_u1c27"]
+[ext_resource type="Texture2D" uid="uid://ccgrq2ghaw14s" path="res://PlayerMage/assets/1000259011.png" id="9_op7ga"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
 
