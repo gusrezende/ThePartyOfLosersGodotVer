@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 const SPEED = 2.5
-const MAX_HP = 3
+const MAX_HP = 5
 const ATTACK_RANGE = 1.5
 const ATTACK_DAMAGE = 1
 const ATTACK_COOLDOWN = 1.0
