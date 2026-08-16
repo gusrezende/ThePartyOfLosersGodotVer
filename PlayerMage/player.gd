@@ -1,12 +1,13 @@
 extends CharacterBody3D
 
-signal hp_changed(current_hp, max_hp)
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 const MAX_HP = 5
 const KNOCKBACK_FORCE = 6.0
 const KNOCKBACK_DURATION = 0.2
 const FLASH_DURATION = 0.3
+
+signal hp_changed(current_hp, max_hp)
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var hp := MAX_HP
@@ -16,6 +17,10 @@ var knockback_timer := 0.0
 @onready var sprite: AnimatedSprite3D = $AnimatedSprite3D
 
 const PROJECTILE_SCENE = preload("res://Projectile/projectile.tscn")
+
+
+func _ready() -> void:
+	hp_changed.emit(hp, MAX_HP)
 
 
 func _physics_process(delta: float) -> void:
@@ -100,12 +105,15 @@ func take_damage(amount: int, source_position = null) -> void:
 	hp = max(hp, 0)
 	hp_changed.emit(hp, MAX_HP)
 	print("Player tomou dano, HP restante: ", hp)
+
 	if source_position != null:
 		apply_knockback(source_position)
 	flash_red()
+
 	if hp <= 0:
 		print("Player morreu!")
-		get_tree().reload_current_scene()
+		get_tree().call_deferred("reload_current_scene")
+
 
 func apply_knockback(source_position: Vector3) -> void:
 	var direction = global_position - source_position

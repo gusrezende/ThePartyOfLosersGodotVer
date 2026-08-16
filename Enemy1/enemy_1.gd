@@ -66,4 +66,5 @@ func take_damage(amount: int) -> void:
 	hp -= amount
 	print("Enemy tomou dano, HP restante: ", hp)
 	if hp <= 0:
+		set_physics_process(false)
 		queue_free()
