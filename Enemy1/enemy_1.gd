@@ -1,15 +1,17 @@
 extends CharacterBody3D
 
 const SPEED = 2.5
-const MAX_HP = 5
+const MAX_HP = 3
 const ATTACK_RANGE = 1.5
 const ATTACK_DAMAGE = 1
 const ATTACK_COOLDOWN = 1.0
+const DETECTION_RADIUS = 6.0
 
 var hp := MAX_HP
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var player: Node3D = null
 var attack_timer := 0.0
+var is_hunting := false
 
 @onready var sprite: AnimatedSprite3D = $AnimatedSprite3D
 
@@ -31,6 +33,15 @@ func _physics_process(delta: float) -> void:
 	var to_player = player.global_position - global_position
 	to_player.y = 0
 	var distance = to_player.length()
+
+	if not is_hunting:
+		if distance <= DETECTION_RADIUS:
+			is_hunting = true
+		else:
+			velocity.x = 0
+			velocity.z = 0
+			move_and_slide()
+			return
 
 	if distance > ATTACK_RANGE:
 		var direction = to_player.normalized()

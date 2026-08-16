@@ -54,7 +54,6 @@ data = PackedVector3Array(-1, 0, 0.375, -0.3701, 0, 0.1875, -0.3701, 0, 0.375, -
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lya5h"]
 resource_name = "Material.001"
-transparency = 4
 cull_mode = 2
 albedo_texture = ExtResource("2_kf38n")
 metadata/_gltf_primary_texture_coord = 0
@@ -283,4 +282,4 @@ omni_range = 9.718122
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3062897, 0, 14.64906)
 
 [node name="Enemy1" parent="." unique_id=1396215999 groups=["enemy"] instance=ExtResource("7_c4i6m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.681492, 0.3776884, 8.188301)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.681492, 0.3776884, 4.9042816)
