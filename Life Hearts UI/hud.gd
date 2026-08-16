@@ -26,3 +26,4 @@ func _on_hp_changed(current_hp: int, max_hp: int) -> void:
 		var heart_min = i * hp_per_heart
 		var heart_hp = clamp(current_hp - heart_min, 0, hp_per_heart)
 		hearts[i].value = (heart_hp / hp_per_heart) * 100.0
+		print("Coração ", i, " valor: ", hearts[i].value)
