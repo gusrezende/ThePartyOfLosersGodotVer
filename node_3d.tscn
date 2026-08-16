@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c5mste5xg54bn" path="res://PlayerMage/player.tscn" id="1_a202f"]
 [ext_resource type="PackedScene" uid="uid://bqeuujknt5hro" path="res://Enemy1/enemy_1.tscn" id="2_noarx"]
 [ext_resource type="PackedScene" uid="uid://bmwihea3gmy11" path="res://MissEile/miss_eile.tscn" id="3_a0tk4"]
+[ext_resource type="PackedScene" uid="uid://b4flc54piu4pc" path="res://Life Hearts UI/lifeHeartsUI.tscn" id="4_r3fl7"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_g4v7s"]
 
@@ -44,3 +45,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5025947, 1.49, -4.5163717)
 
 [node name="Enemy1" parent="." unique_id=1396215999 groups=["enemy"] instance=ExtResource("2_noarx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.595993, 1.8031931, 10.256695)
+
+[node name="Node3D" parent="." unique_id=520576831 instance=ExtResource("4_r3fl7")]

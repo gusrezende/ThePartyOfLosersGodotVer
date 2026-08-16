@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+signal hp_changed(current_hp, max_hp)
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 const MAX_HP = 5
@@ -96,16 +97,15 @@ func get_mouse_world_position() -> Variant:
 
 func take_damage(amount: int, source_position = null) -> void:
 	hp -= amount
+	hp = max(hp, 0)
+	hp_changed.emit(hp, MAX_HP)
 	print("Player tomou dano, HP restante: ", hp)
-
 	if source_position != null:
 		apply_knockback(source_position)
 	flash_red()
-
 	if hp <= 0:
 		print("Player morreu!")
 		get_tree().reload_current_scene()
-
 
 func apply_knockback(source_position: Vector3) -> void:
 	var direction = global_position - source_position
