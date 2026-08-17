@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cytxnlbnfkmxe" path="res://PlayerMage/assets/1000259008.png" id="7_606se"]
 [ext_resource type="Texture2D" uid="uid://gxdu5eyfrru3" path="res://PlayerMage/assets/1000259010.png" id="8_u1c27"]
 [ext_resource type="Texture2D" uid="uid://ccgrq2ghaw14s" path="res://PlayerMage/assets/1000259011.png" id="9_op7ga"]
+[ext_resource type="Texture2D" uid="uid://dalu2ig4mpd7d" path="res://Life Hearts UI/assets/lifeheart.png" id="10_c3bqx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
 
@@ -77,11 +78,16 @@ script = ExtResource("1_b26j0")
 shape = SubResource("CapsuleShape3D_g4v7s")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=805599003]
-transform = Transform3D(0.44630253, 0, 0, 0, 0.44630253, 0, 0, 0, 0.44630253, 0, 0, 0)
+transform = Transform3D(0.44630253, 0, 0, 0, 0.41288006, 0.16945796, 0, -0.16945796, 0.41288006, 0, 0, 0)
 sprite_frames = SubResource("SpriteFrames_g4v7s")
 animation = &"IdleDown"
 frame_progress = 0.10760876
 speed_scale = 2.0
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1319799575]
-transform = Transform3D(1, 0, 0, 0, 0.6420837, 0.7666346, 0, -0.7666346, 0.6420837, 4.7683716e-07, 4.7394624, 4.137229)
+transform = Transform3D(1, 0, 0, 0, 0.29067382, 0.9568223, 0, -0.9568223, 0.29067382, 4.7683716e-07, 8.960051, 3.3218274)
+
+[node name="HeldMushroom" type="Sprite3D" parent="." unique_id=784663824]
+transform = Transform3D(1.91383, 0, 0, 0, 1.6309448, 1.0013813, 0, -1.0013813, 1.6309448, 0, 0.95317197, 0)
+visible = false
+texture = ExtResource("10_c3bqx")

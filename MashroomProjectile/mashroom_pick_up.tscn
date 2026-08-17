@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cn607bjka8fcm"]
+
+[ext_resource type="Script" uid="uid://c78ucsu3p8bni" path="res://MashroomProjectile/mashroom_pick_up.gd" id="1_4fwrv"]
+[ext_resource type="Texture2D" uid="uid://dalu2ig4mpd7d" path="res://Life Hearts UI/assets/lifeheart.png" id="2_fk8di"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_s1fef"]
+radius = 0.8721852
+
+[node name="MashroomPickUp" type="Area3D" unique_id=800666980]
+script = ExtResource("1_4fwrv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1308308834]
+shape = SubResource("SphereShape3D_s1fef")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=927530213]
+transform = Transform3D(2.8523736, 0, 0, 0, 2.5436432, 1.2907032, 0, -1.2907032, 2.5436432, 0, 0, 0)
+texture = ExtResource("2_fk8di")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

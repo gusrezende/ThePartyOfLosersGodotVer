@@ -13,10 +13,13 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var hp := MAX_HP
 var knockback_velocity := Vector3.ZERO
 var knockback_timer := 0.0
+var is_holding_mushroom := false
 
 @onready var sprite: AnimatedSprite3D = $AnimatedSprite3D
+@onready var held_mushroom: Node3D = $HeldMushroom
 
 const PROJECTILE_SCENE = preload("res://Projectile/projectile.tscn")
+const MUSHROOM_PROJECTILE_SCENE = preload("res://MashroomProjectile/mashroom_projectile.tscn")
 
 
 func _ready() -> void:
@@ -65,7 +68,10 @@ func update_walk_animation(direction: Vector3) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		shoot()
+		if is_holding_mushroom:
+			throw_mushroom()
+		else:
+			shoot()
 
 
 func shoot() -> void:
@@ -83,6 +89,33 @@ func shoot() -> void:
 	get_tree().current_scene.add_child(projectile)
 	projectile.global_position = global_position
 	projectile.launch(shoot_direction)
+
+
+func pick_up_mushroom() -> void:
+	if is_holding_mushroom:
+		return
+	is_holding_mushroom = true
+	held_mushroom.visible = true
+
+
+func throw_mushroom() -> void:
+	var target_point = get_mouse_world_position()
+	if target_point == null:
+		return
+
+	var throw_direction = (target_point - global_position)
+	throw_direction.y = 0
+	if throw_direction.length() == 0:
+		return
+	throw_direction = throw_direction.normalized()
+
+	var mushroom = MUSHROOM_PROJECTILE_SCENE.instantiate()
+	get_tree().current_scene.add_child(mushroom)
+	mushroom.global_position = global_position
+	mushroom.launch(throw_direction)
+
+	is_holding_mushroom = false
+	held_mushroom.visible = false
 
 
 func get_mouse_world_position() -> Variant:
