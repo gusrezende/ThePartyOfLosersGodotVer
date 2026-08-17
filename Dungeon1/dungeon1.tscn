@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c5mste5xg54bn" path="res://PlayerMage/player.tscn" id="6_kf38n"]
 [ext_resource type="PackedScene" uid="uid://bqeuujknt5hro" path="res://Enemy1/enemy_1.tscn" id="7_c4i6m"]
 [ext_resource type="PackedScene" uid="uid://cn607bjka8fcm" path="res://MashroomProjectile/mashroom_pick_up.tscn" id="8_rcoht"]
+[ext_resource type="PackedScene" uid="uid://dcf61ynn5bt25" path="res://pedinte.tscn" id="9_18j48"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bx51d"]
 resource_name = "TexFLOOR"
@@ -288,4 +289,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.681492, 0.3776884, 4.904281
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.794211, -0.11153889, 0.09025955)
 
 [node name="Enemy2" parent="." unique_id=1445308736 groups=["enemy"] instance=ExtResource("7_c4i6m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.732301, 0.28022134, 1.5534487)
+transform = Transform3D(3.603017, 0, 0, 0, 3.603017, 0, 0, 0, 3.603017, 15.749612, 1.5470039, 1.5529504)
+
+[node name="Pedinte" parent="." unique_id=713960368 instance=ExtResource("9_18j48")]
+transform = Transform3D(0.82391256, 0, 0, 0, 0.82391256, 0, 0, 0, 0.82391256, 6.2005963, -1.2308521, -0.12939644)

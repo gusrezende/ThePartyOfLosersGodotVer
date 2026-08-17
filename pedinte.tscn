@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dcf61ynn5bt25"]
+
+[ext_resource type="Texture2D" uid="uid://djbrodjs6bcbf" path="res://Pedinte/sprite/pedinte.png" id="1_wdo7k"]
+
+[node name="Pedinte" type="CharacterBody3D" unique_id=713960368]
+
+[node name="Timer" type="Timer" parent="." unique_id=1384316823]
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=766108333]
+transform = Transform3D(1, 0, 0, 0, 0.95120525, 0.30855882, 0, -0.30855882, 0.95120525, 0.0016047955, 2.064345, -0.0052461624)
+texture = ExtResource("1_wdo7k")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1315526727]

@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://bwnaqfyiwl2cg" path="res://Enemy1/assets/1000259239.png" id="5_71e5q"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
+radius = 0.3227539
+height = 1.6374512
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
 animations = [{
@@ -37,6 +39,7 @@ animations = [{
 script = ExtResource("1_jm2qf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=266612813]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10632324, 0)
 shape = SubResource("CapsuleShape3D_g4v7s")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=1500460267]
