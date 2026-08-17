@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://b4flc54piu4pc"]
 
 [ext_resource type="Script" uid="uid://b7e8ye2c1eca" path="res://Life Hearts UI/hud.gd" id="1_613kq"]
-[ext_resource type="Texture2D" uid="uid://gdfqa53c76my" path="res://Life Hearts UI/assets/lifeheartempty.png" id="2_hge17"]
-[ext_resource type="Texture2D" uid="uid://dalu2ig4mpd7d" path="res://Life Hearts UI/assets/lifeheart.png" id="2_jmf4g"]
+[ext_resource type="Texture2D" uid="uid://cnvjw55y3lqpx" path="res://Life Hearts UI/assets/corações_vazios.png" id="2_jmf4g"]
+[ext_resource type="Texture2D" uid="uid://sdq3acbunnvb" path="res://Life Hearts UI/assets/coração.png" id="3_hge17"]
 
 [node name="Node3D" type="Node3D" unique_id=520576831]
 
@@ -16,16 +16,16 @@ offset_bottom = 63.0
 
 [node name="Heart1" type="TextureProgressBar" parent="HUD/HeartsContainer" unique_id=884335791]
 layout_mode = 2
-texture_under = ExtResource("2_hge17")
-texture_progress = ExtResource("2_jmf4g")
+texture_under = ExtResource("2_jmf4g")
+texture_progress = ExtResource("3_hge17")
 texture_progress_offset = Vector2(1, 1)
 
 [node name="Heart2" type="TextureProgressBar" parent="HUD/HeartsContainer" unique_id=583155227]
 layout_mode = 2
-texture_under = ExtResource("2_hge17")
-texture_progress = ExtResource("2_jmf4g")
+texture_under = ExtResource("2_jmf4g")
+texture_progress = ExtResource("3_hge17")
 
 [node name="Heart3" type="TextureProgressBar" parent="HUD/HeartsContainer" unique_id=1812657703]
 layout_mode = 2
-texture_under = ExtResource("2_hge17")
-texture_progress = ExtResource("2_jmf4g")
+texture_under = ExtResource("2_jmf4g")
+texture_progress = ExtResource("3_hge17")
