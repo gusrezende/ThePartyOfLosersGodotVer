@@ -1,11 +1,36 @@
 extends Node
 
+var missao_ativa := false
+var papeis_coletados := 0
+var total_papeis := 5
+var missao_concluida := false
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+
+func iniciar_missao():
+	missao_ativa = true
+	papeis_coletados = 0
+	missao_concluida = false
+
+	print("MISSÃO INICIADA!")
+	print("Encontre 5 folhas de papel.")
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func coletar_papel():
+
+	if not missao_ativa:
+		return
+
+	if missao_concluida:
+		return
+
+	papeis_coletados += 1
+
+	print("Papel coletado: ", papeis_coletados, "/", total_papeis)
+
+	if papeis_coletados >= total_papeis:
+		missao_concluida = true
+		print("TODOS OS PAPEIS FORAM COLETADOS!")
+
+
+func missao_esta_pronta() -> bool:
+	return missao_concluida
