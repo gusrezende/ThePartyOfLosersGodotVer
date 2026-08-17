@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cytxnlbnfkmxe" path="res://PlayerMage/assets/1000259008.png" id="7_606se"]
 [ext_resource type="Texture2D" uid="uid://gxdu5eyfrru3" path="res://PlayerMage/assets/1000259010.png" id="8_u1c27"]
 [ext_resource type="Texture2D" uid="uid://ccgrq2ghaw14s" path="res://PlayerMage/assets/1000259011.png" id="9_op7ga"]
-[ext_resource type="Texture2D" uid="uid://dalu2ig4mpd7d" path="res://Life Hearts UI/assets/lifeheart.png" id="10_c3bqx"]
+[ext_resource type="Texture2D" uid="uid://blnmivcq6aeij" path="res://MashroomProjectile/asset/ExplosiveMashroom.png" id="10_c3bqx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
 
