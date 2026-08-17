@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
-const MAX_HP = 5
+const MAX_HP = 6
 const KNOCKBACK_FORCE = 6.0
 const KNOCKBACK_DURATION = 0.2
 const FLASH_DURATION = 0.3

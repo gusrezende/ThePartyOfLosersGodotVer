@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gdfqa53c76my"
-path="res://.godot/imported/lifeheartempty.png-52a38b6dcc66efeef9235c8603d97bc1.ctex"
+uid="uid://cnvjw55y3lqpx"
+path="res://.godot/imported/corações_vazios.png-d0a9d1724ce29ac675d796d159e29cf6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Life Hearts UI/assets/lifeheartempty.png"
-dest_files=["res://.godot/imported/lifeheartempty.png-52a38b6dcc66efeef9235c8603d97bc1.ctex"]
+source_file="res://Life Hearts UI/assets/corações_vazios.png"
+dest_files=["res://.godot/imported/corações_vazios.png-d0a9d1724ce29ac675d796d159e29cf6.ctex"]
 
 [params]
 

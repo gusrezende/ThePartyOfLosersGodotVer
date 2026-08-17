@@ -280,16 +280,16 @@ transform = Transform3D(1.4285715, 0, 0, 0, 1.4285715, 0, 0, 0, 1.4285715, 9.536
 omni_range = 9.718122
 
 [node name="Player" parent="." unique_id=1477526133 instance=ExtResource("6_kf38n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3062897, 0, 14.64906)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3062897, -0.34844565, 14.64906)
 
 [node name="Enemy1" parent="." unique_id=1396215999 groups=["enemy"] instance=ExtResource("7_c4i6m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.681492, 0.3776884, 4.9042816)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.681492, -0.2729987, 4.9042816)
 
 [node name="MashroomPickUp" parent="." unique_id=800666980 instance=ExtResource("8_rcoht")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.794211, -0.11153889, 0.09025955)
 
 [node name="Enemy2" parent="." unique_id=1445308736 groups=["enemy"] instance=ExtResource("7_c4i6m")]
-transform = Transform3D(3.603017, 0, 0, 0, 3.603017, 0, 0, 0, 3.603017, 15.749612, 1.5470039, 1.5529504)
+transform = Transform3D(3.603017, 0, 0, 0, 3.603017, 0, 0, 0, 3.603017, 15.75, 1, 1.553)
 
 [node name="Pedinte" parent="." unique_id=713960368 instance=ExtResource("9_18j48")]
 transform = Transform3D(0.82391256, 0, 0, 0, 0.82391256, 0, 0, 0, 0.82391256, 6.2005963, -1.2308521, -0.12939644)
