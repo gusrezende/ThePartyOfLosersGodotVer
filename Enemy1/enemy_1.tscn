@@ -45,7 +45,5 @@ shape = SubResource("CapsuleShape3D_g4v7s")
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=1500460267]
 transform = Transform3D(0.52127725, 0, 0, 0, 0.48229077, 0.19780186, 0, -0.19780186, 0.48229077, 0, 0, 0)
 sprite_frames = SubResource("SpriteFrames_g4v7s")
-animation = &"chasing"
-frame = 1
-frame_progress = 0.71931064
+animation = &"attack"
 speed_scale = 2.0

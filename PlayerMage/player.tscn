@@ -85,7 +85,8 @@ frame_progress = 0.10760876
 speed_scale = 2.0
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1319799575]
-transform = Transform3D(1, 0, 0, 0, 0.29067382, 0.9568223, 0, -0.9568223, 0.29067382, 4.7683716e-07, 8.960051, 3.3218274)
+transform = Transform3D(1, 0, 0, 0, 0.69933486, 0.7147943, 0, -0.7147943, 0.69933486, 4.7683716e-07, 5.660881, 5.294056)
+fov = 55.15981
 
 [node name="HeldMushroom" type="Sprite3D" parent="." unique_id=784663824]
 transform = Transform3D(1.91383, 0, 0, 0, 1.6309448, 1.0013813, 0, -1.0013813, 1.6309448, 0, 0.95317197, 0)
