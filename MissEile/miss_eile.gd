@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 enum State { SHOOTING, TRANSFORMING, CHASING, RETURNING }
 
-const MAX_HP = 15
+const MAX_HP = 100
 const DETECT_RADIUS = 9.0
 const RETREAT_RADIUS = 9.0
 const FLY_HEIGHT = 1.5

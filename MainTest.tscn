@@ -2,11 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c5mste5xg54bn" path="res://PlayerMage/player.tscn" id="1_uuif0"]
 [ext_resource type="PackedScene" uid="uid://bmwihea3gmy11" path="res://MissEile/miss_eile.tscn" id="2_4opra"]
-[ext_resource type="PackedScene" uid="uid://bqeuujknt5hro" path="res://Enemy1/enemy_1.tscn" id="3_fe6h6"]
 [ext_resource type="PackedScene" uid="uid://b4flc54piu4pc" path="res://Life Hearts UI/lifeHeartsUI.tscn" id="4_uw173"]
-[ext_resource type="Script" uid="uid://cbokwlpa7i6wi" path="res://MiniGameMissEile/mini_game_miss_eile_interaction.gd" id="5_3vqva"]
-[ext_resource type="PackedScene" uid="uid://dc6brydb28no6" path="res://MiniGameMissEile/MiniGameMissEile.tscn" id="6_yaf5x"]
-[ext_resource type="PackedScene" uid="uid://dcf61ynn5bt25" path="res://pedinte.tscn" id="7_4opra"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_g4v7s"]
 
@@ -16,13 +12,10 @@ size = Vector3(37.620773, 1, 31.823738)
 [sub_resource type="BoxShape3D" id="BoxShape3D_yf5fn"]
 size = Vector3(49.127792, 1, 32.38217)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_s1fef"]
-
-[sub_resource type="PrismMesh" id="PrismMesh_s1fef"]
-
 [node name="Node3D" type="Node3D" unique_id=701580891]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1820967899]
+transform = Transform3D(0.45006734, 0, 0, 0, 1, 0, 0, 0, 0.6026871, 0, 0, 0)
 physics_material_override = SubResource("PhysicsMaterial_g4v7s")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=170212429]
@@ -37,26 +30,9 @@ shape = SubResource("BoxShape3D_yf5fn")
 transform = Transform3D(1, 0, 0, 0, 0.6384885, 0.7696314, 0, -0.7696314, 0.6384885, 0, 9.944241, 0.7533424)
 
 [node name="Player" parent="." unique_id=1477526133 instance=ExtResource("1_uuif0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.035353, 1.6157563, 18.736162)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.9343452, 1.6157563, 10.377201)
 
 [node name="MissEile" parent="." unique_id=1731039629 instance=ExtResource("2_4opra")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5025947, 1.49, -4.5163717)
 
-[node name="Enemy1" parent="." unique_id=1396215999 groups=["enemy"] instance=ExtResource("3_fe6h6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.595993, 1.8031931, 10.256695)
-
 [node name="Hearts" parent="." unique_id=520576831 instance=ExtResource("4_uw173")]
-
-[node name="MiniGameMissEileInteraction" type="Area3D" parent="." unique_id=1531148451]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.520373, 1.033679, 15.580629)
-script = ExtResource("5_3vqva")
-cena_minigame = ExtResource("6_yaf5x")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MiniGameMissEileInteraction" unique_id=295852093]
-shape = SubResource("BoxShape3D_s1fef")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MiniGameMissEileInteraction" unique_id=1915711389]
-mesh = SubResource("PrismMesh_s1fef")
-
-[node name="Pedinte" parent="." unique_id=713960368 instance=ExtResource("7_4opra")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.036668, 0.1339643, -0.11708164)
