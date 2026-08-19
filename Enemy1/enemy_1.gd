@@ -20,6 +20,10 @@ func _ready() -> void:
 	if players.size() > 0:
 		player = players[0]
 
+	sprite.animation = "chasing"
+	sprite.frame = 0
+	sprite.stop()
+
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -52,7 +56,6 @@ func _physics_process(delta: float) -> void:
 		velocity.x = 0
 		velocity.z = 0
 		sprite.play("attack")
-
 		attack_timer -= delta
 		if attack_timer <= 0:
 			attack_timer = ATTACK_COOLDOWN
@@ -60,7 +63,6 @@ func _physics_process(delta: float) -> void:
 				player.take_damage(ATTACK_DAMAGE)
 
 	move_and_slide()
-
 
 func take_damage(amount: int) -> void:
 	hp -= amount
