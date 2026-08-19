@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://cbokwlpa7i6wi" path="res://MiniGameMissEile/mini_game_miss_eile_interaction.gd" id="12_ve5cd"]
 [ext_resource type="PackedScene" uid="uid://dc6brydb28no6" path="res://MiniGameMissEile/MiniGameMissEile.tscn" id="13_hdfvm"]
 [ext_resource type="Script" uid="uid://c0b8omxeyavhi" path="res://PlayerMage/camera_3d.gd" id="14_hdfvm"]
+[ext_resource type="PackedScene" uid="uid://b4flc54piu4pc" path="res://Life Hearts UI/lifeHeartsUI.tscn" id="15_75216"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bx51d"]
 resource_name = "TexFLOOR"
@@ -393,3 +394,5 @@ mesh = SubResource("PrismMesh_wo7pl")
 transform = Transform3D(1, 0, 0, 0, 0.6993348, 0.7147943, 0, -0.7147943, 0.6993348, 3.0359464, 8.585146, 22.27555)
 fov = 55.15981
 script = ExtResource("14_hdfvm")
+
+[node name="Hearts" parent="." unique_id=520576831 instance=ExtResource("15_75216")]

@@ -96,7 +96,7 @@ func interagir():
 		QuestManager.iniciar_missao()
 
 		mostrar_mensagem(
-			"Ei! Você consegue me ajudar a encontrar 5 folhas de papel?"
+			"Planta... PLATA! ME DÊ 5 PLANTAS!"
 		)
 
 		return
