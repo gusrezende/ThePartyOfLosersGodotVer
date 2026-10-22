@@ -12,6 +12,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var player: Node3D = null
 var attack_timer := 0.0
 var is_hunting := false
+var morto := false
 
 @onready var sprite: AnimatedSprite3D = $AnimatedSprite3D
 
@@ -25,6 +26,9 @@ func _ready() -> void:
 	sprite.stop()
 
 func _physics_process(delta: float) -> void:
+	if morto:
+		return
+
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
@@ -65,8 +69,17 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func take_damage(amount: int) -> void:
+	if morto:
+		return
 	hp -= amount
 	print("Enemy tomou dano, HP restante: ", hp)
 	if hp <= 0:
-		set_physics_process(false)
-		queue_free()
+		morrer()
+
+func morrer() -> void:
+	morto = true
+	set_physics_process(false)
+	velocity = Vector3.ZERO
+	sprite.play("death")
+	await sprite.animation_finished
+	queue_free()

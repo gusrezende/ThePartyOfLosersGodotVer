@@ -1,0 +1,208 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://dvfci6d5tx5dc" path="res://SalaEvolucao/sala_evolucao.gd" id="1_sala"]
+[ext_resource type="Texture2D" uid="uid://bkht2t5cjqptm" path="res://Dungeon1/3D model/NEWcave2_NEWfloor.png" id="2_chao"]
+[ext_resource type="Texture2D" uid="uid://bi4ptekygwpgd" path="res://Dungeon1/3D model/NEWcave2_DungeonBrick.png" id="3_tijolo"]
+[ext_resource type="Texture2D" uid="uid://5nbh1dx7u882" path="res://Dungeon1/3D model/NEWcave2_NEWstone.png" id="4_pedra"]
+[ext_resource type="PackedScene" uid="uid://c5mste5xg54bn" path="res://PlayerMage/player.tscn" id="5_player"]
+[ext_resource type="PackedScene" uid="uid://b4flc54piu4pc" path="res://Life Hearts UI/lifeHeartsUI.tscn" id="6_hearts"]
+[ext_resource type="Script" uid="uid://c0b8omxeyavhi" path="res://PlayerMage/camera_3d.gd" id="7_camera"]
+
+[sub_resource type="Environment" id="Env_sala"]
+background_mode = 1
+background_color = Color(0, 0, 0, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.55, 0.45, 0.7, 1)
+ambient_light_energy = 0.3
+
+[sub_resource type="StandardMaterial3D" id="Mat_chao"]
+albedo_texture = ExtResource("2_chao")
+texture_filter = 0
+uv1_scale = Vector3(0.3, 0.3, 0.3)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="Mat_tijolo"]
+albedo_texture = ExtResource("3_tijolo")
+texture_filter = 0
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="Mat_pedra"]
+albedo_texture = ExtResource("4_pedra")
+texture_filter = 0
+uv1_scale = Vector3(0.35, 0.35, 0.35)
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="Mat_tocha"]
+shading_mode = 0
+albedo_color = Color(1, 0.6, 0.15, 1)
+
+[sub_resource type="BoxMesh" id="Mesh_chao"]
+material = SubResource("Mat_chao")
+size = Vector3(28, 1, 22)
+
+[sub_resource type="BoxShape3D" id="Shape_chao"]
+size = Vector3(28, 1, 22)
+
+[sub_resource type="BoxMesh" id="Mesh_parede_fundo"]
+material = SubResource("Mat_pedra")
+size = Vector3(28, 4, 1)
+
+[sub_resource type="BoxShape3D" id="Shape_parede_fundo"]
+size = Vector3(28, 4, 1)
+
+[sub_resource type="BoxMesh" id="Mesh_parede_frente"]
+material = SubResource("Mat_tijolo")
+size = Vector3(28, 1, 1)
+
+[sub_resource type="BoxShape3D" id="Shape_parede_frente"]
+size = Vector3(28, 4, 1)
+
+[sub_resource type="BoxMesh" id="Mesh_parede_lado"]
+material = SubResource("Mat_pedra")
+size = Vector3(1, 4, 22)
+
+[sub_resource type="BoxShape3D" id="Shape_parede_lado"]
+size = Vector3(1, 4, 22)
+
+[sub_resource type="BoxMesh" id="Mesh_pilar"]
+material = SubResource("Mat_tijolo")
+size = Vector3(1.4, 3, 1.4)
+
+[sub_resource type="BoxShape3D" id="Shape_pilar"]
+size = Vector3(1.4, 3, 1.4)
+
+[sub_resource type="BoxMesh" id="Mesh_tocha"]
+material = SubResource("Mat_tocha")
+size = Vector3(0.25, 0.4, 0.25)
+
+[node name="SalaEvolucao" type="Node3D"]
+script = ExtResource("1_sala")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Env_sala")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.94, 0.2, -0.28, 0, 0.8137, 0.5812, 0.3441, -0.5464, 0.7649, 0, 10, 0)
+light_color = Color(0.8, 0.7, 1, 1)
+light_energy = 0.3
+shadow_enabled = true
+
+[node name="Chao" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Chao"]
+mesh = SubResource("Mesh_chao")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Chao"]
+shape = SubResource("Shape_chao")
+
+[node name="ParedeFundo" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -10.5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ParedeFundo"]
+mesh = SubResource("Mesh_parede_fundo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ParedeFundo"]
+shape = SubResource("Shape_parede_fundo")
+
+[node name="ParedeFrente" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 10.5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ParedeFrente"]
+mesh = SubResource("Mesh_parede_frente")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ParedeFrente"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("Shape_parede_frente")
+
+[node name="ParedeEsquerda" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.5, 2, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ParedeEsquerda"]
+mesh = SubResource("Mesh_parede_lado")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ParedeEsquerda"]
+shape = SubResource("Shape_parede_lado")
+
+[node name="ParedeDireita" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 2, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ParedeDireita"]
+mesh = SubResource("Mesh_parede_lado")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ParedeDireita"]
+shape = SubResource("Shape_parede_lado")
+
+[node name="Pilar1" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3, 1.5, -9.3)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pilar1"]
+mesh = SubResource("Mesh_pilar")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pilar1"]
+shape = SubResource("Shape_pilar")
+
+[node name="Pilar2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3, 1.5, -9.3)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pilar2"]
+mesh = SubResource("Mesh_pilar")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pilar2"]
+shape = SubResource("Shape_pilar")
+
+[node name="Tocha1" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2.8, -9.8)
+light_color = Color(1, 0.55, 0.2, 1)
+light_energy = 2.5
+omni_range = 11.0
+
+[node name="Chama" type="MeshInstance3D" parent="Tocha1"]
+mesh = SubResource("Mesh_tocha")
+
+[node name="Tocha2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 2.8, -9.8)
+light_color = Color(1, 0.55, 0.2, 1)
+light_energy = 2.5
+omni_range = 11.0
+
+[node name="Chama" type="MeshInstance3D" parent="Tocha2"]
+mesh = SubResource("Mesh_tocha")
+
+[node name="Tocha3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.8, 2.8, 2)
+light_color = Color(1, 0.55, 0.2, 1)
+light_energy = 2.5
+omni_range = 11.0
+
+[node name="Chama" type="MeshInstance3D" parent="Tocha3"]
+mesh = SubResource("Mesh_tocha")
+
+[node name="Tocha4" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.8, 2.8, 2)
+light_color = Color(1, 0.55, 0.2, 1)
+light_energy = 2.5
+omni_range = 11.0
+
+[node name="Chama" type="MeshInstance3D" parent="Tocha4"]
+mesh = SubResource("Mesh_tocha")
+
+[node name="LuzCentro" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+light_color = Color(0.85, 0.75, 1, 1)
+light_energy = 1.5
+omni_range = 16.0
+
+[node name="Player" parent="." instance=ExtResource("5_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 6)
+
+[node name="Hearts" parent="." instance=ExtResource("6_hearts")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.6993348, 0.7147943, 0, -0.7147943, 0.6993348, 0, 8.07, 12.7)
+fov = 55.15981
+script = ExtResource("7_camera")

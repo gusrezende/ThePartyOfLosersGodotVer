@@ -1,33 +1,36 @@
 [gd_scene format=3 uid="uid://bmwihea3gmy11"]
 
-[ext_resource type="Texture2D" uid="uid://drg0ob5g7j6gx" path="res://MissEile/assets/001.png" id="1_haish"]
 [ext_resource type="Script" uid="uid://2t5ep064yeiw" path="res://MissEile/miss_eile.gd" id="1_l6ojy"]
-[ext_resource type="Texture2D" uid="uid://b7v0cr3mj427c" path="res://MissEile/assets/1000228579.png" id="2_bm6fn"]
-[ext_resource type="Texture2D" uid="uid://bcqyauwssxaja" path="res://MissEile/assets/002.png" id="2_rxo3t"]
-[ext_resource type="Texture2D" uid="uid://cy7y0fg5kkijb" path="res://MissEile/assets/008.png" id="3_p5r2o"]
-[ext_resource type="Texture2D" uid="uid://cb20kbsgpot1l" path="res://MissEile/assets/003.png" id="3_vd5wd"]
-[ext_resource type="Texture2D" uid="uid://bgt7254sihpm3" path="res://MissEile/assets/009.png" id="4_pb1ew"]
-[ext_resource type="Texture2D" uid="uid://b3tdlyxs5yrn4" path="res://MissEile/assets/004.png" id="4_r244b"]
-[ext_resource type="Texture2D" uid="uid://dvslu7btwggky" path="res://MissEile/assets/005.png" id="5_jlprt"]
-[ext_resource type="Texture2D" uid="uid://3rhajqvxt8dk" path="res://MissEile/assets/006.png" id="10_4l5m4"]
-[ext_resource type="Texture2D" uid="uid://b3hvdpn7gdhxf" path="res://MissEile/assets/007.png" id="11_36quo"]
+[ext_resource type="Texture2D" uid="uid://c5ucjc3jf5uqx" path="res://MissEile/newAssets/Attack/1000280560.png" id="2_l6ojy"]
+[ext_resource type="Texture2D" uid="uid://d3c44qj87cbbe" path="res://MissEile/newAssets/flying/1000280557.png" id="3_bm6fn"]
+[ext_resource type="Texture2D" uid="uid://s73rsxignoc6" path="res://MissEile/newAssets/flying/1000280558.png" id="4_p5r2o"]
+[ext_resource type="Texture2D" uid="uid://b3l58lxyc0nen" path="res://MissEile/newAssets/flying/1000280559.png" id="5_pb1ew"]
+[ext_resource type="Texture2D" uid="uid://dsonfiv0egs7" path="res://MissEile/newAssets/idle/1000280553.png" id="6_4l5m4"]
+[ext_resource type="Texture2D" uid="uid://bjm3aokrnwg52" path="res://MissEile/newAssets/idle/1000280552.png" id="7_36quo"]
+[ext_resource type="Texture2D" uid="uid://wiqdryxglvav" path="res://MissEile/newAssets/idle/1000280551.png" id="8_6juh1"]
+[ext_resource type="Texture2D" uid="uid://cam1vo7txiypd" path="res://MissEile/newAssets/transforming/1000280554.png" id="9_g0gsa"]
+[ext_resource type="Texture2D" uid="uid://mqsrjpeiusm7" path="res://MissEile/newAssets/transforming/1000280555.png" id="10_5nw7r"]
+[ext_resource type="Texture2D" uid="uid://b81d15whiwmrt" path="res://MissEile/newAssets/transforming/1000280556.png" id="11_ma5w5"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yf5fn"]
 animations = [{
 "frames": [{
-"duration": 0.3,
-"texture": ExtResource("2_bm6fn")
+"duration": 1.0,
+"texture": ExtResource("2_l6ojy")
 }],
 "loop": 1,
 "name": &"attack",
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 0.5,
-"texture": ExtResource("3_p5r2o")
+"duration": 1.0,
+"texture": ExtResource("3_bm6fn")
 }, {
-"duration": 0.6,
-"texture": ExtResource("4_pb1ew")
+"duration": 1.0,
+"texture": ExtResource("4_p5r2o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pb1ew")
 }],
 "loop": 1,
 "name": &"flying",
@@ -35,22 +38,19 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_haish")
+"texture": ExtResource("6_4l5m4")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_rxo3t")
+"texture": ExtResource("7_36quo")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_vd5wd")
+"texture": ExtResource("8_6juh1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_vd5wd")
+"texture": ExtResource("7_36quo")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_r244b")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_jlprt")
+"texture": ExtResource("6_4l5m4")
 }],
 "loop": 1,
 "name": &"idle",
@@ -58,10 +58,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("10_4l5m4")
+"texture": ExtResource("9_g0gsa")
 }, {
-"duration": 3.0,
-"texture": ExtResource("11_36quo")
+"duration": 1.0,
+"texture": ExtResource("10_5nw7r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ma5w5")
 }],
 "loop": 0,
 "name": &"transformation",
@@ -76,9 +79,9 @@ height = 2.9350586
 script = ExtResource("1_l6ojy")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=493240682]
-transform = Transform3D(1.4240716, 0, 0, 0, 1.3477323, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(0.5696286, 0, 0, 0, 0.67386615, 0, 0, 0, 1, 0, 0, 0)
 sprite_frames = SubResource("SpriteFrames_yf5fn")
-animation = &"transformation"
+animation = &"attack"
 speed_scale = 2.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1979635130]

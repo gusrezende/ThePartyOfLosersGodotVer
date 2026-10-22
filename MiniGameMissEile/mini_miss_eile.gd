@@ -1,9 +1,11 @@
 extends TextureButton
 
+const TelaVitoria = preload("res://BossMissEile/tela_vitoria.gd")  # ajuste se salvou em outra pasta
+
 @export var vida_maxima := 20
 @export var velocidade_inicial := 450.0
 @export var velocidade_maxima := 1000.0
-@export var tempo_maximo := 30.0
+@export var tempo_maximo := 15.0  # antes: 30.0
 
 var vida: int
 var velocidade: float
@@ -191,6 +193,15 @@ func vencer():
 		0.5
 	)
 
+	# espera a animação e mostra a tela final da demo
+	await get_tree().create_timer(1.2).timeout
+
+	# GameState.pulou_boss = true  # descomente se criou o Autoload
+
+	var tela = TelaVitoria.new()
+	get_tree().current_scene.add_child(tela)
+	tela.mostrar("Parabéns! Você completou o mini jogo e pulou a luta contra o boss. Você ganhou +1 de habilidade (com menos experiência).")
+
 
 func perder():
 
@@ -205,6 +216,10 @@ func perder():
 
 	if timer_label:
 		timer_label.text = "TIME: 0"
+
+	# tempo esgotado: recomeça o mini jogo
+	await get_tree().create_timer(1.5).timeout
+	get_tree().reload_current_scene()
 
 
 func atualizar_interface():

@@ -1,10 +1,18 @@
 [gd_scene format=3 uid="uid://bqeuujknt5hro"]
 
 [ext_resource type="Script" uid="uid://dh4lctgpukoa1" path="res://Enemy1/enemy_1.gd" id="1_jm2qf"]
-[ext_resource type="Texture2D" uid="uid://dchsxocdqt3qv" path="res://Enemy1/assets/1000259241.png" id="2_taxtk"]
-[ext_resource type="Texture2D" uid="uid://caphtm326u18t" path="res://Enemy1/assets/1000259242.png" id="3_6cpsr"]
-[ext_resource type="Texture2D" uid="uid://dirmwvfwnow57" path="res://Enemy1/assets/1000259240.png" id="4_2mib6"]
-[ext_resource type="Texture2D" uid="uid://bwnaqfyiwl2cg" path="res://Enemy1/assets/1000259239.png" id="5_71e5q"]
+[ext_resource type="Texture2D" uid="uid://fkbg817h4nel" path="res://Enemy1/newAssets/attack/1000280375.png" id="2_eixfm"]
+[ext_resource type="Texture2D" uid="uid://cpuf3apydbcxw" path="res://Enemy1/newAssets/attack/1000280376.png" id="3_k6fdb"]
+[ext_resource type="Texture2D" uid="uid://qpno5go25p1u" path="res://Enemy1/newAssets/attack/1000280377.png" id="4_sc335"]
+[ext_resource type="Texture2D" uid="uid://boautbaicpxoh" path="res://Enemy1/newAssets/attack/1000280378.png" id="5_x6dhl"]
+[ext_resource type="Texture2D" uid="uid://b45qpcuqkcsh2" path="res://Enemy1/newAssets/chasing/1000280372.png" id="6_mglfd"]
+[ext_resource type="Texture2D" uid="uid://bi64f57c61yuf" path="res://Enemy1/newAssets/chasing/1000280373.png" id="7_f0g31"]
+[ext_resource type="Texture2D" uid="uid://c8hv72owqny82" path="res://Enemy1/newAssets/chasing/1000280374.png" id="8_50pke"]
+[ext_resource type="Texture2D" uid="uid://dc0ghig05poox" path="res://Enemy1/newAssets/death/1000280381.png" id="9_sq6ka"]
+[ext_resource type="Texture2D" uid="uid://cdti48nxtwrya" path="res://Enemy1/newAssets/death/1000280382.png" id="10_dp8fc"]
+[ext_resource type="Texture2D" uid="uid://ge7xccoid1ly" path="res://Enemy1/newAssets/death/1000280386.png" id="11_emcv5"]
+[ext_resource type="Texture2D" uid="uid://bp7pdhvh6jsir" path="res://Enemy1/newAssets/death/1000280387.png" id="12_lu8ne"]
+[ext_resource type="Texture2D" uid="uid://cc5ygehoyjgyy" path="res://Enemy1/newAssets/death/1000280388.png" id="13_c1lsw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
 radius = 0.3227539
@@ -14,10 +22,16 @@ height = 1.6374512
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_taxtk")
+"texture": ExtResource("2_eixfm")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_6cpsr")
+"texture": ExtResource("3_k6fdb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_sc335")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_x6dhl")
 }],
 "loop": 1,
 "name": &"attack",
@@ -25,13 +39,36 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_2mib6")
+"texture": ExtResource("6_mglfd")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_71e5q")
+"texture": ExtResource("7_f0g31")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_50pke")
 }],
 "loop": 1,
 "name": &"chasing",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_sq6ka")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_dp8fc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_emcv5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_lu8ne")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_c1lsw")
+}],
+"loop": 0,
+"name": &"death",
 "speed": 5.0
 }]
 

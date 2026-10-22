@@ -1,0 +1,13 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Jogo exportado (builds) - não vai pro GitHub, use "Releases" para distribuir
+*.exe
+*.pck
+*.zip
+/builds/
+/export/
+
+# Arquivos temporários do Godot
+*.tmp

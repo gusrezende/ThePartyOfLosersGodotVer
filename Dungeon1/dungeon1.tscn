@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://dc6brydb28no6" path="res://MiniGameMissEile/MiniGameMissEile.tscn" id="13_hdfvm"]
 [ext_resource type="Script" uid="uid://c0b8omxeyavhi" path="res://PlayerMage/camera_3d.gd" id="14_hdfvm"]
 [ext_resource type="PackedScene" uid="uid://b4flc54piu4pc" path="res://Life Hearts UI/lifeHeartsUI.tscn" id="15_75216"]
+[ext_resource type="Script" uid="uid://die4rna1m8ei5" path="res://Dungeon1/porta_boss.gd" id="16_wo7pl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bx51d"]
 resource_name = "TexFLOOR"
@@ -277,6 +278,9 @@ data = PackedVector3Array(-0.0169, -2.9052, -0.21779999, -0.2077, -2.9052, -0.02
 
 [sub_resource type="PrismMesh" id="PrismMesh_wo7pl"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_s1fef"]
+size = Vector3(7.94751, 3.9379272, 4.493164)
+
 [node name="Node3D" type="Node3D" unique_id=587704780]
 
 [node name="NEWcave2" type="Node3D" parent="." unique_id=1326973182]
@@ -390,9 +394,52 @@ shape = SubResource("BoxShape3D_75216")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MiniGameMissEileInteraction" unique_id=1590678493]
 mesh = SubResource("PrismMesh_wo7pl")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="MiniGameMissEileInteraction" unique_id=699429466]
+
+[node name="PanelContainer" type="PanelContainer" parent="MiniGameMissEileInteraction/CanvasLayer" unique_id=1991417316]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -23.5
+offset_right = 20.0
+offset_bottom = 23.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MiniGameMissEileInteraction/CanvasLayer/PanelContainer" unique_id=1273834627]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MiniGameMissEileInteraction/CanvasLayer/PanelContainer/VBoxContainer" unique_id=1786928952]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+text = "Você pode pular a luta contra o boss jogando esse mini jogo no lugar, mas você vai ganhar menos experiência. Deseja continuar?"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="SimButton" type="Button" parent="MiniGameMissEileInteraction/CanvasLayer/PanelContainer/VBoxContainer" unique_id=861230166]
+custom_minimum_size = Vector2(160, 56)
+layout_mode = 2
+text = "Sim"
+
+[node name="NaoButton" type="Button" parent="MiniGameMissEileInteraction/CanvasLayer/PanelContainer/VBoxContainer" unique_id=773304604]
+custom_minimum_size = Vector2(160, 56)
+layout_mode = 2
+text = "Não"
+
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1880160109]
 transform = Transform3D(1, 0, 0, 0, 0.6993348, 0.7147943, 0, -0.7147943, 0.6993348, 3.0359464, 8.585146, 22.27555)
 fov = 55.15981
 script = ExtResource("14_hdfvm")
 
 [node name="Hearts" parent="." unique_id=520576831 instance=ExtResource("15_75216")]
+
+[node name="PortaBoss" type="Area3D" parent="." unique_id=1203422506]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.624817, 0, 0.88081264)
+script = ExtResource("16_wo7pl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PortaBoss" unique_id=2022346073]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.65856934, 0.8023987, -0.088378906)
+shape = SubResource("BoxShape3D_s1fef")

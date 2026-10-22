@@ -20,10 +20,16 @@ var is_holding_mushroom := false
 
 const PROJECTILE_SCENE = preload("res://Projectile/projectile.tscn")
 const MUSHROOM_PROJECTILE_SCENE = preload("res://MashroomProjectile/mashroom_projectile.tscn")
+const EVOLUCOES = preload("res://Evolucoes/evolucoes.gd")
 
 
 func _ready() -> void:
+	if GameState.player_hp >= 0:
+		hp = clampi(GameState.player_hp, 1, MAX_HP)  # veio de outra cena: mantém a vida
+	else:
+		GameState.player_hp = hp                     # primeira vez: guarda a vida inicial
 	hp_changed.emit(hp, MAX_HP)
+	EVOLUCOES.aplicar(self)  # liga a evolução escolhida depois da MissEile (se tiver)
 
 
 func _physics_process(delta: float) -> void:
@@ -136,6 +142,7 @@ func get_mouse_world_position() -> Variant:
 func take_damage(amount: int, source_position = null) -> void:
 	hp -= amount
 	hp = max(hp, 0)
+	GameState.player_hp = hp  # guarda a vida para a próxima cena
 	hp_changed.emit(hp, MAX_HP)
 	print("Player tomou dano, HP restante: ", hp)
 
@@ -145,6 +152,7 @@ func take_damage(amount: int, source_position = null) -> void:
 
 	if hp <= 0:
 		print("Player morreu!")
+		GameState.player_hp = -1  # ao recarregar a cena, volta com a vida cheia
 		get_tree().call_deferred("reload_current_scene")
 
 

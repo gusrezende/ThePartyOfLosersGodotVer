@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://mie07622rgwq"]
+
+[ext_resource type="Script" uid="uid://do7df21jfabr4" path="res://MainMenu/main_menu.gd" id="1_nhkf3"]
+
+[node name="MainMenu" type="Control" unique_id=2072714089]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nhkf3")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=838742]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.3162761, 0.02491238, 0.369929, 1)
+
+[node name="Label" type="Label" parent="." unique_id=549021366]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -75.5
+offset_right = 75.5
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "The Party Of Losers"
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="Container" parent="." unique_id=312429462]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.294
+anchor_top = 0.5
+anchor_right = 0.73700005
+anchor_bottom = 0.804
+offset_left = -0.07600403
+offset_right = -1.3980713
+offset_bottom = 0.07998657
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=120966192]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+offset_transform_enabled = true
+alignment = 1
+
+[node name="PlayButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1638662046]
+custom_minimum_size = Vector2(360, 72)
+layout_mode = 2
+text = "Play"
+
+[node name="ExitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=45832191]
+custom_minimum_size = Vector2(360, 72)
+layout_mode = 2
+text = "Exit"
