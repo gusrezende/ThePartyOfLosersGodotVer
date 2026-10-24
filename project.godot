@@ -19,7 +19,7 @@ config/icon="res://icon.svg"
 
 QuestManager="*uid://utk7yleu27ak"
 GameState="*uid://dexir7e0wtog2"
-Transicao="*uid://c41v7ht34htm2"
+Transicao="*uid://dn3aqws7gi1h3"
 
 [display]
 

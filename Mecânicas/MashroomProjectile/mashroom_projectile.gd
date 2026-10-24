@@ -39,4 +39,9 @@ func explode() -> void:
 			if enemy.has_method("take_damage"):
 				enemy.take_damage(EXPLOSION_DAMAGE)
 
+	# avisa alvos (ex.: a torre que vira ponte) que teve uma explosão aqui
+	for alvo in get_tree().get_nodes_in_group("reage_explosao"):
+		if is_instance_valid(alvo) and alvo.has_method("receber_explosao"):
+			alvo.receber_explosao(global_position, EXPLOSION_RADIUS)
+
 	queue_free()

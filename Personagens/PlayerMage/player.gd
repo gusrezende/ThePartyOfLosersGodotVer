@@ -18,7 +18,7 @@ var is_holding_mushroom := false
 @onready var sprite: AnimatedSprite3D = $AnimatedSprite3D
 @onready var held_mushroom: Node3D = $HeldMushroom
 
-const PROJECTILE_SCENE = preload("res://Mecânicas/projectile/projectile.tscn")
+const PROJECTILE_SCENE = preload("res://Mecânicas/Projectile/projectile.tscn")
 const MUSHROOM_PROJECTILE_SCENE = preload("res://Mecânicas/MashroomProjectile/mashroom_projectile.tscn")
 
 
