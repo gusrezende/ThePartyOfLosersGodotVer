@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://c83x7dkm72opm"]
+[gd_scene format=3 uid="uid://bou2s5jtnthni"]
 
 [ext_resource type="PackedScene" uid="uid://c5mste5xg54bn" path="res://PlayerMage/player.tscn" id="1_uuif0"]
 [ext_resource type="PackedScene" uid="uid://bmwihea3gmy11" path="res://MissEile/miss_eile.tscn" id="2_4opra"]
