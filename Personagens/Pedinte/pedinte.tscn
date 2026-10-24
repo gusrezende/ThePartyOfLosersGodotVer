@@ -1,16 +1,86 @@
 [gd_scene format=3 uid="uid://dcf61ynn5bt25"]
 
-[ext_resource type="Texture2D" uid="uid://djbrodjs6bcbf" path="res://Personagens/Pedinte/sprite/pedinte.png" id="1_wdo7k"]
+[ext_resource type="Script" uid="uid://tbpa70qufslq" path="res://Personagens/Pedinte/pedinte_npc.gd" id="1_20phg"]
+[ext_resource type="Texture2D" uid="uid://svdx8dv88xnn" path="res://Personagens/Pedinte/assets/Idle/1000280357.png" id="1_pqmku"]
+[ext_resource type="Texture2D" uid="uid://jj1v0kiqidqc" path="res://Personagens/Pedinte/assets/Idle/1000280358.png" id="2_20phg"]
 [ext_resource type="Script" uid="uid://lops5en1756u" path="res://Personagens/Pedinte/area_3dPedinte.gd" id="2_wfp3v"]
+[ext_resource type="Texture2D" uid="uid://jvfsmey7lj1y" path="res://Personagens/Pedinte/assets/Idle 2/1000280359.png" id="3_gbery"]
+[ext_resource type="Texture2D" uid="uid://dpiojdj23jalh" path="res://Personagens/Pedinte/assets/Idle 2/1000280362.png" id="4_jp37g"]
+[ext_resource type="Texture2D" uid="uid://b84a6x63cu4qt" path="res://Personagens/Pedinte/assets/Morte/1000280369.png" id="5_2mh0b"]
+[ext_resource type="Texture2D" uid="uid://c555tc2d5ramv" path="res://Personagens/Pedinte/assets/Morte/1000280371.png" id="6_0buvc"]
+[ext_resource type="Texture2D" uid="uid://brjd018nbvocx" path="res://Personagens/Pedinte/assets/Morte/1000280370.png" id="7_biweg"]
+[ext_resource type="Texture2D" uid="uid://cawwen067uwte" path="res://Personagens/Pedinte/assets/Morte/1000280368.png" id="8_11yc4"]
+[ext_resource type="Texture2D" uid="uid://fi6vx3167do8" path="res://Personagens/Pedinte/assets/Andando (repita o sprite do meio no fim)/1000280363.png" id="9_00vsh"]
+[ext_resource type="Texture2D" uid="uid://cojqjggxbgkcf" path="res://Personagens/Pedinte/assets/Andando (repita o sprite do meio no fim)/1000280364.png" id="10_uytvv"]
+[ext_resource type="Texture2D" uid="uid://wuu7nuad4qmp" path="res://Personagens/Pedinte/assets/Andando (repita o sprite do meio no fim)/1000280365.png" id="11_ko0dv"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6yr6j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_pqmku")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_20phg")
+}],
+"loop": 1,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_gbery")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_jp37g")
+}],
+"loop": 1,
+"name": &"Idle 2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_2mh0b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_0buvc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_biweg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_11yc4")
+}],
+"loop": 1,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_00vsh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_uytvv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ko0dv")
+}],
+"loop": 1,
+"name": &"walking",
+"speed": 5.0
+}]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_s1fef"]
 radius = 2.656869
 
 [node name="Pedinte" type="CharacterBody3D" unique_id=713960368]
+script = ExtResource("1_20phg")
 
-[node name="Sprite3D" type="Sprite3D" parent="." unique_id=766108333]
+[node name="Sprite3D" type="AnimatedSprite3D" parent="." unique_id=845293751]
 transform = Transform3D(1, 0, 0, 0, 0.95120525, 0.30855882, 0, -0.30855882, 0.95120525, 0.0016047955, 2.064345, -0.0052461624)
-texture = ExtResource("1_wdo7k")
+sprite_frames = SubResource("SpriteFrames_6yr6j")
+animation = &"Idle"
+autoplay = "Idle"
 
 [node name="Area3D" type="Area3D" parent="." unique_id=1315526727]
 script = ExtResource("2_wfp3v")

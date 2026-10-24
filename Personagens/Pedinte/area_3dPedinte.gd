@@ -125,14 +125,18 @@ func interagir():
 
 	mostrar_mensagem("Ah! Obrigado!")
 
-	await get_tree().create_timer(2.0).timeout
-
 	npc_finalizado = true
+
+	await get_tree().create_timer(1.5).timeout
 
 	limpar_dialogo()
 
-	# Remove o Pedinte inteiro
-	get_parent().queue_free()
+	# Em vez de sumir, o Pedinte se transforma e vira inimigo
+	var npc := _achar_npc_transformavel()
+	if npc:
+		npc.transformar()
+	else:
+		push_error("PEDINTE: não achei o script pedinte_npc.gd! Coloque ele no nó raiz 'Pedinte' (o CharacterBody3D) e confira se o arquivo tem 'func transformar'.")
 
 
 func mostrar_mensagem(texto: String):
@@ -155,3 +159,17 @@ func limpar_dialogo():
 
 		dialogo.text = ""
 		dialogo.visible = false
+
+
+## Procura o nó do Pedinte que tem o script pedinte_npc.gd
+## (normalmente é o pai deste Area3D, mas procura também acima e nos irmãos).
+func _achar_npc_transformavel() -> Node:
+	var no: Node = get_parent()
+	while no != null and no != get_tree().root:
+		if no.has_method("transformar"):
+			return no
+		no = no.get_parent()
+	for irmao in get_parent().find_children("*", "", true, false):
+		if irmao.has_method("transformar"):
+			return irmao
+	return null

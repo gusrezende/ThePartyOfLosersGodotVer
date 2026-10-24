@@ -1,5 +1,8 @@
 extends Node
 
+## Avisa quando o player pega todas as plantas
+signal missao_completa
+
 var missao_ativa := false
 var papeis_coletados := 0
 var total_papeis := 5
@@ -43,6 +46,8 @@ func coletar_papel():
 		print("================================")
 		print("TODOS OS PAPEIS FORAM COLETADOS!")
 		print("================================")
+
+		missao_completa.emit()
 
 
 func missao_esta_pronta() -> bool:
