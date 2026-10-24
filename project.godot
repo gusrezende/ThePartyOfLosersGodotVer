@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="The Party Of Losers"
-run/main_scene="uid://c83x7dkm72opm"
+run/main_scene="uid://mie07622rgwq"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
