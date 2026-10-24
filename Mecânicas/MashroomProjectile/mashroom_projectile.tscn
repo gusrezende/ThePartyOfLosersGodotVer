@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://ceddanhse1guy"]
+
+[ext_resource type="Script" uid="uid://c2xgnv7tolprs" path="res://Mecânicas/MashroomProjectile/mashroom_projectile.gd" id="1_fyf5o"]
+[ext_resource type="Texture2D" uid="uid://blnmivcq6aeij" path="res://Mecânicas/MashroomProjectile/asset/ExplosiveMashroom.png" id="2_k4yde"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_s1fef"]
+radius = 0.78178054
+
+[node name="MashroomProjectile" type="Area3D" unique_id=484676050]
+script = ExtResource("1_fyf5o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2093723226]
+shape = SubResource("SphereShape3D_s1fef")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=2088333571]
+transform = Transform3D(3.0360005, 0, 0, 0, 2.609266, 1.5521051, 0, -1.5521051, 2.609266, 0, 0, 0)
+texture = ExtResource("2_k4yde")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

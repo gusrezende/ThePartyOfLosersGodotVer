@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://c5mste5xg54bn"]
+
+[ext_resource type="Script" uid="uid://cy11u207fa7ix" path="res://Personagens/PlayerMage/player.gd" id="1_b26j0"]
+[ext_resource type="Texture2D" uid="uid://b5pgb7b8wnefa" path="res://Personagens/PlayerMage/assets/1000259006.png" id="2_n7ghd"]
+[ext_resource type="Texture2D" uid="uid://bjf4aepd01xrk" path="res://Personagens/PlayerMage/assets/1000259007.png" id="3_nvl01"]
+[ext_resource type="Texture2D" uid="uid://kksag07n1q11" path="res://Personagens/PlayerMage/assets/1000259013.png" id="4_ivps1"]
+[ext_resource type="Texture2D" uid="uid://cx1mpvyor7l16" path="res://Personagens/PlayerMage/assets/1000259012.png" id="5_urp6f"]
+[ext_resource type="Texture2D" uid="uid://cuehj510v2jii" path="res://Personagens/PlayerMage/assets/1000259009.png" id="6_bwjto"]
+[ext_resource type="Texture2D" uid="uid://cytxnlbnfkmxe" path="res://Personagens/PlayerMage/assets/1000259008.png" id="7_606se"]
+[ext_resource type="Texture2D" uid="uid://gxdu5eyfrru3" path="res://Personagens/PlayerMage/assets/1000259010.png" id="8_u1c27"]
+[ext_resource type="Texture2D" uid="uid://ccgrq2ghaw14s" path="res://Personagens/PlayerMage/assets/1000259011.png" id="9_op7ga"]
+[ext_resource type="Texture2D" uid="uid://blnmivcq6aeij" path="res://Mecânicas/MashroomProjectile/asset/ExplosiveMashroom.png" id="10_c3bqx"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
+animations = [{
+"frames": [{
+"duration": 3.0,
+"texture": ExtResource("3_nvl01")
+}, {
+"duration": 3.0,
+"texture": ExtResource("2_n7ghd")
+}],
+"loop": 1,
+"name": &"IdleDown",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_n7ghd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_nvl01")
+}],
+"loop": 1,
+"name": &"WalkingDown",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ivps1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_urp6f")
+}],
+"loop": 1,
+"name": &"WalkingLeft",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_bwjto")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_606se")
+}],
+"loop": 1,
+"name": &"WalkingRight",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_u1c27")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_op7ga")
+}],
+"loop": 1,
+"name": &"WalkingUp",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody3D" unique_id=1477526133 groups=["player"]]
+script = ExtResource("1_b26j0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=21141536]
+shape = SubResource("CapsuleShape3D_g4v7s")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=805599003]
+transform = Transform3D(0.44630253, 0, 0, 0, 0.41288006, 0.16945796, 0, -0.16945796, 0.41288006, 0, 0, 0)
+sprite_frames = SubResource("SpriteFrames_g4v7s")
+animation = &"IdleDown"
+frame_progress = 0.10760876
+speed_scale = 2.0
+
+[node name="HeldMushroom" type="Sprite3D" parent="." unique_id=784663824]
+transform = Transform3D(1.91383, 0, 0, 0, 1.6309448, 1.0013813, 0, -1.0013813, 1.6309448, 0, 0.95317197, 0)
+visible = false
+texture = ExtResource("10_c3bqx")

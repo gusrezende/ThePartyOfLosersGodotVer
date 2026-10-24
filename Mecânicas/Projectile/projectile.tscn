@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://dol1xk3qlyndh"]
+
+[ext_resource type="Script" uid="uid://cj3r0w6n1erdd" path="res://Mecânicas/Projectile/projectile.gd" id="1_08sw2"]
+[ext_resource type="Texture2D" uid="uid://bf6upxyifjnsl" path="res://Mecânicas/Projectile/assets/1000280561.png" id="2_vnovy"]
+[ext_resource type="Texture2D" uid="uid://djklt7dcfmfht" path="res://Mecânicas/Projectile/assets/1000280562.png" id="3_dlj6a"]
+[ext_resource type="Texture2D" uid="uid://cvdpc6grxyd7u" path="res://Mecânicas/Projectile/assets/1000280563.png" id="4_vaclg"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tm405"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d0trj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_vnovy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_dlj6a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_vaclg")
+}],
+"loop": 1,
+"name": &"Fire Ball",
+"speed": 5.0
+}]
+
+[node name="projectile" type="Area3D" unique_id=1648465211]
+script = ExtResource("1_08sw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1282382457]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("SphereShape3D_tm405")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=2008398711]
+transform = Transform3D(0.44630253, 0, 0, 0, 0.41288006, 0.16945796, 0, -0.16945796, 0.41288006, 0, 0, 0)
+sprite_frames = SubResource("SpriteFrames_d0trj")
+animation = &"Fire Ball"
+frame_progress = 0.4151695
+speed_scale = 2.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

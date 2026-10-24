@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://2qucbwawa0jy"]
+
+[ext_resource type="Script" uid="uid://rblsvxknpbyl" path="res://Mecânicas/Coletáveis/Plantinhas/planta_coletavel.gd" id="1_4ce50"]
+[ext_resource type="Texture2D" uid="uid://sdq3acbunnvb" path="res://UI/Life Hearts UI/assets/coração.png" id="2_j6n1h"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_s1fef"]
+
+[node name="Planta" type="Area3D" unique_id=1352802038]
+script = ExtResource("1_4ce50")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=758612756]
+transform = Transform3D(1, 0, 0, 0, 0.9007006, 0.43444028, 0, -0.43444028, 0.9007006, 0, 0, 0)
+texture = ExtResource("2_j6n1h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1758482680]
+shape = SubResource("SphereShape3D_s1fef")

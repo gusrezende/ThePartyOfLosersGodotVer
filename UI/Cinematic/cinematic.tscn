@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://dw3xe0mq02vut"]
+
+[ext_resource type="VideoStream" uid="uid://fe8cjb8j3xmv" path="res://UI/MainMenu/assets/Story Losers.ogv" id="1_oe414"]
+[ext_resource type="Script" uid="uid://c083jhvrtgsf" path="res://UI/Cinematic/cinematic.gd" id="1_qulof"]
+
+[node name="Cinematic" type="Control" unique_id=1400203141]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qulof")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=643483162]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("1_oe414")
+expand = true
+
+[node name="SkipButton" type="Button" parent="." unique_id=634836433]
+custom_minimum_size = Vector2(160, 56)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.89100003
+anchor_right = 1.0
+anchor_bottom = 0.065000005
+offset_left = 0.085998535
+offset_bottom = -0.20000267
+grow_horizontal = 0
+text = "Pular
+"

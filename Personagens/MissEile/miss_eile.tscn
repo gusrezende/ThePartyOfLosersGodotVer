@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://bmwihea3gmy11"]
+
+[ext_resource type="Script" uid="uid://2t5ep064yeiw" path="res://Personagens/MissEile/miss_eile.gd" id="1_l6ojy"]
+[ext_resource type="Texture2D" uid="uid://c5ucjc3jf5uqx" path="res://Personagens/MissEile/newAssets/Attack/1000280560.png" id="2_l6ojy"]
+[ext_resource type="Texture2D" uid="uid://d3c44qj87cbbe" path="res://Personagens/MissEile/newAssets/flying/1000280557.png" id="3_bm6fn"]
+[ext_resource type="Texture2D" uid="uid://s73rsxignoc6" path="res://Personagens/MissEile/newAssets/flying/1000280558.png" id="4_p5r2o"]
+[ext_resource type="Texture2D" uid="uid://b3l58lxyc0nen" path="res://Personagens/MissEile/newAssets/flying/1000280559.png" id="5_pb1ew"]
+[ext_resource type="Texture2D" uid="uid://dsonfiv0egs7" path="res://Personagens/MissEile/newAssets/idle/1000280553.png" id="6_4l5m4"]
+[ext_resource type="Texture2D" uid="uid://bjm3aokrnwg52" path="res://Personagens/MissEile/newAssets/idle/1000280552.png" id="7_36quo"]
+[ext_resource type="Texture2D" uid="uid://wiqdryxglvav" path="res://Personagens/MissEile/newAssets/idle/1000280551.png" id="8_6juh1"]
+[ext_resource type="Texture2D" uid="uid://cam1vo7txiypd" path="res://Personagens/MissEile/newAssets/transforming/1000280554.png" id="9_g0gsa"]
+[ext_resource type="Texture2D" uid="uid://mqsrjpeiusm7" path="res://Personagens/MissEile/newAssets/transforming/1000280555.png" id="10_5nw7r"]
+[ext_resource type="Texture2D" uid="uid://b81d15whiwmrt" path="res://Personagens/MissEile/newAssets/transforming/1000280556.png" id="11_ma5w5"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yf5fn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_l6ojy")
+}],
+"loop": 1,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_bm6fn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_p5r2o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pb1ew")
+}],
+"loop": 1,
+"name": &"flying",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_4l5m4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_36quo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_6juh1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_36quo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_4l5m4")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_g0gsa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_5nw7r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ma5w5")
+}],
+"loop": 0,
+"name": &"transformation",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
+radius = 1.269043
+height = 2.9350586
+
+[node name="MissEile" type="CharacterBody3D" unique_id=1731039629 groups=["enemy"]]
+script = ExtResource("1_l6ojy")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=493240682]
+transform = Transform3D(0.5696286, 0, 0, 0, 0.67386615, 0, 0, 0, 1, 0, 0, 0)
+sprite_frames = SubResource("SpriteFrames_yf5fn")
+animation = &"attack"
+speed_scale = 2.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1979635130]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02129662, 0)
+shape = SubResource("CapsuleShape3D_g4v7s")

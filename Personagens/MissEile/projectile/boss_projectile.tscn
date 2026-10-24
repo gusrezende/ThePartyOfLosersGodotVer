@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://6tx8ivkv67ye"]
+
+[ext_resource type="Script" uid="uid://d10yxtpc2rn5b" path="res://Personagens/MissEile/projectile/boss_projectile.gd" id="1_l2kl3"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_g4v7s"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_g4v7s"]
+
+[node name="BossProjectile" type="Area3D" unique_id=1166333533]
+script = ExtResource("1_l2kl3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1732535943]
+shape = SubResource("SphereShape3D_g4v7s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" unique_id=1537798213]
+transform = Transform3D(0.659832, 0, 0, 0, 0.65803015, 0, 0, 0, 0.59941137, 0, 0, 0)
+mesh = SubResource("SphereMesh_g4v7s")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

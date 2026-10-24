@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://dc6brydb28no6"]
+
+[ext_resource type="Texture2D" uid="uid://drg0ob5g7j6gx" path="res://Personagens/MissEile/assets/001.png" id="2_8hnoi"]
+[ext_resource type="Script" uid="uid://cvvb61w7uxdt2" path="res://Mini games/MiniGameMissEile/mini_miss_eile.gd" id="2_fcmns"]
+
+[node name="MiniGameMissEile" type="Node3D" unique_id=121994084]
+
+[node name="control" type="CanvasLayer" parent="." unique_id=477289927]
+
+[node name="MissEile" type="TextureButton" parent="control" unique_id=53155864]
+offset_right = 166.0
+offset_bottom = 198.0
+texture_normal = ExtResource("2_8hnoi")
+script = ExtResource("2_fcmns")
+
+[node name="Vida" type="ProgressBar" parent="control" unique_id=1089021383]
+offset_left = 307.0
+offset_top = 419.0
+offset_right = 600.0
+offset_bottom = 446.0
+
+[node name="Combo" type="Label" parent="control" unique_id=1570300606]
+offset_left = 7.0
+offset_top = 231.0
+offset_right = 47.0
+offset_bottom = 254.0
+
+[node name="Status" type="Label" parent="control" unique_id=2111863760]
+offset_left = 365.0
+offset_top = 378.0
+offset_right = 405.0
+offset_bottom = 401.0
+
+[node name="Timer" type="Label" parent="control" unique_id=953383474]
+offset_left = 365.0
+offset_top = 4.0
+offset_right = 405.0
+offset_bottom = 27.0
+
+[connection signal="pressed" from="control/MissEile" to="control" method="_on_miss_eile_pressed"]
