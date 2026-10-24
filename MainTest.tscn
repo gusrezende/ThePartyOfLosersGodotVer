@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c5mste5xg54bn" path="res://PlayerMage/player.tscn" id="1_uuif0"]
 [ext_resource type="PackedScene" uid="uid://bmwihea3gmy11" path="res://MissEile/miss_eile.tscn" id="2_4opra"]
 [ext_resource type="PackedScene" uid="uid://b4flc54piu4pc" path="res://Life Hearts UI/lifeHeartsUI.tscn" id="4_uw173"]
+[ext_resource type="Script" uid="uid://c0b8omxeyavhi" path="res://PlayerMage/camera_3d.gd" id="4_v5o3d"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_g4v7s"]
 
@@ -36,3 +37,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.9343452, 1.6157563, 10.377
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5025947, 1.49, -4.5163717)
 
 [node name="Hearts" parent="." unique_id=520576831 instance=ExtResource("4_uw173")]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=2007732513]
+transform = Transform3D(1, 0, 0, 0, 0.6993348, 0.7147943, 0, -0.7147943, 0.6993348, -6.4588504, 8.585146, 22.27555)
+fov = 55.15981
+script = ExtResource("4_v5o3d")
