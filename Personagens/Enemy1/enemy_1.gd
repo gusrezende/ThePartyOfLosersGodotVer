@@ -80,6 +80,15 @@ func morrer() -> void:
 	morto = true
 	set_physics_process(false)
 	velocity = Vector3.ZERO
+
+	# o corpo não conta mais como inimigo, não bloqueia o player e não para os tiros
+	remove_from_group("enemy")
+	for forma in find_children("*", "CollisionShape3D", true, false):
+		forma.set_deferred("disabled", true)
+
+	# toca a morte uma vez só e fica parado no último quadro (o corpo fica no mapa)
+	sprite.sprite_frames.set_animation_loop("death", false)
 	sprite.play("death")
 	await sprite.animation_finished
-	queue_free()
+	sprite.stop()
+	sprite.frame = sprite.sprite_frames.get_frame_count("death") - 1

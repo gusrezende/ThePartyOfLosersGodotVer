@@ -10,6 +10,8 @@ extends CharacterBody3D
 @export var anim_transformando := "Idle 2"
 @export var anim_andando := "walking"
 @export var anim_morte := "death"
+## Depois da morte, fica tocando esta em loop (o corpo fica no mapa)
+@export var anim_morto_loop := "death2"
 
 @export_group("Transformação")
 ## Quanto tempo ele fica no "Idle 2" antes de atacar
@@ -125,13 +127,18 @@ func _morrer() -> void:
 	velocity = Vector3.ZERO
 	for forma in find_children("*", "CollisionShape3D", false, false):
 		forma.set_deferred("disabled", true)
-	if _sprite and _sprite.sprite_frames and _sprite.sprite_frames.has_animation(anim_morte):
-		_sprite.sprite_frames.set_animation_loop(anim_morte, false)
+	if _sprite == null or _sprite.sprite_frames == null:
+		return
+	var frames := _sprite.sprite_frames
+	# 1) "death" toca uma vez
+	if frames.has_animation(anim_morte):
+		frames.set_animation_loop(anim_morte, false)
 		_sprite.play(anim_morte)
 		await _sprite.animation_finished
-	else:
-		await get_tree().create_timer(0.3).timeout
-	queue_free()
+	# 2) depois fica em loop no "death2" (ele não some)
+	if frames.has_animation(anim_morto_loop):
+		frames.set_animation_loop(anim_morto_loop, true)
+		_sprite.play(anim_morto_loop)
 
 
 # ---------------------------------------------------------------- AUXILIARES
