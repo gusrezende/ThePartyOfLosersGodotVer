@@ -127,6 +127,9 @@ func interagir():
 
 	npc_finalizado = true
 
+	# entregou os pedaços: o cogumelo some do canto da tela
+	QuestManager.esconder_hud()
+
 	await get_tree().create_timer(1.5).timeout
 
 	limpar_dialogo()
