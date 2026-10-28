@@ -1,0 +1,264 @@
+[gd_scene format=3 uid="uid://dhwn40dio4epy"]
+
+[ext_resource type="PackedScene" uid="uid://drfubyftxwioo" path="res://Cenários/DungeonTeste/modelo/NEWCaveInterminado.glb" id="1_qrpbj"]
+[ext_resource type="Script" uid="uid://b58bh8rp5p1r7" path="res://Cenários/DungeonTeste/scripts/gerar_colisao.gd" id="2_d4qay"]
+[ext_resource type="PackedScene" uid="uid://c5mste5xg54bn" path="res://Personagens/PlayerMage/player.tscn" id="3_bf4dl"]
+[ext_resource type="Script" uid="uid://c0b8omxeyavhi" path="res://Personagens/PlayerMage/camera_3d.gd" id="4_ydo76"]
+[ext_resource type="PackedScene" uid="uid://b4flc54piu4pc" path="res://UI/Life Hearts UI/lifeHeartsUI.tscn" id="5_bn3cg"]
+[ext_resource type="PackedScene" uid="uid://dcf61ynn5bt25" path="res://Personagens/Pedinte/pedinte.tscn" id="6_oqky2"]
+[ext_resource type="PackedScene" uid="uid://2qucbwawa0jy" path="res://Personagens/Pedinte/plantaColetavel.tscn" id="7_cobsc"]
+[ext_resource type="PackedScene" uid="uid://cn607bjka8fcm" path="res://Mecânicas/MashroomProjectile/mashroom_pick_up.tscn" id="8_3nkro"]
+[ext_resource type="PackedScene" uid="uid://bqeuujknt5hro" path="res://Personagens/Enemy1/enemy_1.tscn" id="9_p0f6e"]
+[ext_resource type="PackedScene" path="res://Cenários/DungeonTeste/enemy_atirador.tscn" id="10_7c124"]
+[ext_resource type="PackedScene" path="res://Cenários/DungeonTeste/torre.tscn" id="11_wg7wa"]
+[ext_resource type="PackedScene" path="res://Cenários/DungeonTeste/parede_explodivel.tscn" id="12_r017q"]
+[ext_resource type="Script" uid="uid://b84s8q8oq0b3o" path="res://Cenários/DungeonTeste/scripts/porta_sala.gd" id="13_qb2yj"]
+[ext_resource type="Script" uid="uid://die4rna1m8ei5" path="res://Cenários/Dungeon1/porta_boss.gd" id="14_g1mwk"]
+[ext_resource type="Script" uid="uid://7ovd33g1sll4" path="res://Cenários/DungeonTeste/scripts/zona_queda.gd" id="15_7w1ks"]
+
+[sub_resource type="Environment" id="Environment_ufefc"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(0.55, 0.5, 0.7, 1)
+ambient_light_energy = 0.45
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s73jb"]
+size = Vector3(2.2, 3, 3.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fmm7y"]
+size = Vector3(2.2, 3, 3.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ndiq2"]
+size = Vector3(2.2, 3, 3.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lcu2c"]
+size = Vector3(7, 3, 3.6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fp2da"]
+size = Vector3(200, 4, 320)
+
+[node name="DungeonTeste" type="Node3D" unique_id=1390205539]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1385914472]
+environment = SubResource("Environment_ufefc")
+
+[node name="LuzGeral" type="DirectionalLight3D" parent="." unique_id=1412266813]
+transform = Transform3D(0.8660254, -0.43301272, 0.24999999, 0, 0.49999997, 0.86602545, -0.5, -0.75, 0.43301266, 0, 0, 0)
+light_energy = 0.35
+
+[node name="Mapa" parent="." unique_id=533734282 instance=ExtResource("1_qrpbj")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+script = ExtResource("2_d4qay")
+
+[node name="Luzes" type="Node3D" parent="." unique_id=402668214]
+
+[node name="Luz1" type="OmniLight3D" parent="Luzes" unique_id=1578717864]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 3.5, -10)
+light_color = Color(1, 0.85, 0.95, 1)
+light_energy = 1.4
+omni_range = 13.0
+
+[node name="Luz2" type="OmniLight3D" parent="Luzes" unique_id=1105619158]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.510678, 3.5, 8)
+light_color = Color(1, 0.85, 0.95, 1)
+light_energy = 1.4
+omni_range = 4.045434
+
+[node name="Luz3" type="OmniLight3D" parent="Luzes" unique_id=1507334458]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -10)
+light_color = Color(1, 0.85, 0.95, 1)
+light_energy = 1.4
+omni_range = 13.0
+
+[node name="Luz4" type="OmniLight3D" parent="Luzes" unique_id=1034719147]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 8)
+light_color = Color(1, 0.85, 0.95, 1)
+light_energy = 1.4
+omni_range = 13.0
+
+[node name="Luz5" type="OmniLight3D" parent="Luzes" unique_id=1535635161]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 3.5, 6)
+light_color = Color(1, 0.85, 0.95, 1)
+light_energy = 1.4
+omni_range = 13.0
+
+[node name="Luz6" type="OmniLight3D" parent="Luzes" unique_id=423266137]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 3.5, -8)
+light_color = Color(1, 0.85, 0.95, 1)
+light_energy = 1.4
+omni_range = 13.0
+
+[node name="Luz7" type="OmniLight3D" parent="Luzes" unique_id=906078964]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 3.5, -22)
+light_color = Color(1, 0.85, 0.95, 1)
+light_energy = 1.4
+omni_range = 13.0
+
+[node name="Luz8" type="OmniLight3D" parent="Luzes" unique_id=747652122]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 3.5, -36)
+light_color = Color(1, 0.85, 0.95, 1)
+light_energy = 1.4
+omni_range = 13.0
+
+[node name="Luz9" type="OmniLight3D" parent="Luzes" unique_id=1391055460]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 3.5, -50)
+light_color = Color(1, 0.85, 0.95, 1)
+light_energy = 1.4
+omni_range = 13.0
+
+[node name="Luz10" type="OmniLight3D" parent="Luzes" unique_id=1327441808]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 3.5, -63)
+light_color = Color(1, 0.85, 0.95, 1)
+light_energy = 1.4
+omni_range = 13.0
+
+[node name="Luz11" type="OmniLight3D" parent="Luzes" unique_id=255112217]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3.8, -78)
+light_color = Color(1, 0.95, 0.85, 1)
+light_energy = 1.4
+omni_range = 13.0
+
+[node name="Luz12" type="OmniLight3D" parent="Luzes" unique_id=1686423457]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 3.8, -78)
+light_color = Color(1, 0.95, 0.85, 1)
+light_energy = 1.4
+omni_range = 13.0
+
+[node name="Luz13" type="OmniLight3D" parent="Luzes" unique_id=1883722501]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3.8, -100)
+light_color = Color(1, 0.95, 0.85, 1)
+light_energy = 1.4
+omni_range = 13.0
+
+[node name="Luz14" type="OmniLight3D" parent="Luzes" unique_id=209915780]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 3.8, -100)
+light_color = Color(1, 0.95, 0.85, 1)
+light_energy = 1.4
+omni_range = 13.0
+
+[node name="Luz15" type="OmniLight3D" parent="Luzes" unique_id=1207459229]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 3.8, -110)
+light_color = Color(1, 0.95, 0.85, 1)
+light_energy = 1.4
+omni_range = 13.0
+
+[node name="Player" parent="." unique_id=1477526133 instance=ExtResource("3_bf4dl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.2, 1.1, 12.9)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1680693541]
+transform = Transform3D(1, 0, 0, 0, 0.6993348, 0.7147943, 0, -0.7147943, 0.6993348, -15.47, 10.030001, 20.529999)
+fov = 55.15981
+script = ExtResource("4_ydo76")
+
+[node name="Hearts" parent="." unique_id=520576831 instance=ExtResource("5_bn3cg")]
+
+[node name="Pedinte" parent="." unique_id=713960368 instance=ExtResource("6_oqky2")]
+transform = Transform3D(0.82391256, 0, 0, 0, 0.82391256, 0, 0, 0, 0.82391256, -14, -0.5458263, -11.2)
+
+[node name="Plantas" type="Node3D" parent="." unique_id=701233193]
+
+[node name="Planta1" parent="Plantas" unique_id=1352802038 instance=ExtResource("7_cobsc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0.5, -1)
+
+[node name="Planta2" parent="Plantas" unique_id=339798973 instance=ExtResource("7_cobsc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.5, -6)
+
+[node name="Planta3" parent="Plantas" unique_id=1933705832 instance=ExtResource("7_cobsc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.5, 5)
+
+[node name="Planta4" parent="Plantas" unique_id=1705368047 instance=ExtResource("7_cobsc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0.5, -16)
+
+[node name="Planta5" parent="Plantas" unique_id=1330320733 instance=ExtResource("7_cobsc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.5, -92)
+
+[node name="CogumelosExplosivos" type="Node3D" parent="." unique_id=262586998]
+
+[node name="Cogumelo1" parent="CogumelosExplosivos" unique_id=800666980 instance=ExtResource("8_3nkro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.7, 0.9360486, -14.2)
+
+[node name="Cogumelo2" parent="CogumelosExplosivos" unique_id=826197704 instance=ExtResource("8_3nkro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2, 0.9360486, -14.4)
+
+[node name="Cogumelo3" parent="CogumelosExplosivos" unique_id=233150261 instance=ExtResource("8_3nkro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0.9360486, 13.8)
+
+[node name="Inimigos" type="Node3D" parent="." unique_id=516230582]
+
+[node name="Enemy1" parent="Inimigos" unique_id=1396215999 groups=["enemy"] instance=ExtResource("9_p0f6e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, 0.8, 2.2)
+
+[node name="Enemy2" parent="Inimigos" unique_id=287560629 groups=["enemy"] instance=ExtResource("9_p0f6e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.8, 10.1)
+
+[node name="Enemy3" parent="Inimigos" unique_id=250253426 groups=["enemy"] instance=ExtResource("9_p0f6e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, 0.8, 16.3)
+
+[node name="Enemy4" parent="Inimigos" unique_id=930268226 groups=["enemy"] instance=ExtResource("9_p0f6e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0.8, -21.9)
+
+[node name="Enemy5" parent="Inimigos" unique_id=824475721 groups=["enemy"] instance=ExtResource("9_p0f6e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0.8, -40.7)
+
+[node name="Atiradores" type="Node3D" parent="." unique_id=534225398]
+
+[node name="Atirador1" parent="Atiradores" unique_id=298225279 groups=["enemy"] instance=ExtResource("10_7c124")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.8, 0.8, -104.6)
+
+[node name="Atirador2" parent="Atiradores" unique_id=76508054 groups=["enemy"] instance=ExtResource("10_7c124")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.8, -98)
+
+[node name="Atirador3" parent="Atiradores" unique_id=296026016 groups=["enemy"] instance=ExtResource("10_7c124")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.9, 0.8, -98)
+
+[node name="Atirador4" parent="Atiradores" unique_id=1996504123 groups=["enemy"] instance=ExtResource("10_7c124")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.8, -84.9)
+
+[node name="Atirador5" parent="Atiradores" unique_id=1330631254 groups=["enemy"] instance=ExtResource("10_7c124")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5, 0.8, -82.5)
+
+[node name="Torre" parent="." unique_id=1446822966 instance=ExtResource("11_wg7wa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.4, 0.1, 6.8)
+
+[node name="ParedeExplodivel" parent="." unique_id=1644364722 instance=ExtResource("12_r017q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.95, 2.05, -54.25)
+
+[node name="PortasSalas" type="Node3D" parent="." unique_id=532420540]
+
+[node name="SalaEsquerda" type="Area3D" parent="PortasSalas" unique_id=1246644336]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8, 1.5, -30.15)
+script = ExtResource("13_qb2yj")
+nome_sala = "Sala point-and-click"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PortasSalas/SalaEsquerda" unique_id=988644030]
+shape = SubResource("BoxShape3D_s73jb")
+
+[node name="SalaDireita1" type="Area3D" parent="PortasSalas" unique_id=1526471763]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.8, 1.5, -30.15)
+script = ExtResource("13_qb2yj")
+nome_sala = "Sala point-and-click"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PortasSalas/SalaDireita1" unique_id=874829390]
+shape = SubResource("BoxShape3D_fmm7y")
+
+[node name="SalaDireita2" type="Area3D" parent="PortasSalas" unique_id=143172992]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.7, 1.5, -54.25)
+script = ExtResource("13_qb2yj")
+nome_sala = "Sala point-and-click"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PortasSalas/SalaDireita2" unique_id=1355650679]
+shape = SubResource("BoxShape3D_ndiq2")
+
+[node name="PortaBoss" type="Area3D" parent="." unique_id=1871491907]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.75, 1.5, -112.6)
+script = ExtResource("14_g1mwk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PortaBoss" unique_id=617093703]
+shape = SubResource("BoxShape3D_lcu2c")
+
+[node name="ZonaQueda" type="Area3D" parent="." unique_id=183366085]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, -48)
+script = ExtResource("15_7w1ks")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ZonaQueda" unique_id=1463522356]
+shape = SubResource("BoxShape3D_fp2da")
