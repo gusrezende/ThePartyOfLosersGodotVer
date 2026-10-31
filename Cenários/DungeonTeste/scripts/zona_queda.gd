@@ -9,6 +9,7 @@ extends Area3D
 var _player: CharacterBody3D
 var _ultimo_seguro := Vector3.ZERO
 var _tempo := 0.0
+var _espera := 0.0   # evita contar a mesma queda duas vezes
 
 
 func _ready() -> void:
@@ -22,6 +23,7 @@ func _physics_process(delta: float) -> void:
 	if _player == null or not is_instance_valid(_player):
 		return
 	_tempo -= delta
+	_espera -= delta
 	# guarda a posição quando o player está firme no chão (e longe da beirada)
 	if _tempo <= 0.0 and _player.is_on_floor() and _chao_firme_em_volta(_player.global_position):
 		_ultimo_seguro = _player.global_position
@@ -39,6 +41,9 @@ func _on_body_entered(body: Node3D) -> void:
 
 
 func _devolver_player() -> void:
+	if _espera > 0.0:
+		return
+	_espera = 0.5
 	_player.velocity = Vector3.ZERO
 	_player.global_position = _ultimo_seguro + Vector3(0, 0.5, 0)
 	if _player.has_method("take_damage"):

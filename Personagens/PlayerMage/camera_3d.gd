@@ -4,6 +4,10 @@ extends Camera3D
 ## Os limites do mapa são calculados sozinhos a partir de toda a geometria fixa da cena
 ## (StaticBody3D: chão, paredes...). Se quiser definir na mão, ligue "usar_limites_manuais"
 ## no Inspetor e preencha "limite_min" / "limite_max" (X e Z do mundo).
+##
+## Mapas com formato irregular (caverna + corredor + sala): coloque ZONAS DE CÂMERA
+## (res://Mecânicas/ZonaCamera/zona_camera.tscn). Aí a câmera usa como limite só a
+## zona onde o player está, e chega mais perto quando a zona é mais estreita que a tela.
 
 ## Quanto maior, mais rápido ela alcança o player (8 = atraso bem pequeno e suave)
 @export var suavidade := 8.0
@@ -12,6 +16,9 @@ extends Camera3D
 ## O player nunca chega mais perto da borda da tela do que isso (0.75 = 75% do caminho
 ## do centro até a borda). Tem prioridade sobre os limites do mapa.
 @export_range(0.3, 0.95) var margem_player := 0.75
+## Até que ponto da tela o FUNDO do mapa pode aparecer (0.5 = meio da tela,
+## 0.0 = topo da tela). Menor = mostra menos coisa além da parede do fundo.
+@export_range(0.0, 0.5) var ponto_fundo := 0.5
 
 ## Abre um "buraco" (efeito de pontinhos) na parte das paredes que fica entre a
 ## câmera e o player, pra dar pra ver o player atrás delas. O chão nunca some.
@@ -29,6 +36,12 @@ var _limites: Rect2           # X/Z do mapa (position = mínimo, end = máximo)
 var _tem_limites := false
 var _cor_fundo_antiga: Color
 
+var _limites_mapa: Rect2      # limites do mapa inteiro (usado quando não há zona)
+var _tem_limites_mapa := false
+var _zonas: Array = []        # zonas de câmera da cena
+var _zona_atual: Node = null
+var _zoom := 1.0              # 1 = distância normal; menor = mais perto do player
+
 
 func _ready() -> void:
 	var players = get_tree().get_nodes_in_group("player")
@@ -41,9 +54,13 @@ func _ready() -> void:
 		RenderingServer.set_default_clear_color(Color.BLACK)
 
 	_calcular_limites()
+	_limites_mapa = _limites
+	_tem_limites_mapa = _tem_limites
+	_zonas = get_tree().get_nodes_in_group("zona_camera")
 	if paredes_somem and player:
 		_aplicar_paredes_que_somem()
 	if player:
+		_atualizar_zona(0.0, true)
 		global_position = _alvo_limitado()   # já começa no lugar certo, sem deslizar
 
 
@@ -55,6 +72,7 @@ func _exit_tree() -> void:
 func _process(delta: float) -> void:
 	if player == null or not is_instance_valid(player):
 		return
+	_atualizar_zona(delta, false)
 	var alvo := _alvo_limitado()
 	# atraso suave que não depende do FPS
 	var peso := 1.0 - exp(-suavidade * delta)
@@ -64,7 +82,7 @@ func _process(delta: float) -> void:
 
 ## Onde a câmera deveria estar: atrás do player, mas sem passar dos limites do mapa.
 func _alvo_limitado() -> Vector3:
-	var alvo := player.global_position + offset
+	var alvo := player.global_position + offset * _zoom
 	if not _tem_limites:
 		return alvo
 
@@ -83,7 +101,7 @@ func _alvo_limitado() -> Vector3:
 	var dir_meio := _no_chao(Vector2(tam.x, tam.y * 0.5), h)
 	var esq_baixo := _no_chao(Vector2(0, tam.y), h)
 	var dir_baixo := _no_chao(Vector2(tam.x, tam.y), h)
-	var centro := _no_chao(tam * 0.5, h)
+	var centro := _no_chao(Vector2(tam.x * 0.5, tam.y * ponto_fundo), h)
 
 	var min_dx := minf(esq_meio.x, esq_baixo.x)
 	var max_dx := maxf(dir_meio.x, dir_baixo.x)
@@ -136,6 +154,56 @@ func _player_cabe_vertical(cam: Vector3, p: Vector3, frente: Vector3, cima: Vect
 	if prof <= 0.1:
 		return false
 	return absf(rel.dot(cima)) <= prof * tan_v * margem_player
+
+
+# ---------------------------------------------------------------- ZONAS DE CÂMERA
+
+## Descobre em qual zona o player está e ajusta os limites e a aproximação.
+func _atualizar_zona(delta: float, na_hora: bool) -> void:
+	if _zonas.is_empty():
+		return
+	var pos := player.global_position
+	var melhor: Node = null
+	for z in _zonas:
+		if not is_instance_valid(z) or not z.contem(pos):
+			continue
+		if melhor == null or z.prioridade > melhor.prioridade \
+				or (z.prioridade == melhor.prioridade and z == _zona_atual):
+			melhor = z
+	if melhor != null:
+		_zona_atual = melhor
+	# fora de todas as zonas: continua usando a última (ou o mapa inteiro)
+	if _zona_atual != null and is_instance_valid(_zona_atual):
+		_limites = _zona_atual.retangulo()
+		_tem_limites = true
+	else:
+		_limites = _limites_mapa
+		_tem_limites = _tem_limites_mapa
+
+	var zoom_alvo := _zoom_da_zona()
+	if na_hora:
+		_zoom = zoom_alvo
+	else:
+		_zoom = lerpf(_zoom, zoom_alvo, 1.0 - exp(-suavidade * 0.5 * delta))
+
+
+## Quanto a câmera precisa se aproximar para a tela caber dentro da zona.
+func _zoom_da_zona() -> float:
+	if _zona_atual == null or not is_instance_valid(_zona_atual) or not _zona_atual.aproximar_se_estreito:
+		return 1.0
+	if offset.y <= 0.1:
+		return 1.0
+	var tam := get_viewport().get_visible_rect().size
+	# tamanho do chão visível para cada 1 m de altura da câmera
+	var esq := _no_chao(Vector2(0, tam.y * 0.5), 1.0)
+	var dir := _no_chao(Vector2(tam.x, tam.y * 0.5), 1.0)
+	var largura_por_m := dir.x - esq.x
+	if largura_por_m <= 0.01:
+		return 1.0
+	# a altura da câmera acima do chão é (offset.y * zoom + 1)
+	var altura_cabe: float = _zona_atual.retangulo().size.x / largura_por_m
+	var z: float = (altura_cabe - 1.0) / offset.y
+	return clampf(z, _zona_atual.zoom_minimo, 1.0)
 
 
 ## Distância (X, Z) da câmera até o ponto do chão que aparece nesse pixel da tela.

@@ -32,36 +32,36 @@ Um rei está aflito: sua filha, a princesa, está terrivelmente doente. Cabe a u
 
 <table>
   <tr>
-    <td width="50%"><img src="docs/screenshots/01_menu.png" alt="Menu"></td>
-    <td width="50%"><img src="docs/screenshots/03_dungeon.png" alt="Dungeon"></td>
+	<td width="50%"><img src="docs/screenshots/01_menu.png" alt="Menu"></td>
+	<td width="50%"><img src="docs/screenshots/03_dungeon.png" alt="Dungeon"></td>
   </tr>
   <tr>
-    <td align="center"><sub><b>Menu principal</b></sub></td>
-    <td align="center"><sub><b>A dungeon</b>: corredores escuros de pedra roxa</sub></td>
+	<td align="center"><sub><b>Menu principal</b></sub></td>
+	<td align="center"><sub><b>A dungeon</b>: corredores escuros de pedra roxa</sub></td>
   </tr>
   <tr>
-    <td><img src="docs/screenshots/05_combate.png" alt="Combate"></td>
-    <td><img src="docs/screenshots/04_npc.png" alt="Pedinte"></td>
+	<td><img src="docs/screenshots/05_combate.png" alt="Combate"></td>
+	<td><img src="docs/screenshots/04_npc.png" alt="Pedinte"></td>
   </tr>
   <tr>
-    <td align="center"><sub><b>Combate</b>: o mago carregando um cogumelo explosivo</sub></td>
-    <td align="center"><sub><b>O Pedinte</b>: "Planta... PLATA! ME DÊ 5 PLANTAS!"</sub></td>
+	<td align="center"><sub><b>Combate</b>: o mago carregando um cogumelo explosivo</sub></td>
+	<td align="center"><sub><b>O Pedinte</b>: "Planta... PLATA! ME DÊ 5 PLANTAS!"</sub></td>
   </tr>
   <tr>
-    <td><img src="docs/screenshots/06_pedinte_vilao.png" alt="Pedinte vira vilão"></td>
-    <td><img src="docs/screenshots/08_boss_tiros.png" alt="MissEile atirando"></td>
+	<td><img src="docs/screenshots/06_pedinte_vilao.png" alt="Pedinte vira vilão"></td>
+	<td><img src="docs/screenshots/08_boss_tiros.png" alt="MissEile atirando"></td>
   </tr>
   <tr>
-    <td align="center"><sub>Entregue as plantas e descubra quem ele é de verdade...</sub></td>
-    <td align="center"><sub><b>MissEile</b>: a chefe da dungeon</sub></td>
+	<td align="center"><sub>Entregue as plantas e descubra quem ele é de verdade...</sub></td>
+	<td align="center"><sub><b>MissEile</b>: a chefe da dungeon</sub></td>
   </tr>
   <tr>
-    <td><img src="docs/screenshots/09_boss_explosao.png" alt="Aviso de explosão"></td>
-    <td><img src="docs/screenshots/10_boss_misseis.png" alt="Chuva de mísseis"></td>
+	<td><img src="docs/screenshots/09_boss_explosao.png" alt="Aviso de explosão"></td>
+	<td><img src="docs/screenshots/10_boss_misseis.png" alt="Chuva de mísseis"></td>
   </tr>
   <tr>
-    <td align="center"><sub>O chão avisa onde a explosão vai acontecer: <b>corra!</b></sub></td>
-    <td align="center"><sub>Chuva de mísseis nas áreas longe dela</sub></td>
+	<td align="center"><sub>O chão avisa onde a explosão vai acontecer: <b>corra!</b></sub></td>
+	<td align="center"><sub>Chuva de mísseis nas áreas longe dela</sub></td>
   </tr>
 </table>
 

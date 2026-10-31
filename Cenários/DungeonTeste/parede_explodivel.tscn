@@ -6,28 +6,27 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xoh1b"]
 albedo_color = Color(1.15, 1, 0.9, 1)
 albedo_texture = ExtResource("2_wxhad")
-uv1_scale = Vector3(0.5, 0.5, 0.5)
 uv1_triplanar = true
 texture_filter = 0
 
 [sub_resource type="BoxMesh" id="BoxMesh_gmd5k"]
 material = SubResource("StandardMaterial3D_xoh1b")
-size = Vector3(0.6, 3.9, 5.9)
+size = Vector3(0.5, 1.95, 2.95)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_clglb"]
-size = Vector3(0.6, 3.9, 5.9)
+size = Vector3(0.5, 1.95, 2.95)
 
-[node name="ParedeExplodivel" type="StaticBody3D" unique_id=1644364722]
+[node name="ParedeExplodivel" type="StaticBody3D" unique_id=2124284445]
 script = ExtResource("1_eqgfk")
 
-[node name="Modelo" type="MeshInstance3D" parent="." unique_id=764899949]
+[node name="Modelo" type="MeshInstance3D" parent="." unique_id=1737790851]
 mesh = SubResource("BoxMesh_gmd5k")
 
-[node name="Dica" type="Label3D" parent="." unique_id=1320149333]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.35, 0.6, 0)
+[node name="Dica" type="Label3D" parent="." unique_id=1651296025]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.3, 0.2, 0)
 pixel_size = 0.01
 modulate = Color(1, 0.8, 0.5, 0.8)
 text = "rachada..."
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=857831426]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2040551428]
 shape = SubResource("BoxShape3D_clglb")
