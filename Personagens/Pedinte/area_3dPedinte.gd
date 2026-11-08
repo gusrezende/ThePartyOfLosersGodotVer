@@ -1,5 +1,8 @@
 extends Area3D
 
+## Tela de diálogo (zoom + caixa com opções à direita)
+const CaixaDialogo = preload("res://UI/Dialogo/caixa_dialogo.gd")
+
 @export var tecla_interacao := KEY_E
 
 var jogador_perto := false
@@ -44,6 +47,9 @@ func _input(event):
 	if not pode_interagir:
 		return
 
+	if CaixaDialogo.tem_conversa_aberta(get_tree()):
+		return
+
 	# Verifica se E foi pressionado
 	if event is InputEventKey:
 
@@ -64,82 +70,137 @@ func _input(event):
 
 func _on_body_entered(body):
 
-	if body.is_in_group("player") or body is CharacterBody3D:
+	if body.is_in_group("player"):
 
 		jogador_perto = true
 
-		print("PLAYER ENTROU NA ÁREA DO NPC")
+		if not npc_finalizado:
+			mostrar_mensagem("[E] Falar")
 
 
 func _on_body_exited(body):
 
-	if body.is_in_group("player") or body is CharacterBody3D:
+	if body.is_in_group("player"):
 
 		jogador_perto = false
 
-		print("PLAYER SAIU DA ÁREA DO NPC")
+		limpar_dialogo()
 
+
+# ==========================================================
+# CONVERSA (abre a tela de diálogo: personagens à esquerda,
+# caixa com as opções à direita)
+#
+#   await conversa.falar("texto")               -> só uma fala
+#   var n = await conversa.perguntar("texto", ["opção 1", "opção 2"])
+#                                               -> n = 0, 1, 2... (opção escolhida)
+#   await conversa.fechar()                     -> termina a conversa
+# ==========================================================
 
 func interagir():
 
-	print("INTERAGINDO COM O NPC!")
+	if CaixaDialogo.tem_conversa_aberta(get_tree()):
+		return
+
+	limpar_dialogo()
+
+	var player := get_tree().get_first_node_in_group("player") as Node3D
+	var npc := _achar_npc_transformavel() as Node3D
+	if npc == null:
+		npc = get_parent() as Node3D
+
+	var conversa = CaixaDialogo.abrir(self, "Pedinte", player, npc)
 
 
-	# ==========================================
-	# PRIMEIRA INTERAÇÃO
-	# ==========================================
+	# ------------------------------------------
+	# PRIMEIRA CONVERSA: pede as plantas
+	# ------------------------------------------
 
 	if not missao_aceita:
 
-		missao_aceita = true
+		await conversa.falar("Planta... PLATA! ME DÊ 5 PLANTAS!")
 
-		QuestManager.iniciar_missao()
-
-		mostrar_mensagem(
-			"Planta... PLATA! ME DÊ 5 PLANTAS!"
+		var escolha: int = await conversa.perguntar(
+			"Você vai me trazer as plantas ou não vai?",
+			["Tá bom, eu procuro as 5 plantas.", "Pra que você quer plantas?", "Agora não."]
 		)
 
+		if escolha == 1:
+			await conversa.falar("Pra... pra minha vovozinha doente! É... isso. Vovozinha.")
+			var de_novo: int = await conversa.perguntar(
+				"E aí? Vai ajudar ou não?",
+				["Tá bom, eu procuro.", "Agora não."]
+			)
+			escolha = 0 if de_novo == 0 else 2
+
+		if escolha == 0:
+			missao_aceita = true
+			QuestManager.iniciar_missao()
+			await conversa.falar("Hehehe... Elas estão espalhadas pela caverna. Vai logo!")
+		else:
+			await conversa.falar("Hmpf. Volte quando parar de enrolar.")
+
+		await conversa.fechar()
+		_mostrar_dica_se_perto()
 		return
 
 
-	# ==========================================
+	# ------------------------------------------
 	# MISSÃO AINDA NÃO TERMINOU
-	# ==========================================
+	# ------------------------------------------
 
 	if not QuestManager.missao_esta_pronta():
 
 		var quantidade = QuestManager.papeis_coletados
 
-		mostrar_mensagem(
-			"Você já encontrou "
-			+ str(quantidade)
-			+ " de 5 folhas."
+		var escolha: int = await conversa.perguntar(
+			"Você só achou " + str(quantidade) + " de 5 plantas. Cadê o resto?!",
+			["Onde eu acho as plantas?", "Já vou procurar."]
 		)
 
+		if escolha == 0:
+			await conversa.falar("Por aí! Nos cantos da caverna... Procure direito!")
+
+		await conversa.fechar()
+		_mostrar_dica_se_perto()
 		return
 
 
-	# ==========================================
-	# MISSÃO TERMINADA
-	# ==========================================
+	# ------------------------------------------
+	# MISSÃO TERMINADA: entregar ou não
+	# ------------------------------------------
 
-	mostrar_mensagem("Ah! Obrigado!")
+	var escolha: int = await conversa.perguntar(
+		"Você... você trouxe as 5 plantas?!",
+		["Aqui estão.", "Ainda não vou entregar."]
+	)
+
+	if escolha == 1:
+		await conversa.falar("GRRR... Tudo bem. Eu espero. Por enquanto.")
+		await conversa.fechar()
+		_mostrar_dica_se_perto()
+		return
+
+	await conversa.falar("Ah! Obrigado!")
+	await conversa.falar("Hehehe... hehehehe...")
 
 	npc_finalizado = true
 
 	# entregou os pedaços: o cogumelo some do canto da tela
 	QuestManager.esconder_hud()
 
-	await get_tree().create_timer(1.5).timeout
-
-	limpar_dialogo()
+	await conversa.fechar()
 
 	# Em vez de sumir, o Pedinte se transforma e vira inimigo
-	var npc := _achar_npc_transformavel()
-	if npc:
+	if npc and npc.has_method("transformar"):
 		npc.transformar()
 	else:
 		push_error("PEDINTE: não achei o script pedinte_npc.gd! Coloque ele no nó raiz 'Pedinte' (o CharacterBody3D) e confira se o arquivo tem 'func transformar'.")
+
+
+func _mostrar_dica_se_perto():
+	if jogador_perto and not npc_finalizado:
+		mostrar_mensagem("[E] Falar")
 
 
 func mostrar_mensagem(texto: String):

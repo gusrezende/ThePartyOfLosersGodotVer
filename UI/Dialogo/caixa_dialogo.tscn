@@ -1,0 +1,98 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://UI/Dialogo/caixa_dialogo.gd" id="1_cd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_painel"]
+content_margin_left = 16.0
+content_margin_top = 12.0
+content_margin_right = 16.0
+content_margin_bottom = 12.0
+bg_color = Color(0.09, 0.05, 0.16, 0.93)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.62, 0.42, 0.95, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.45)
+shadow_size = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_nome"]
+font_size = 19
+font_color = Color(1, 0.82, 0.35, 1)
+outline_size = 4
+outline_color = Color(0.2, 0.08, 0.02, 1)
+
+[node name="CaixaDialogo" type="CanvasLayer"]
+process_mode = 3
+layer = 30
+script = ExtResource("1_cd")
+
+[node name="FaixaCima" type="ColorRect" parent="."]
+unique_name_in_owner = true
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="FaixaBaixo" type="ColorRect" parent="."]
+unique_name_in_owner = true
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Painel" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_left = 0.56
+anchor_top = 0.1
+anchor_right = 0.975
+anchor_bottom = 0.9
+theme_override_styles/panel = SubResource("StyleBoxFlat_painel")
+
+[node name="VBox" type="VBoxContainer" parent="Painel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Nome" type="Label" parent="Painel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Pedinte"
+label_settings = SubResource("LabelSettings_nome")
+
+[node name="HSeparator" type="HSeparator" parent="Painel/VBox"]
+layout_mode = 2
+
+[node name="Texto" type="RichTextLabel" parent="Painel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 16
+theme_override_colors/default_color = Color(0.95, 0.93, 1, 1)
+bbcode_enabled = true
+text = "Texto da fala aparece aqui."
+scroll_active = false
+autowrap_mode = 3
+
+[node name="Continuar" type="Label" parent="Painel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.82, 0.35, 1)
+theme_override_font_sizes/font_size = 13
+text = "[E] continuar ▼"
+horizontal_alignment = 2
+
+[node name="Opcoes" type="VBoxContainer" parent="Painel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 6

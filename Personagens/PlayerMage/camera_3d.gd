@@ -42,6 +42,9 @@ var _zonas: Array = []        # zonas de câmera da cena
 var _zona_atual: Node = null
 var _zoom := 1.0              # 1 = distância normal; menor = mais perto do player
 
+var _conversa: Array = []     # player + NPC quando a tela de diálogo está aberta
+var _modo_antes_conversa := Node.PROCESS_MODE_INHERIT
+
 
 func _ready() -> void:
 	var players = get_tree().get_nodes_in_group("player")
@@ -72,10 +75,18 @@ func _exit_tree() -> void:
 func _process(delta: float) -> void:
 	if player == null or not is_instance_valid(player):
 		return
+	var alvo: Vector3
+	var peso: float
+	if not _conversa.is_empty():
+		alvo = _alvo_conversa()
+		peso = 1.0 - exp(-suavidade * 0.6 * delta)
+		global_position = global_position.lerp(alvo, peso)
+		_atualizar_paredes()
+		return
 	_atualizar_zona(delta, false)
-	var alvo := _alvo_limitado()
+	alvo = _alvo_limitado()
 	# atraso suave que não depende do FPS
-	var peso := 1.0 - exp(-suavidade * delta)
+	peso = 1.0 - exp(-suavidade * delta)
 	global_position = global_position.lerp(alvo, peso)
 	_atualizar_paredes()
 
@@ -154,6 +165,76 @@ func _player_cabe_vertical(cam: Vector3, p: Vector3, frente: Vector3, cima: Vect
 	if prof <= 0.1:
 		return false
 	return absf(rel.dot(cima)) <= prof * tan_v * margem_player
+
+
+# ---------------------------------------------------------------- TELA DE DIÁLOGO
+
+## Chamado pela caixa de diálogo: dá zoom nos personagens e deixa eles
+## do lado esquerdo da tela (o lado direito fica livre para a caixa).
+func focar_conversa(personagens: Array) -> void:
+	_conversa = personagens.filter(func(n): return n != null and is_instance_valid(n))
+	_modo_antes_conversa = process_mode
+	process_mode = Node.PROCESS_MODE_ALWAYS   # o jogo fica pausado, a câmera não
+
+
+func soltar_conversa() -> void:
+	_conversa.clear()
+	process_mode = _modo_antes_conversa
+
+
+## Fração da largura da tela onde fica o centro dos personagens (0 = esquerda, 1 = direita)
+const CONVERSA_POSICAO_X := 0.28
+## Quanto da tela (largura) os personagens podem ocupar
+const CONVERSA_LARGURA := 0.5
+
+
+func _alvo_conversa() -> Vector3:
+	# caixa (no mundo) que envolve os desenhos dos personagens
+	var caixa := AABB()
+	var achou := false
+	for n in _conversa:
+		if not is_instance_valid(n):
+			continue
+		var c := _caixa_visual(n)
+		caixa = c if not achou else caixa.merge(c)
+		achou = true
+	if not achou:
+		return global_position
+	var meio := caixa.get_center()
+	var tam := get_viewport().get_visible_rect().size
+	var tan_v := tan(deg_to_rad(fov * 0.5))
+	var tan_h := tan_v * tam.x / tam.y
+	var frente := -global_basis.z
+	var direita := global_basis.x
+	var cima := global_basis.y
+	# tamanho da caixa "vista pela câmera" (largura e altura na tela)
+	var largura := 0.0
+	var altura := 0.0
+	for i in 8:
+		var canto := caixa.get_endpoint(i) - meio
+		largura = maxf(largura, absf(canto.dot(direita)) * 2.0)
+		altura = maxf(altura, absf(canto.dot(cima)) * 2.0)
+	# distância para os dois caberem na parte esquerda, com uma folga
+	var dist := maxf((largura + 1.2) / (CONVERSA_LARGURA * 2.0 * tan_h),
+		(altura + 0.8) / (2.0 * tan_v * 0.78))
+	dist = clampf(dist, 3.5, offset.length() * 1.2)
+	# empurra a câmera pra direita: os personagens aparecem do lado esquerdo
+	var deslocar := (1.0 - CONVERSA_POSICAO_X * 2.0) * dist * tan_h
+	return meio - frente * dist + direita * deslocar
+
+
+## Caixa que envolve os desenhos (sprites/modelos) de um personagem
+func _caixa_visual(n: Node3D) -> AABB:
+	var caixa := AABB(n.global_position, Vector3(0.5, 1.5, 0.5))
+	var achou := false
+	for v in n.find_children("*", "GeometryInstance3D", true, false):
+		var gi := v as GeometryInstance3D
+		if not gi.is_visible_in_tree() or gi is Label3D:
+			continue
+		var b := gi.global_transform * gi.get_aabb()
+		caixa = b if not achou else caixa.merge(b)
+		achou = true
+	return caixa
 
 
 # ---------------------------------------------------------------- ZONAS DE CÂMERA

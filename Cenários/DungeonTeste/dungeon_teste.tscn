@@ -39,20 +39,26 @@ size = Vector3(3.5, 2.4, 2.4)
 size = Vector3(200, 4, 320)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_t6iqj"]
-size = Vector3(23.7, 4, 20.8)
+size = Vector3(8.2, 4, 13.4)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r3irx"]
-size = Vector3(7, 4, 25.5)
+size = Vector3(17.6, 4, 8.4)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pdtrc"]
+size = Vector3(15.9, 4, 10.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0sgb2"]
+size = Vector3(7, 4, 36.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tswpf"]
 size = Vector3(28.6, 4, 24.5)
 
-[node name="DungeonTeste" type="Node3D" unique_id=828750055]
+[node name="DungeonTeste" type="Node3D" unique_id=2039778987]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=343338058]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=782056596]
 environment = SubResource("Environment_fmm7y")
 
-[node name="LuzGeral" type="DirectionalLight3D" parent="." unique_id=1119079369]
+[node name="LuzGeral" type="DirectionalLight3D" parent="." unique_id=1325308297]
 transform = Transform3D(0.8660254, -0.43301272, 0.24999999, 0, 0.49999997, 0.86602545, -0.5, -0.75, 0.43301266, 0, 0, 0)
 light_energy = 0.35
 
@@ -60,93 +66,93 @@ light_energy = 0.35
 transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5, 0, 0, 0)
 script = ExtResource("2_bf4dl")
 
-[node name="Luzes" type="Node3D" parent="." unique_id=619778526]
+[node name="Luzes" type="Node3D" parent="." unique_id=1200958838]
 
-[node name="Luz1" type="OmniLight3D" parent="Luzes" unique_id=205817863]
+[node name="Luz1" type="OmniLight3D" parent="Luzes" unique_id=1080993951]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 2.2, -5)
 light_color = Color(1, 0.85, 0.95, 1)
 light_energy = 1.3
 omni_range = 9.0
 
-[node name="Luz2" type="OmniLight3D" parent="Luzes" unique_id=1006450649]
+[node name="Luz2" type="OmniLight3D" parent="Luzes" unique_id=1171619113]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 2.2, 4)
 light_color = Color(1, 0.85, 0.95, 1)
 light_energy = 1.3
 omni_range = 9.0
 
-[node name="Luz3" type="OmniLight3D" parent="Luzes" unique_id=1195704610]
+[node name="Luz3" type="OmniLight3D" parent="Luzes" unique_id=134406456]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, -5)
 light_color = Color(1, 0.85, 0.95, 1)
 light_energy = 1.3
 omni_range = 9.0
 
-[node name="Luz4" type="OmniLight3D" parent="Luzes" unique_id=890930516]
+[node name="Luz4" type="OmniLight3D" parent="Luzes" unique_id=1368765583]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 4)
 light_color = Color(1, 0.85, 0.95, 1)
 light_energy = 1.3
 omni_range = 9.0
 
-[node name="Luz5" type="OmniLight3D" parent="Luzes" unique_id=1541288226]
+[node name="Luz5" type="OmniLight3D" parent="Luzes" unique_id=1199700429]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2.2, 3)
 light_color = Color(1, 0.85, 0.95, 1)
 light_energy = 1.3
 omni_range = 9.0
 
-[node name="Luz6" type="OmniLight3D" parent="Luzes" unique_id=1517629882]
+[node name="Luz6" type="OmniLight3D" parent="Luzes" unique_id=89421007]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 2.2, -4)
 light_color = Color(1, 0.85, 0.95, 1)
 light_energy = 1.3
 omni_range = 9.0
 
-[node name="Luz7" type="OmniLight3D" parent="Luzes" unique_id=336005471]
+[node name="Luz7" type="OmniLight3D" parent="Luzes" unique_id=1103235352]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 2.2, -11)
 light_color = Color(1, 0.85, 0.95, 1)
 light_energy = 1.3
 omni_range = 9.0
 
-[node name="Luz8" type="OmniLight3D" parent="Luzes" unique_id=1281780429]
+[node name="Luz8" type="OmniLight3D" parent="Luzes" unique_id=2141590003]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 2.2, -18)
 light_color = Color(1, 0.85, 0.95, 1)
 light_energy = 1.3
 omni_range = 9.0
 
-[node name="Luz9" type="OmniLight3D" parent="Luzes" unique_id=898075637]
+[node name="Luz9" type="OmniLight3D" parent="Luzes" unique_id=505349565]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 2.2, -25)
 light_color = Color(1, 0.85, 0.95, 1)
 light_energy = 1.3
 omni_range = 9.0
 
-[node name="Luz10" type="OmniLight3D" parent="Luzes" unique_id=1317875067]
+[node name="Luz10" type="OmniLight3D" parent="Luzes" unique_id=1213538432]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 2.2, -31.5)
 light_color = Color(1, 0.85, 0.95, 1)
 light_energy = 1.3
 omni_range = 9.0
 
-[node name="Luz11" type="OmniLight3D" parent="Luzes" unique_id=919233998]
+[node name="Luz11" type="OmniLight3D" parent="Luzes" unique_id=1551047068]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.2, -39)
 light_color = Color(1, 0.95, 0.85, 1)
 light_energy = 1.3
 omni_range = 9.0
 
-[node name="Luz12" type="OmniLight3D" parent="Luzes" unique_id=731688102]
+[node name="Luz12" type="OmniLight3D" parent="Luzes" unique_id=1555511886]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2.2, -39)
 light_color = Color(1, 0.95, 0.85, 1)
 light_energy = 1.3
 omni_range = 9.0
 
-[node name="Luz13" type="OmniLight3D" parent="Luzes" unique_id=1413634163]
+[node name="Luz13" type="OmniLight3D" parent="Luzes" unique_id=380117639]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.2, -50)
 light_color = Color(1, 0.95, 0.85, 1)
 light_energy = 1.3
 omni_range = 9.0
 
-[node name="Luz14" type="OmniLight3D" parent="Luzes" unique_id=302708027]
+[node name="Luz14" type="OmniLight3D" parent="Luzes" unique_id=803164198]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 2.2, -50)
 light_color = Color(1, 0.95, 0.85, 1)
 light_energy = 1.3
 omni_range = 9.0
 
-[node name="Luz15" type="OmniLight3D" parent="Luzes" unique_id=1094832906]
+[node name="Luz15" type="OmniLight3D" parent="Luzes" unique_id=484570109]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2.2, -55)
 light_color = Color(1, 0.95, 0.85, 1)
 light_energy = 1.3
@@ -155,7 +161,7 @@ omni_range = 9.0
 [node name="Player" parent="." unique_id=1477526133 instance=ExtResource("3_ydo76")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.6, 1.1, 6.45)
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1252481092]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1510374275]
 transform = Transform3D(1, 0, 0, 0, 0.6993348, 0.7147943, 0, -0.7147943, 0.6993348, -7.87, 10.030001, 14.08)
 fov = 55.15981
 script = ExtResource("4_bn3cg")
@@ -164,132 +170,120 @@ ponto_fundo = 0.25
 [node name="Hearts" parent="." unique_id=520576831 instance=ExtResource("5_oqky2")]
 
 [node name="Pedinte" parent="." unique_id=713960368 instance=ExtResource("6_cobsc")]
-transform = Transform3D(0.82391256, 0, 0, 0, 0.82391256, 0, 0, 0, 0.82391256, -7, 0.1, -5.6)
+transform = Transform3D(0.82391256, 0, 0, 0, 0.82391256, 0, 0, 0, 0.82391256, -3.7887743, -0.6677326, -7.9640408)
 
-[node name="Plantas" type="Node3D" parent="." unique_id=154781395]
+[node name="Plantas" type="Node3D" parent="." unique_id=50436420]
 
 [node name="Planta1" parent="Plantas" unique_id=1352802038 instance=ExtResource("7_3nkro")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.5, -0.5)
 
-[node name="Planta2" parent="Plantas" unique_id=1507825677 instance=ExtResource("7_3nkro")]
+[node name="Planta2" parent="Plantas" unique_id=1944700159 instance=ExtResource("7_3nkro")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, -3)
 
-[node name="Planta3" parent="Plantas" unique_id=1315738821 instance=ExtResource("7_3nkro")]
+[node name="Planta3" parent="Plantas" unique_id=1925697156 instance=ExtResource("7_3nkro")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.5, 2.5)
 
-[node name="Planta4" parent="Plantas" unique_id=1473580749 instance=ExtResource("7_3nkro")]
+[node name="Planta4" parent="Plantas" unique_id=851147492 instance=ExtResource("7_3nkro")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.5, -8)
 
-[node name="Planta5" parent="Plantas" unique_id=1795345752 instance=ExtResource("7_3nkro")]
+[node name="Planta5" parent="Plantas" unique_id=423448138 instance=ExtResource("7_3nkro")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, -46)
 
-[node name="CogumelosExplosivos" type="Node3D" parent="." unique_id=453628294]
+[node name="CogumelosExplosivos" type="Node3D" parent="." unique_id=538255547]
 
 [node name="Cogumelo1" parent="CogumelosExplosivos" unique_id=800666980 instance=ExtResource("8_p0f6e")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.35, 0.6, -7.1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.918377, 0.8234793, -18.895727)
 
-[node name="Cogumelo2" parent="CogumelosExplosivos" unique_id=1359675993 instance=ExtResource("8_p0f6e")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 0.6, -7.2)
+[node name="Cogumelo2" parent="CogumelosExplosivos" unique_id=1473127200 instance=ExtResource("8_p0f6e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 0.8234793, -7.2)
 
-[node name="Cogumelo3" parent="CogumelosExplosivos" unique_id=1343674119 instance=ExtResource("8_p0f6e")]
+[node name="Cogumelo3" parent="CogumelosExplosivos" unique_id=1726564474 instance=ExtResource("8_p0f6e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.6, 6.9)
 
-[node name="Inimigos" type="Node3D" parent="." unique_id=264132409]
+[node name="Inimigos" type="Node3D" parent="." unique_id=2012053416]
 
 [node name="Enemy1" parent="Inimigos" unique_id=1396215999 groups=["enemy"] instance=ExtResource("9_7c124")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0.8, 1.1)
 
-[node name="Enemy2" parent="Inimigos" unique_id=1720293626 groups=["enemy"] instance=ExtResource("9_7c124")]
+[node name="Enemy2" parent="Inimigos" unique_id=1399358052 groups=["enemy"] instance=ExtResource("9_7c124")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.8, 5.05)
 
-[node name="Enemy3" parent="Inimigos" unique_id=120604246 groups=["enemy"] instance=ExtResource("9_7c124")]
+[node name="Enemy3" parent="Inimigos" unique_id=1942366455 groups=["enemy"] instance=ExtResource("9_7c124")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0.8, 8.15)
 
-[node name="Enemy4" parent="Inimigos" unique_id=1004186549 groups=["enemy"] instance=ExtResource("9_7c124")]
+[node name="Enemy4" parent="Inimigos" unique_id=729782148 groups=["enemy"] instance=ExtResource("9_7c124")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.8, -10.95)
 
-[node name="Enemy5" parent="Inimigos" unique_id=1831810429 groups=["enemy"] instance=ExtResource("9_7c124")]
+[node name="Enemy5" parent="Inimigos" unique_id=527555260 groups=["enemy"] instance=ExtResource("9_7c124")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0.8, -20.35)
 
-[node name="Atiradores" type="Node3D" parent="." unique_id=455986384]
+[node name="Atiradores" type="Node3D" parent="." unique_id=1816162741]
 
-[node name="Atirador1" parent="Atiradores" unique_id=1037824695 groups=["enemy"] instance=ExtResource("10_wg7wa")]
+[node name="Atirador1" parent="Atiradores" unique_id=798978520 groups=["enemy"] instance=ExtResource("10_wg7wa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.4, 0.8, -52.3)
 
-[node name="Atirador2" parent="Atiradores" unique_id=280241235 groups=["enemy"] instance=ExtResource("10_wg7wa")]
+[node name="Atirador2" parent="Atiradores" unique_id=351073305 groups=["enemy"] instance=ExtResource("10_wg7wa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9, 0.8, -49)
 
-[node name="Atirador3" parent="Atiradores" unique_id=2017173932 groups=["enemy"] instance=ExtResource("10_wg7wa")]
+[node name="Atirador3" parent="Atiradores" unique_id=456324825 groups=["enemy"] instance=ExtResource("10_wg7wa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.95, 0.8, -49)
 
-[node name="Atirador4" parent="Atiradores" unique_id=796251078 groups=["enemy"] instance=ExtResource("10_wg7wa")]
+[node name="Atirador4" parent="Atiradores" unique_id=1628303857 groups=["enemy"] instance=ExtResource("10_wg7wa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9, 0.8, -42.45)
 
-[node name="Atirador5" parent="Atiradores" unique_id=443528855 groups=["enemy"] instance=ExtResource("10_wg7wa")]
+[node name="Atirador5" parent="Atiradores" unique_id=438642780 groups=["enemy"] instance=ExtResource("10_wg7wa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.75, 0.8, -41.25)
 
-[node name="Torre" parent="." unique_id=1019395292 instance=ExtResource("11_r017q")]
+[node name="Torre" parent="." unique_id=476120307 instance=ExtResource("11_r017q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.7, 0.05, 3.4)
 
-[node name="ParedeExplodivel" parent="." unique_id=2124284445 instance=ExtResource("12_qb2yj")]
+[node name="ParedeExplodivel" parent="." unique_id=1877608356 instance=ExtResource("12_qb2yj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.05, 1.025, -27.125)
 
-[node name="PortasSalas" type="Node3D" parent="." unique_id=1434597640]
+[node name="PortasSalas" type="Node3D" parent="." unique_id=209456575]
 
-[node name="SalaEsquerda" type="Area3D" parent="PortasSalas" unique_id=1627907474]
+[node name="SalaEsquerda" type="Area3D" parent="PortasSalas" unique_id=1483974331]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6, 1.2, -15.075)
 script = ExtResource("13_g1mwk")
 nome_sala = "Sala point-and-click"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PortasSalas/SalaEsquerda" unique_id=1264279230]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PortasSalas/SalaEsquerda" unique_id=758914566]
 shape = SubResource("BoxShape3D_ndiq2")
 
-[node name="SalaDireita1" type="Area3D" parent="PortasSalas" unique_id=747714823]
+[node name="SalaDireita1" type="Area3D" parent="PortasSalas" unique_id=2100991714]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2, 1.2, -15.075)
 script = ExtResource("13_g1mwk")
 nome_sala = "Sala point-and-click"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PortasSalas/SalaDireita1" unique_id=634630681]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PortasSalas/SalaDireita1" unique_id=2124412822]
 shape = SubResource("BoxShape3D_lcu2c")
 
-[node name="SalaDireita2" type="Area3D" parent="PortasSalas" unique_id=691512295]
+[node name="SalaDireita2" type="Area3D" parent="PortasSalas" unique_id=1047054597]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.15, 1.2, -27.125)
 script = ExtResource("13_g1mwk")
 nome_sala = "Sala point-and-click"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PortasSalas/SalaDireita2" unique_id=1986340246]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PortasSalas/SalaDireita2" unique_id=1688838103]
 shape = SubResource("BoxShape3D_fp2da")
 
-[node name="PortaBoss" type="Area3D" parent="." unique_id=2040262522]
+[node name="PortaBoss" type="Area3D" parent="." unique_id=378449943]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.375, 1.2, -56.25)
 script = ExtResource("14_7w1ks")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PortaBoss" unique_id=483091785]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PortaBoss" unique_id=820718700]
 shape = SubResource("BoxShape3D_s7f76")
 
-[node name="ZonaQueda" type="Area3D" parent="." unique_id=563306691]
+[node name="ZonaQueda" type="Area3D" parent="." unique_id=1562565155]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, -24)
 script = ExtResource("15_ufefc")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ZonaQueda" unique_id=2028347102]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ZonaQueda" unique_id=25667493]
 shape = SubResource("BoxShape3D_3603n")
 
-[node name="ZonasCamera" type="Node3D" parent="." unique_id=1234595814]
+[node name="ZonasCamera" type="Node3D" parent="." unique_id=1300826671]
 
-[node name="Caverna" type="Area3D" parent="ZonasCamera" unique_id=1393216321]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 2, -0.6)
-collision_layer = 0
-collision_mask = 0
-monitoring = false
-monitorable = false
-script = ExtResource("16_s73jb")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ZonasCamera/Caverna" unique_id=1760937665]
-shape = SubResource("BoxShape3D_t6iqj")
-debug_color = Color(0.2, 0.6, 1, 0.25)
-
-[node name="Corredor" type="Area3D" parent="ZonasCamera" unique_id=864883158]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 2, -21.75)
+[node name="CavernaEsquerda" type="Area3D" parent="ZonasCamera" unique_id=1399957867]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.9, 2, 3.1)
 collision_layer = 0
 collision_mask = 0
 monitoring = false
@@ -297,11 +291,50 @@ monitorable = false
 script = ExtResource("16_s73jb")
 zoom_minimo = 0.45
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ZonasCamera/Corredor" unique_id=215633027]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ZonasCamera/CavernaEsquerda" unique_id=1620356847]
+shape = SubResource("BoxShape3D_t6iqj")
+debug_color = Color(0.2, 0.6, 1, 0.25)
+
+[node name="CavernaCima" type="Area3D" parent="ZonasCamera" unique_id=30171908]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2, 2, -6.2)
+collision_layer = 0
+collision_mask = 0
+monitoring = false
+monitorable = false
+script = ExtResource("16_s73jb")
+zoom_minimo = 0.45
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ZonasCamera/CavernaCima" unique_id=829500776]
 shape = SubResource("BoxShape3D_r3irx")
 debug_color = Color(0.2, 0.6, 1, 0.25)
 
-[node name="Refeitorio" type="Area3D" parent="ZonasCamera" unique_id=267695731]
+[node name="CavernaDireita" type="Area3D" parent="ZonasCamera" unique_id=1307525217]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.25, 2, 4.6)
+collision_layer = 0
+collision_mask = 0
+monitoring = false
+monitorable = false
+script = ExtResource("16_s73jb")
+zoom_minimo = 0.45
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ZonasCamera/CavernaDireita" unique_id=1050009729]
+shape = SubResource("BoxShape3D_pdtrc")
+debug_color = Color(0.2, 0.6, 1, 0.25)
+
+[node name="Corredor" type="Area3D" parent="ZonasCamera" unique_id=1255669989]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 2, -16.25)
+collision_layer = 0
+collision_mask = 0
+monitoring = false
+monitorable = false
+script = ExtResource("16_s73jb")
+zoom_minimo = 0.45
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ZonasCamera/Corredor" unique_id=2145609521]
+shape = SubResource("BoxShape3D_0sgb2")
+debug_color = Color(0.2, 0.6, 1, 0.25)
+
+[node name="Refeitorio" type="Area3D" parent="ZonasCamera" unique_id=1253650945]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 2, -45.25)
 collision_layer = 0
 collision_mask = 0
@@ -309,6 +342,6 @@ monitoring = false
 monitorable = false
 script = ExtResource("16_s73jb")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ZonasCamera/Refeitorio" unique_id=898768441]
-shape = SubResource("BoxShape3D_pdtrc")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ZonasCamera/Refeitorio" unique_id=505276075]
+shape = SubResource("BoxShape3D_tswpf")
 debug_color = Color(0.2, 0.6, 1, 0.25)

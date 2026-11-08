@@ -15,4 +15,4 @@ func _terminar() -> void:
 		return
 	_acabou = true
 	video.stop()
-	get_tree().change_scene_to_file("res://Cenários/Dungeon1/dungeon1.tscn")  # confira o caminho real
+	get_tree().change_scene_to_file("res://Cenários/DungeonTeste/dungeon_teste.tscn")  # confira o caminho real

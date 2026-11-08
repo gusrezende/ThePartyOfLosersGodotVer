@@ -52,6 +52,12 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if estado == Estado.MORTO:
 		return   # morto: fica parado onde caiu (sem gravidade, não afunda no chão)
+	if estado != Estado.INIMIGO:
+		# Enquanto é NPC (e transformando), ele NÃO usa física: fica exatamente onde
+		# você colocou no editor. Sem isso, se ele encosta um pouco no chão, numa pedra
+		# ou no player, a física "desgruda" ele e ele sobe/escorrega (parece que voa).
+		velocity = Vector3.ZERO
+		return
 	if not is_on_floor():
 		velocity.y -= _gravidade * delta
 	else:
@@ -82,6 +88,7 @@ func transformar() -> void:
 	if estado != Estado.TRANSFORMANDO:
 		return
 	_falar("")
+	_assentar_no_chao()
 	estado = Estado.INIMIGO
 	add_to_group("enemy")   # agora os tiros e o cogumelo machucam ele
 	_tocar(anim_andando)
@@ -152,6 +159,21 @@ func _falar(texto: String) -> void:
 	if _dialogo:
 		_dialogo.text = texto
 		_dialogo.visible = texto != ""
+
+
+## Antes de começar a andar: coloca os pés dele em cima do chão que está embaixo,
+## para não começar enterrado (e ser jogado pra cima).
+func _assentar_no_chao() -> void:
+	var de := global_position + Vector3(0, 2.0, 0)
+	var ate := global_position + Vector3(0, -3.0, 0)
+	var consulta := PhysicsRayQueryParameters3D.create(de, ate)
+	consulta.exclude = [get_rid()]
+	if player is CollisionObject3D:
+		consulta.exclude.append((player as CollisionObject3D).get_rid())
+	var acerto := get_world_3d().direct_space_state.intersect_ray(consulta)
+	if acerto.has("position"):
+		global_position.y = acerto["position"].y + 0.02
+	velocity = Vector3.ZERO
 
 
 ## O Pedinte precisa de uma colisão no corpo pra andar no chão e levar tiro.
