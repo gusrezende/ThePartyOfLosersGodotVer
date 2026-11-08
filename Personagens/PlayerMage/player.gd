@@ -151,6 +151,7 @@ func take_damage(amount: int, source_position = null) -> void:
 	if hp <= 0:
 		print("Player morreu!")
 		GameState.player_hp = -1  # ao recarregar a cena, volta com a vida cheia
+		QuestManager.resetar_missao()  # a missão das plantas começa de novo
 		get_tree().call_deferred("reload_current_scene")
 
 

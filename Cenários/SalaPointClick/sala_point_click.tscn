@@ -1,0 +1,264 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://Cenários/SalaPointClick/sala_point_click.gd" id="1_sp"]
+[ext_resource type="Texture2D" path="res://Cenários/SalaPointClick/fundo_sala.png" id="2_fs"]
+[ext_resource type="Script" path="res://Cenários/SalaPointClick/ponto_interesse.gd" id="3_pi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_voltar"]
+content_margin_left = 14.0
+content_margin_top = 6.0
+content_margin_right = 14.0
+content_margin_bottom = 6.0
+bg_color = Color(0.09, 0.05, 0.16, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.62, 0.42, 0.95, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_voltar_hover"]
+content_margin_left = 14.0
+content_margin_top = 6.0
+content_margin_right = 14.0
+content_margin_bottom = 6.0
+bg_color = Color(0.45, 0.27, 0.7, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.82, 0.35, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_msg"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(0.09, 0.05, 0.16, 0.92)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.62, 0.42, 0.95, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_seta"]
+font_size = 34
+font_color = Color(1, 0.85, 0.4, 1)
+outline_size = 8
+outline_color = Color(0.1, 0.05, 0.15, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_nome"]
+font_size = 15
+font_color = Color(1, 0.85, 0.4, 1)
+outline_size = 6
+outline_color = Color(0.1, 0.05, 0.15, 1)
+
+[node name="SalaPointClick" type="CanvasLayer"]
+process_mode = 3
+layer = 25
+script = ExtResource("1_sp")
+
+[node name="Escuro" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Cenario" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 2000.0
+offset_bottom = 480.0
+mouse_filter = 2
+
+[node name="Fundo" type="TextureRect" parent="Cenario"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 2000.0
+offset_bottom = 480.0
+mouse_filter = 2
+texture = ExtResource("2_fs")
+expand_mode = 1
+
+[node name="Estante" type="Control" parent="Cenario"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 220.0
+offset_top = 113.0
+offset_right = 420.0
+offset_bottom = 347.0
+mouse_filter = 2
+script = ExtResource("3_pi")
+nome = "Estante"
+mensagem = "Livros velhos... \"Como domesticar cogumelos\", \"A Arte de Pedir Plantas\" e \"Missões para Iniciantes\"."
+
+[node name="Quadro" type="Control" parent="Cenario"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 500.0
+offset_top = 93.0
+offset_right = 632.0
+offset_bottom = 207.0
+mouse_filter = 2
+script = ExtResource("3_pi")
+nome = "Quadro torto"
+mensagem = "Um retrato de alguém muito parecido com o Pedinte. Que estranho..."
+
+[node name="Janela" type="Control" parent="Cenario"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 953.0
+offset_top = 68.0
+offset_right = 1047.0
+offset_bottom = 199.0
+mouse_filter = 2
+script = ExtResource("3_pi")
+nome = "Janela"
+mensagem = "Tem grades. Lá fora só dá pra ver escuridão."
+
+[node name="Mesa" type="Control" parent="Cenario"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 720.0
+offset_top = 220.0
+offset_right = 947.0
+offset_bottom = 347.0
+mouse_filter = 2
+script = ExtResource("3_pi")
+nome = "Bilhete na mesa"
+mensagem = "\"Quem estiver lendo isto: NÃO entregue as plantas.\""
+
+[node name="Bau" type="Control" parent="Cenario"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1300.0
+offset_top = 233.0
+offset_right = 1440.0
+offset_bottom = 344.0
+mouse_filter = 2
+script = ExtResource("3_pi")
+nome = "Baú"
+mensagem = "Está trancado. Deve ter uma chave em algum lugar..."
+
+[node name="Passagem" type="Control" parent="Cenario"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1703.0
+offset_top = 127.0
+offset_right = 1830.0
+offset_bottom = 347.0
+mouse_filter = 2
+script = ExtResource("3_pi")
+nome = "Passagem escura"
+mensagem = "Escuro demais para entrar. Melhor não."
+
+[node name="SetaEsquerda" type="Label" parent="."]
+unique_name_in_owner = true
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = -24.0
+offset_right = 40.0
+offset_bottom = 24.0
+grow_vertical = 2
+text = "◀"
+label_settings = SubResource("LabelSettings_seta")
+
+[node name="SetaDireita" type="Label" parent="."]
+unique_name_in_owner = true
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -24.0
+offset_right = -8.0
+offset_bottom = 24.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "▶"
+label_settings = SubResource("LabelSettings_seta")
+horizontal_alignment = 2
+
+[node name="Voltar" type="Button" parent="."]
+unique_name_in_owner = true
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 112.0
+offset_bottom = 46.0
+focus_mode = 0
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.95, 0.93, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_voltar")
+theme_override_styles/hover = SubResource("StyleBoxFlat_voltar_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_voltar_hover")
+text = "◀ Voltar"
+
+[node name="Dica" type="Label" parent="."]
+unique_name_in_owner = true
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = -40.0
+offset_right = 220.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Arraste com o mouse para olhar em volta"
+label_settings = SubResource("LabelSettings_nome")
+horizontal_alignment = 1
+
+[node name="NomeObjeto" type="Label" parent="."]
+unique_name_in_owner = true
+offset_right = 120.0
+offset_bottom = 24.0
+mouse_filter = 2
+text = "Objeto"
+label_settings = SubResource("LabelSettings_nome")
+
+[node name="Mensagem" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -96.0
+offset_right = 300.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_msg")
+
+[node name="MensagemTexto" type="Label" parent="Mensagem"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.93, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "Mensagem"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
