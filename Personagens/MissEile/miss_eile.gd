@@ -47,8 +47,8 @@ const EXPLOSAO = preload("res://Personagens/MissEile/ataques/explosao.gd")
 const MISSIL = preload("res://Personagens/MissEile/ataques/missil.gd")
 const TelaVitoria = preload("res://Cenários/BossMissEile/tela_vitoria.gd")
 
-# Limites da arena (X e Z) onde os mísseis podem cair. Os valores padrão batem com o chão
-# da cena bossMissEile.tscn. Se mudar o tamanho da arena, ajuste no Inspetor.
+# Limites da arena (X e Z) onde os mísseis podem cair. Pode ser um retângulo um pouco
+# maior que a arena: os mísseis só caem onde tem chão. Se mudar a arena, ajuste no Inspetor.
 @export var arena_min := Vector2(-10.5, -5.0)
 @export var arena_max := Vector2(10.5, 13.8)
 
@@ -64,11 +64,14 @@ var shooting_elapsed := 0.0
 var charge_timer := 0.0
 var chuva_restante := 0.0
 var onda_timer := 0.0
+var _casa_ajustada := false   # a altura da "casa" é acertada pelo chão no 1º quadro de física
 
 @onready var sprite: AnimatedSprite3D = $AnimatedSprite3D
 
 
 func _ready() -> void:
+	# ela VOA: sem lógica de chão/rampa do CharacterBody (não fica presa em degraus e bordas)
+	motion_mode = CharacterBody3D.MOTION_MODE_FLOATING
 	home_position = global_position
 	var players = get_tree().get_nodes_in_group("player")
 	if players.size() > 0:
@@ -79,6 +82,9 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if player == null or not is_instance_valid(player):
 		return
+
+	if not _casa_ajustada:
+		_ajustar_casa()
 
 	match state:
 		State.SHOOTING:
@@ -193,7 +199,9 @@ func transform_and_chase() -> void:
 	await sprite.animation_finished
 	if state != State.TRANSFORMING or player == null or not is_instance_valid(player):
 		return
-	global_position.y = player.global_position.y
+	# voa na altura dela (acima do chão), e não na altura do player:
+	# ela é mais alta que o mago, e na altura dele a colisão dela raspava no chão e travava
+	global_position.y = home_position.y + FLY_HEIGHT
 	chase_timer = CHASE_DURATION
 	contact_timer = 0.0
 	can_take_damage = true
@@ -210,6 +218,8 @@ func process_chasing(delta: float) -> void:
 	var direction = to_player.normalized()
 
 	velocity = direction * CHASE_SPEED
+	# mantém a altura de voo
+	velocity.y = (home_position.y + FLY_HEIGHT - global_position.y) * 8.0
 	move_and_slide()
 
 	for i in get_slide_collision_count():
@@ -280,8 +290,12 @@ func _ponto_longe_da_boss() -> Vector2:
 	var casa := Vector2(home_position.x, home_position.z)
 	for i in 30:
 		var p := Vector2(randf_range(arena_min.x, arena_max.x), randf_range(arena_min.y, arena_max.y))
-		if p.distance_to(casa) > RAIO_SEGURO + RAIO_MISSIL * 0.5:
-			return p
+		if p.distance_to(casa) <= RAIO_SEGURO + RAIO_MISSIL * 0.5:
+			continue
+		# só cai onde tem chão de verdade (a arena não é um retângulo)
+		if absf(_ponto_no_chao(p.x, p.y).y - home_position.y) > 1.0:
+			continue
+		return p
 	return Vector2.INF
 
 
@@ -319,6 +333,17 @@ func _mostrar_vitoria() -> void:
 
 func _distancia_plana(a: Vector3, b: Vector3) -> float:
 	return Vector2(a.x - b.x, a.z - b.z).length()
+
+
+## A posição inicial dela pode estar alta ou baixa demais em relação ao chão do mapa.
+## Aqui a "casa" é colocada exatamente em cima do chão que está embaixo dela.
+func _ajustar_casa() -> void:
+	_casa_ajustada = true
+	var chao := _ponto_no_chao(home_position.x, home_position.z)
+	if absf(chao.y - home_position.y) < 30.0:
+		home_position.y = chao.y
+	if state == State.SHOOTING:
+		global_position = home_position + Vector3(0, FLY_HEIGHT, 0)
 
 
 ## Acha a altura do chão no ponto (x, z). Se não achar, usa o pé do player.

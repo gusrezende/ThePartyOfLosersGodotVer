@@ -1,44 +1,32 @@
 [gd_scene format=3 uid="uid://c83x7dkm72opm"]
 
 [ext_resource type="PackedScene" uid="uid://c5mste5xg54bn" path="res://Personagens/PlayerMage/player.tscn" id="1_4qoim"]
+[ext_resource type="PackedScene" uid="uid://ctgksfe5gr648" path="res://Cenários/DungeonTeste/modelo/MapaBOSS.glb" id="1_rcceg"]
 [ext_resource type="PackedScene" uid="uid://bmwihea3gmy11" path="res://Personagens/MissEile/miss_eile.tscn" id="2_8jn4o"]
+[ext_resource type="Script" path="res://Cenários/BossMissEile/colisao_mapa.gd" id="2_x72e8"]
 [ext_resource type="PackedScene" uid="uid://b4flc54piu4pc" path="res://UI/Life Hearts UI/lifeHeartsUI.tscn" id="3_52jy6"]
 [ext_resource type="Script" uid="uid://c0b8omxeyavhi" path="res://Personagens/PlayerMage/camera_3d.gd" id="4_2s2v4"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_g4v7s"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_g4v7s"]
-size = Vector3(37.620773, 1, 31.823738)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_yf5fn"]
-size = Vector3(49.127792, 1, 32.38217)
-
 [node name="Node3D" type="Node3D" unique_id=701580891]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1820967899]
-transform = Transform3D(0.45006734, 0, 0, 0, 1, 0, 0, 0, 0.6026871, 0, 0, 0)
-physics_material_override = SubResource("PhysicsMaterial_g4v7s")
+[node name="MapaBOSS" parent="." unique_id=64115082 instance=ExtResource("1_rcceg")]
+transform = Transform3D(-6.39071e-08, 0, -1.7673295, 0, 1.0000004, 0, 1.9578036, 0, -1.0344906e-07, -1.2110134, -1.6295938, 7.8001385)
+script = ExtResource("2_x72e8")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=170212429]
-transform = Transform3D(1.2968454, 0, 0, 0, 1, 0, 0, 0, 1, -0.17059517, 0, 7.4431953)
-mesh = SubResource("BoxMesh_g4v7s")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1129092012]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.009605408, 0, 7.429306)
-shape = SubResource("BoxShape3D_yf5fn")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="StaticBody3D/CollisionShape3D" unique_id=553178506]
-transform = Transform3D(1, 0, 0, 0, 0.6384885, 0.7696314, 0, -0.7696314, 0.6384885, 0, 9.944241, 0.7533424)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=553178506]
+transform = Transform3D(1, 0, 0, 0, 0.80904245, 0.5877502, 0, -0.58775026, 0.8090424, 0.004323079, 9.287528, 8.573594)
 
 [node name="Player" parent="." unique_id=1477526133 instance=ExtResource("1_4qoim")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.9343452, 1.6157563, 10.377201)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4919219, -0.3, 14.8910675)
 
 [node name="MissEile" parent="." unique_id=1731039629 instance=ExtResource("2_8jn4o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5025947, 1.49, -4.5163717)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5025947, 0.016088367, -4.5163717)
+arena_min = Vector2(-13, -8)
+arena_max = Vector2(13, 22)
 
 [node name="Hearts" parent="." unique_id=520576831 instance=ExtResource("3_52jy6")]
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=452996514]
-transform = Transform3D(1, 0, 0, 0, 0.6993348, 0.7147943, 0, -0.7147943, 0.6993348, -7.0845942, 8.585146, 17.080627)
+transform = Transform3D(1, 0, 0, 0, 0.6993348, 0.7147943, 0, -0.7147943, 0.6993348, -0.59398174, 8.585146, 20.20568)
 fov = 55.15981
 script = ExtResource("4_2s2v4")
