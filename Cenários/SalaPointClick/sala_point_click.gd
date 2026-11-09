@@ -1,4 +1,6 @@
 extends CanvasLayer
+
+const Sons = preload("res://Músicas/sons.gd")
 ## TELA DE POINT AND CLICK de uma sala.
 ##
 ## Abre POR CIMA da dungeon (que fica pausada), então ao voltar está tudo do jeito
@@ -77,6 +79,7 @@ func _entrar() -> void:
 	_estava_pausado = get_tree().paused
 	get_tree().paused = true
 	var tr := _transicao()
+	Sons.tocar(self, Sons.TRANSICAO)
 	if tr:
 		tr._preparar()
 		await tr._animar(1.0, 0.5, Tween.EASE_IN)
@@ -98,6 +101,7 @@ func sair() -> void:
 	_saindo = true
 	_ativo = false
 	var tr := _transicao()
+	Sons.tocar(self, Sons.TRANSICAO)
 	if tr:
 		tr._preparar()
 		await tr._animar(1.0, 0.5, Tween.EASE_IN)

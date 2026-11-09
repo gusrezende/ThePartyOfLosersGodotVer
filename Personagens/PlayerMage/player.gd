@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+const Sons = preload("res://Músicas/sons.gd")
+
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 const MAX_HP = 6
@@ -100,6 +102,7 @@ func pick_up_mushroom() -> void:
 		return
 	is_holding_mushroom = true
 	held_mushroom.visible = true
+	Sons.tocar(self, Sons.COGUMELO)
 
 
 func throw_mushroom() -> void:
@@ -117,6 +120,7 @@ func throw_mushroom() -> void:
 	get_tree().current_scene.add_child(mushroom)
 	mushroom.global_position = global_position
 	mushroom.launch(throw_direction)
+	Sons.tocar(self, Sons.JOGANDO_COGUMELO)
 
 	is_holding_mushroom = false
 	held_mushroom.visible = false

@@ -1,4 +1,6 @@
 extends CanvasLayer
+
+const Sons = preload("res://Músicas/sons.gd")
 ## TELA DE DIÁLOGO: a câmera dá zoom no player + NPC (que ficam do lado esquerdo)
 ## e a caixa de diálogo aparece do lado direito, com o texto e as opções.
 ##
@@ -78,6 +80,10 @@ func _comecar(nome_npc: String, player: Node3D, npc: Node3D) -> void:
 	_nome.text = nome_npc
 	_bloqueio = 0.2
 
+	# som de conversa + música de fundo mais baixa
+	Sons.tocar(self, Sons.NPC)
+	Sons.abaixar_musica(self, true)
+
 	# pausa o jogo
 	_estava_pausado = get_tree().paused
 	get_tree().paused = true
@@ -153,6 +159,7 @@ func fechar() -> void:
 	_limpar_opcoes()
 	if _camera and is_instance_valid(_camera) and _camera.has_method("soltar_conversa"):
 		_camera.soltar_conversa()
+	Sons.abaixar_musica(self, false)   # música volta ao normal
 	var tw := create_tween().set_parallel(true)
 	tw.tween_property(_painel, "position:x", _painel_x + 420.0, 0.25).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
 	tw.tween_property(_painel, "modulate:a", 0.0, 0.25)

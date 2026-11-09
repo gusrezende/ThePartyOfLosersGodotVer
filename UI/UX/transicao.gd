@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+const Sons = preload("res://Músicas/sons.gd")
+
 # true = estrela (estilo Mario 64), false = círculo
 @export var usar_estrela := true
 
@@ -94,6 +96,7 @@ func ir_para(destino, duracao := 0.8) -> void:
 	_rect.mouse_filter = Control.MOUSE_FILTER_STOP
 
 	_preparar()
+	Sons.tocar(self, Sons.TRANSICAO)
 	await _animar(1.0, duracao, Tween.EASE_IN)      # fecha em volta do player
 
 	get_tree().paused = false

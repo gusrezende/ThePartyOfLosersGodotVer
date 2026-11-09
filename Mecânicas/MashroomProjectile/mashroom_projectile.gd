@@ -1,5 +1,7 @@
 extends Area3D
 
+const Sons = preload("res://Músicas/sons.gd")
+
 const SPEED = 10.0
 const LIFETIME = 5.0
 const EXPLOSION_RADIUS = 3.0
@@ -32,6 +34,7 @@ func explode() -> void:
 	if has_exploded:
 		return
 	has_exploded = true
+	Sons.tocar(self, Sons.EXPLOSAO)
 
 	var enemies = get_tree().get_nodes_in_group("enemy")
 	for enemy in enemies:

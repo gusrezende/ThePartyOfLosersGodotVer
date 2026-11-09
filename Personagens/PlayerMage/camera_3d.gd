@@ -19,6 +19,9 @@ extends Camera3D
 ## Até que ponto da tela o FUNDO do mapa pode aparecer (0.5 = meio da tela,
 ## 0.0 = topo da tela). Menor = mostra menos coisa além da parede do fundo.
 @export_range(0.0, 0.5) var ponto_fundo := 0.5
+## ZONAS DE CÂMERA: quantos metros ANTES da borda da zona a câmera já troca para a
+## próxima, olhando para onde o player está andando. 0 = só troca encostando na borda.
+@export_range(0.0, 8.0, 0.1) var antecipacao_zona := 3.0
 
 ## Abre um "buraco" (efeito de pontinhos) na parte das paredes que fica entre a
 ## câmera e o player, pra dar pra ver o player atrás delas. O chão nunca some.
@@ -40,6 +43,7 @@ var _limites_mapa: Rect2      # limites do mapa inteiro (usado quando não há z
 var _tem_limites_mapa := false
 var _zonas: Array = []        # zonas de câmera da cena
 var _zona_atual: Node = null
+var _direcao_suave := Vector3.ZERO   # direção em que o player está andando (suavizada)
 var _zoom := 1.0              # 1 = distância normal; menor = mais perto do player
 
 var _conversa: Array = []     # player + NPC quando a tela de diálogo está aberta
@@ -244,13 +248,37 @@ func _atualizar_zona(delta: float, na_hora: bool) -> void:
 	if _zonas.is_empty():
 		return
 	var pos := player.global_position
+
+	# Olha um pouco À FRENTE do player (para onde ele anda): assim a câmera troca de
+	# zona alguns metros antes da borda, e não só quando ele encosta no limite.
+	var vel := Vector3.ZERO
+	if "velocity" in player:
+		vel = player.velocity
+	vel.y = 0.0
+	var dir_alvo := vel.normalized() if vel.length() > 0.5 else Vector3.ZERO
+	_direcao_suave = dir_alvo if na_hora else _direcao_suave.lerp(dir_alvo, 1.0 - exp(-8.0 * delta))
+	var frente := pos + _direcao_suave * antecipacao_zona
+
+	var atual_ok: bool = _zona_atual != null and is_instance_valid(_zona_atual)
+	# parado (ou andando dentro da zona): fica na zona atual enquanto estiver
+	# perto dela, para a câmera não ficar indo e voltando
+	var fica: bool = atual_ok and _zona_atual.contem(frente)
+	if atual_ok and _direcao_suave.length() < 0.3 \
+			and _zona_atual.retangulo().grow(antecipacao_zona).has_point(Vector2(pos.x, pos.z)):
+		fica = true
+
 	var melhor: Node = null
-	for z in _zonas:
-		if not is_instance_valid(z) or not z.contem(pos):
-			continue
-		if melhor == null or z.prioridade > melhor.prioridade \
-				or (z.prioridade == melhor.prioridade and z == _zona_atual):
-			melhor = z
+	if not fica:
+		# primeiro tenta o ponto à frente; se não tiver zona lá, usa a posição do player
+		for ponto in [frente, pos]:
+			for z in _zonas:
+				if not is_instance_valid(z) or not z.contem(ponto):
+					continue
+				if melhor == null or z.prioridade > melhor.prioridade \
+						or (z.prioridade == melhor.prioridade and z == _zona_atual):
+					melhor = z
+			if melhor != null:
+				break
 	if melhor != null:
 		_zona_atual = melhor
 	# fora de todas as zonas: continua usando a última (ou o mapa inteiro)

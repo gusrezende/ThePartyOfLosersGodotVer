@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+const Sons = preload("res://Músicas/sons.gd")
+
 ## Ciclo da MissEile:
 ## 1. SHOOTING  -> parada no lugar dela, atira quando o player está perto (animação "idle")
 ## 2. CHARGING  -> depois de um tempo, mostra no chão a área da explosão (animação "attack")
@@ -85,6 +87,7 @@ func _physics_process(delta: float) -> void:
 
 	if not _casa_ajustada:
 		_ajustar_casa()
+	_atualizar_som_voo()
 
 	match state:
 		State.SHOOTING:
@@ -171,6 +174,7 @@ func process_charging(delta: float) -> void:
 
 func explodir() -> void:
 	sprite.modulate = Color.WHITE
+	Sons.tocar(self, Sons.EXPLOSAO)
 	var centro := _ponto_no_chao(global_position.x, global_position.z)
 
 	var ex := EXPLOSAO.new()
@@ -333,6 +337,33 @@ func _mostrar_vitoria() -> void:
 
 func _distancia_plana(a: Vector3, b: Vector3) -> float:
 	return Vector2(a.x - b.x, a.z - b.z).length()
+
+
+## Som de "míssil voando": toca enquanto ela voa atrás do player e para quando ela para.
+var _som_voo: AudioStreamPlayer
+var _tw_som_voo: Tween
+
+func _atualizar_som_voo() -> void:
+	var voando := state == State.CHASING
+	if voando and (_som_voo == null or not is_instance_valid(_som_voo)):
+		if _tw_som_voo and _tw_som_voo.is_valid():
+			_tw_som_voo.kill()
+		var som: AudioStream = Sons.MISSIL_VOANDO
+		if "loop" in som:
+			som.loop = true
+		_som_voo = AudioStreamPlayer.new()
+		_som_voo.stream = som
+		_som_voo.volume_db = Sons.VOLUMES.get(som, 0.0)
+		add_child(_som_voo)
+		_som_voo.play(0.4)   # pula o silêncio do começo do arquivo
+	elif not voando and _som_voo and is_instance_valid(_som_voo) and not _som_voo.has_meta("parando"):
+		# some suavemente
+		var s := _som_voo
+		s.set_meta("parando", true)
+		_som_voo = null
+		_tw_som_voo = create_tween()
+		_tw_som_voo.tween_property(s, "volume_db", -40.0, 0.35)
+		_tw_som_voo.tween_callback(s.queue_free)
 
 
 ## A posição inicial dela pode estar alta ou baixa demais em relação ao chão do mapa.

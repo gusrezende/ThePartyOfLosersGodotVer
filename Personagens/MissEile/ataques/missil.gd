@@ -1,4 +1,6 @@
 extends Node3D
+
+const Sons = preload("res://Músicas/sons.gd")
 ## Míssil da MissEile: mostra o aviso no chão e uma bola branca cai do céu.
 ## Quando chega no chão, explode e machuca o player se ele estiver dentro do círculo.
 
@@ -35,6 +37,9 @@ func _ready() -> void:
 	_bola.mesh = esf
 	_bola.position.y = ALTURA_QUEDA
 	add_child(_bola)
+
+	# apito + explosão: começa agora, e a explosão do som cai junto com o impacto
+	Sons.tocar_missil(self, tempo)
 
 
 func _physics_process(delta: float) -> void:
