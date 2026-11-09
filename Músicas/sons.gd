@@ -18,7 +18,7 @@ const EXPLOSAO := preload("res://Músicas/Efeitos/explosao.mp3")              # 
 
 ## Volume de cada efeito (dB). 0 = volume do arquivo. Ajuste aqui se algum ficar alto/baixo.
 const VOLUMES := {
-	MISSIL: -15.0,
+	MISSIL: -5.0,
 	MISSIL_VOANDO: -6.0,
 	TRANSICAO: -3.0,
 	COGUMELO: 0.0,
@@ -86,3 +86,21 @@ static func tocar_missil(quem: Node, tempo_queda: float) -> void:
 		var arvore := quem.get_tree()
 		var t := arvore.create_timer(-adianto, false)
 		t.timeout.connect(func(): tocar(arvore.root, MISSIL, 0.0, 0.0, true))
+
+
+## Som da transição da estrela: toca o efeito e PARA A MÚSICA NA HORA.
+## Depois da transição, chame retomar_musica() (a transicao.gd já faz isso).
+static func tocar_transicao(quem: Node) -> void:
+	tocar(quem, TRANSICAO)
+	if quem and quem.is_inside_tree():
+		var musica := quem.get_tree().root.get_node_or_null("Musica")
+		if musica and musica.has_method("parar_agora"):
+			musica.parar_agora()
+
+
+## Volta a música da cena atual depois de uma transição.
+static func retomar_musica(quem: Node) -> void:
+	if quem and quem.is_inside_tree():
+		var musica := quem.get_tree().root.get_node_or_null("Musica")
+		if musica and musica.has_method("retomar"):
+			musica.retomar()

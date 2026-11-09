@@ -79,7 +79,7 @@ func _entrar() -> void:
 	_estava_pausado = get_tree().paused
 	get_tree().paused = true
 	var tr := _transicao()
-	Sons.tocar(self, Sons.TRANSICAO)
+	Sons.tocar_transicao(self)   # som da estrela + música para na hora
 	if tr:
 		tr._preparar()
 		await tr._animar(1.0, 0.5, Tween.EASE_IN)
@@ -101,7 +101,7 @@ func sair() -> void:
 	_saindo = true
 	_ativo = false
 	var tr := _transicao()
-	Sons.tocar(self, Sons.TRANSICAO)
+	Sons.tocar_transicao(self)   # som da estrela + música para na hora
 	if tr:
 		tr._preparar()
 		await tr._animar(1.0, 0.5, Tween.EASE_IN)
@@ -109,6 +109,7 @@ func sair() -> void:
 	visible = false
 	saiu.emit()
 	get_tree().paused = _estava_pausado
+	Sons.retomar_musica(self)   # voltou para a dungeon: a música volta
 	if tr:
 		await get_tree().create_timer(0.15).timeout
 		tr._preparar()

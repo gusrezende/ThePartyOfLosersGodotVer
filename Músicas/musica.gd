@@ -32,6 +32,7 @@ var _musica_atual: AudioStream = null
 var _tw: Tween
 var _tw_abaixar: Tween
 var _abaixada := false
+var _parada := false          # parada pela transição: espera retomar()
 
 
 func _ready() -> void:
@@ -48,6 +49,8 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	if _parada:
+		return
 	var cena := get_tree().current_scene
 	var caminho := cena.scene_file_path if cena else ""
 	if caminho == _cena_atual:
@@ -93,3 +96,25 @@ func abaixar(sim: bool) -> void:
 	_tw_abaixar = create_tween()
 	_tw_abaixar.tween_property(_tocadores[_ativo], "volume_db", _volume_alvo(), 0.4 if sim else 0.8) \
 		.set_trans(Tween.TRANS_SINE)
+
+
+## Para a música NA HORA (sem fade). Usado quando toca o som da transição.
+## Ela fica em silêncio até alguém chamar retomar().
+func parar_agora() -> void:
+	_parada = true
+	if _tw and _tw.is_valid():
+		_tw.kill()
+	if _tw_abaixar and _tw_abaixar.is_valid():
+		_tw_abaixar.kill()
+	for p in _tocadores:
+		p.stop()
+		p.volume_db = -80.0
+	_musica_atual = null
+
+
+## Volta a tocar a música da cena atual (começando suave).
+func retomar() -> void:
+	if not _parada:
+		return
+	_parada = false
+	_cena_atual = ""   # força escolher de novo a música da cena

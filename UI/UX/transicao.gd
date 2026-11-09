@@ -96,7 +96,7 @@ func ir_para(destino, duracao := 0.8) -> void:
 	_rect.mouse_filter = Control.MOUSE_FILTER_STOP
 
 	_preparar()
-	Sons.tocar(self, Sons.TRANSICAO)
+	Sons.tocar_transicao(self)                       # som da estrela + música para na hora
 	await _animar(1.0, duracao, Tween.EASE_IN)      # fecha em volta do player
 
 	get_tree().paused = false
@@ -108,6 +108,7 @@ func ir_para(destino, duracao := 0.8) -> void:
 	await get_tree().process_frame
 	await get_tree().process_frame
 	await get_tree().create_timer(0.25).timeout      # segura a tela preta, como no N64
+	Sons.retomar_musica(self)                        # começa a música da cena nova
 
 	_preparar()                                      # recalcula o centro na cena nova
 	await _animar(0.0, duracao, Tween.EASE_OUT)      # reabre em volta do player
