@@ -353,7 +353,7 @@ func _atualizar_som_voo() -> void:
 			som.loop = true
 		_som_voo = AudioStreamPlayer.new()
 		_som_voo.stream = som
-		_som_voo.volume_db = Sons.VOLUMES.get(som, 0.0)
+		_som_voo.volume_db = Sons.volume_de(som)
 		add_child(_som_voo)
 		_som_voo.play(0.4)   # pula o silêncio do começo do arquivo
 	elif not voando and _som_voo and is_instance_valid(_som_voo) and not _som_voo.has_meta("parando"):

@@ -1,6 +1,48 @@
 [gd_scene format=3 uid="uid://mie07622rgwq"]
 
 [ext_resource type="Script" uid="uid://do7df21jfabr4" path="res://UI/MainMenu/main_menu.gd" id="1_nhkf3"]
+[ext_resource type="Script" path="res://UI/MainMenu/fundo_animado.gd" id="2_fundo"]
+[ext_resource type="Texture2D" path="res://UI/MainMenu/assets/fundo_menu_1.jpg" id="3_q1"]
+[ext_resource type="Texture2D" path="res://UI/MainMenu/assets/fundo_menu_2.jpg" id="4_q2"]
+[ext_resource type="Texture2D" path="res://UI/MainMenu/assets/fundo_menu_3.jpg" id="5_q3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_botao"]
+content_margin_left = 16.0
+content_margin_top = 6.0
+content_margin_right = 16.0
+content_margin_bottom = 6.0
+bg_color = Color(0.16, 0.06, 0.32, 0.92)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.1, 0.03, 0.18, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.4)
+shadow_size = 4
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_botao_sel"]
+content_margin_left = 16.0
+content_margin_top = 6.0
+content_margin_right = 16.0
+content_margin_bottom = 6.0
+bg_color = Color(0.4, 0.2, 0.68, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.84, 0.45, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.4)
+shadow_size = 4
+shadow_offset = Vector2(0, 3)
 
 [node name="MainMenu" type="Control" unique_id=2072714089]
 layout_mode = 3
@@ -20,6 +62,21 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.3162761, 0.02491238, 0.369929, 1)
 
+[node name="Fundo" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_q1")
+expand_mode = 1
+stretch_mode = 6
+script = ExtResource("2_fundo")
+quadros = Array[Texture2D]([ExtResource("3_q1"), ExtResource("4_q2"), ExtResource("3_q1"), ExtResource("5_q3")])
+fps = 4.0
+
 [node name="Label" type="Label" parent="." unique_id=549021366]
 layout_mode = 1
 anchors_preset = 5
@@ -29,19 +86,18 @@ offset_left = -75.5
 offset_right = 75.5
 offset_bottom = 23.0
 grow_horizontal = 2
+visible = false
 text = "The Party Of Losers"
-horizontal_alignment = 1
+horizontal_theme_override_constants/separation = 14
+alignment = 1
 
 [node name="CenterContainer" type="Container" parent="." unique_id=312429462]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.294
-anchor_top = 0.5
-anchor_right = 0.73700005
-anchor_bottom = 0.804
-offset_left = -0.07600403
-offset_right = -1.3980713
-offset_bottom = 0.07998657
+anchor_left = 0.66
+anchor_top = 0.6
+anchor_right = 0.95
+anchor_bottom = 0.92
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -53,11 +109,31 @@ offset_transform_enabled = true
 alignment = 1
 
 [node name="PlayButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1638662046]
-custom_minimum_size = Vector2(360, 72)
+custom_minimum_size = Vector2(210, 48)
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.55, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.1, 0.03, 0.18, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_botao")
+theme_override_styles/hover = SubResource("StyleBoxFlat_botao_sel")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_botao_sel")
+theme_override_styles/focus = SubResource("StyleBoxFlat_botao_sel")
 text = "Play"
 
 [node name="ExitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=45832191]
-custom_minimum_size = Vector2(360, 72)
+custom_minimum_size = Vector2(210, 48)
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.55, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.1, 0.03, 0.18, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_botao")
+theme_override_styles/hover = SubResource("StyleBoxFlat_botao_sel")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_botao_sel")
+theme_override_styles/focus = SubResource("StyleBoxFlat_botao_sel")
 text = "Exit"

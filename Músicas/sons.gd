@@ -16,6 +16,10 @@ const JOGANDO_COGUMELO := preload("res://Músicas/Efeitos/jogando_cogumelo.mp3")
 const NPC := preload("res://Músicas/Efeitos/npc_interacao.mp3")              # conversa com NPC
 const EXPLOSAO := preload("res://Músicas/Efeitos/explosao.mp3")              # explosões
 
+## VOLUME GERAL de todos os efeitos (dB). Vale para todos de uma vez, além do volume
+## de cada um abaixo. -6 = metade da força, -12 = um quarto, 0 = sem mudança.
+const VOLUME_GERAL := -8.0
+
 ## Volume de cada efeito (dB). 0 = volume do arquivo. Ajuste aqui se algum ficar alto/baixo.
 const VOLUMES := {
 	MISSIL: -5.0,
@@ -53,7 +57,7 @@ static func tocar(quem: Node, som: AudioStream, volume_extra := 0.0, a_partir_de
 		return null
 	var p := AudioStreamPlayer.new()
 	p.stream = som
-	p.volume_db = VOLUMES.get(som, 0.0) + volume_extra
+	p.volume_db = volume_de(som) + volume_extra
 	# normalmente toca mesmo com o jogo pausado; os "pausáveis" param junto com o jogo
 	p.process_mode = Node.PROCESS_MODE_PAUSABLE if pausavel else Node.PROCESS_MODE_ALWAYS
 	quem.get_tree().root.add_child(p)
@@ -104,3 +108,8 @@ static func retomar_musica(quem: Node) -> void:
 		var musica := quem.get_tree().root.get_node_or_null("Musica")
 		if musica and musica.has_method("retomar"):
 			musica.retomar()
+
+
+## Volume final de um efeito (volume geral + volume dele)
+static func volume_de(som: AudioStream) -> float:
+	return VOLUME_GERAL + VOLUMES.get(som, 0.0)
