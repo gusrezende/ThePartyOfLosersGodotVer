@@ -5,15 +5,19 @@ extends Node
 ## - Se a cena nova usa a MESMA música (ex.: morreu e a fase recarregou),
 ##   a música continua de onde estava, sem recomeçar.
 ## - Continua tocando com o jogo pausado (diálogo, sala de point and click).
-## - Cenas que não estão na lista abaixo ficam em silêncio (menu, cinemática...).
+## - Cenas que não estão na lista abaixo ficam em silêncio.
 ##
 ## Para colocar música em outra cena: adicione uma linha em MUSICAS.
 
 const DUNGEON := preload("res://Músicas/curious_motif.mp3")   # Dungeon Teste
 const BOSS := preload("res://Músicas/is_that_a_gnome_in_jetpacks.mp3")
+const MENU := preload("res://Músicas/medieval_village.mp3")
+const CINEMATICA := preload("res://Músicas/musica_cinematica.mp3")
 
 ## Cena -> música
 var MUSICAS := {
+	"res://UI/MainMenu/main_menu.tscn": MENU,
+	"res://UI/Cinematic/cinematic.tscn": CINEMATICA,
 	"res://Cenários/DungeonTeste/dungeon_teste.tscn": DUNGEON,
 	"res://Cenários/BossMissEile/bossMissEile.tscn": BOSS,
 }
@@ -43,7 +47,7 @@ func _ready() -> void:
 		p.process_mode = Node.PROCESS_MODE_ALWAYS
 		add_child(p)
 		_tocadores.append(p)
-	for m in [DUNGEON, BOSS]:
+	for m in [DUNGEON, BOSS, MENU, CINEMATICA]:
 		if "loop" in m:
 			m.loop = true   # repete sem parar
 

@@ -2,7 +2,7 @@ extends "res://Personagens/Enemy1/enemy_1.gd"
 ## Inimigo que atira: usa o mesmo corpo e animações do Enemy1, mas mantém distância
 ## do player e dispara projéteis nele. Quando morre, vira corpo no chão igual ao Enemy1.
 
-const PROJETIL = preload("res://Personagens/MissEile/projectile/boss_projectile.tscn")
+const PROJETIL = preload("res://Personagens/Enemy1/projetil/prato_projetil.tscn")   # prato de comida
 
 ## Distância em que ele percebe o player e começa a atirar
 @export var alcance_tiro := 11.0
