@@ -66,12 +66,17 @@ var shooting_elapsed := 0.0
 var charge_timer := 0.0
 var chuva_restante := 0.0
 var onda_timer := 0.0
-var _casa_ajustada := false   # a altura da "casa" é acertada pelo chão no 1º quadro de física
+var _casa_ajustada := false
+const BarraVida = preload("res://Personagens/MissEile/barra_vida_boss.gd")
+var _barra: CanvasLayer   # barra de vida no topo da tela   # a altura da "casa" é acertada pelo chão no 1º quadro de física
 
 @onready var sprite: AnimatedSprite3D = $AnimatedSprite3D
 
 
 func _ready() -> void:
+	_barra = BarraVida.new()
+	_barra.configurar("MissEile", MAX_HP)
+	get_parent().add_child.call_deferred(_barra)
 	# ela VOA: sem lógica de chão/rampa do CharacterBody (não fica presa em degraus e bordas)
 	motion_mode = CharacterBody3D.MOTION_MODE_FLOATING
 	home_position = global_position
@@ -88,6 +93,8 @@ func _physics_process(delta: float) -> void:
 	if not _casa_ajustada:
 		_ajustar_casa()
 	_atualizar_som_voo()
+	if _barra and is_instance_valid(_barra):
+		_barra.vulneravel(can_take_damage)
 
 	match state:
 		State.SHOOTING:
@@ -134,6 +141,7 @@ func shoot_at_player() -> void:
 	get_tree().current_scene.add_child(projectile)
 	projectile.global_position = Vector3(global_position.x, player.global_position.y, global_position.z)
 	projectile.launch(shot_direction)
+	Sons.tocar(self, Sons.FIREBALL)
 
 
 func enter_shooting() -> void:
@@ -310,6 +318,8 @@ func take_damage(amount: int) -> void:
 		return
 	hp -= amount
 	print("MissEile tomou dano, HP restante: ", hp)
+	if _barra and is_instance_valid(_barra):
+		_barra.atualizar(hp)
 	if state != State.CHARGING:
 		sprite.modulate = Color(1.0, 0.5, 0.5)
 		var tween := create_tween()
@@ -320,6 +330,8 @@ func take_damage(amount: int) -> void:
 
 func die() -> void:
 	state = State.DEAD
+	if _barra and is_instance_valid(_barra):
+		_barra.sumir()
 	can_take_damage = false
 	chuva_restante = 0.0
 	velocity = Vector3.ZERO

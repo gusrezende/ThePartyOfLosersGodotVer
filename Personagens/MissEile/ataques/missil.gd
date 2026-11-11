@@ -1,8 +1,8 @@
 extends Node3D
 
 const Sons = preload("res://Músicas/sons.gd")
-## Míssil da MissEile: mostra o aviso no chão e uma mini MissEile cai do céu,
-## de cabeça pra baixo, com a animação de voo dela.
+## Míssil da MissEile: mostra o aviso no chão e um gnomo cai do céu de cabeça
+## pra baixo (animação "Gnomos caindo").
 ## Quando chega no chão, explode e machuca o player se ele estiver dentro do círculo.
 
 const AVISO = preload("res://Personagens/MissEile/ataques/aviso_chao.gd")
@@ -10,16 +10,18 @@ const EXPLOSAO = preload("res://Personagens/MissEile/ataques/explosao.gd")
 
 const ALTURA_QUEDA = 16.0
 
-## Quadros da animação "flying" da MissEile
+## Quadros da animação do gnomo caindo (já desenhado de cabeça pra baixo)
 const QUADROS_VOO := [
-	preload("res://Personagens/MissEile/newAssets/flying/1000280557.png"),
-	preload("res://Personagens/MissEile/newAssets/flying/1000280558.png"),
-	preload("res://Personagens/MissEile/newAssets/flying/1000280559.png"),
+	preload("res://Personagens/MissEile/ataques/gnomo_caindo/MagoCaindo0000.png"),
+	preload("res://Personagens/MissEile/ataques/gnomo_caindo/MagoCaindo0001.png"),
+	preload("res://Personagens/MissEile/ataques/gnomo_caindo/MagoCaindo0002.png"),
 ]
-## Velocidade da animação (quadros por segundo; a MissEile grande usa 10)
+## Velocidade da animação (quadros por segundo)
 const FPS_VOO := 10.0
-## Altura da mini MissEile, em metros
-const ALTURA_MINI := 1.4
+## Altura do desenho do gnomo, em metros (só a parte desenhada, sem o vazio em volta)
+const ALTURA_MINI := 1.6
+## true = vira o desenho de cabeça pra baixo (os quadros novos já vêm virados)
+const VIRAR_DESENHO := false
 
 ## Altura do centro dela quando a ponta do chapéu encosta no chão
 var _altura_no_chao := ALTURA_MINI * 0.5
@@ -57,16 +59,25 @@ func _ready() -> void:
 		frames.add_frame(&"flying", q)
 	_sprite = AnimatedSprite3D.new()
 	_sprite.sprite_frames = frames
-	_sprite.flip_v = true                                   # de cabeça pra baixo
+	_sprite.flip_v = VIRAR_DESENHO
 	_sprite.billboard = BaseMaterial3D.BILLBOARD_ENABLED    # sempre virada para a câmera
 	_sprite.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+	# mede a parte desenhada da imagem (ignora o vazio transparente em volta)
 	var tex: Texture2D = QUADROS_VOO[0]
-	_sprite.pixel_size = ALTURA_MINI / float(tex.get_height())
+	var img := tex.get_image()
+	if img.is_compressed():
+		img.decompress()
+	var usado := img.get_used_rect()
+	if usado.size.y <= 0:
+		usado = Rect2i(Vector2i.ZERO, img.get_size())
+	_sprite.pixel_size = ALTURA_MINI / float(usado.size.y)
 	_sprite.frame = randi() % QUADROS_VOO.size()
 	_bola.add_child(_sprite)
 	_sprite.play(&"flying")
-	# a ponta do chapéu fica um pouco acima da borda da imagem
-	_altura_no_chao = ALTURA_MINI * 0.5 - 35.0 * _sprite.pixel_size
+	# o ponto mais baixo do desenho (a cabeça) encosta no chão no impacto
+	var centro_y := img.get_height() * 0.5
+	var mais_baixo := float(usado.end.y) if not VIRAR_DESENHO else float(img.get_height() - usado.position.y)
+	_altura_no_chao = (mais_baixo - centro_y) * _sprite.pixel_size + 0.05
 
 	# apito + explosão: começa agora, e a explosão do som cai junto com o impacto
 	Sons.tocar_missil(self, tempo)

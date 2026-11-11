@@ -1,24 +1,40 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" uid="uid://d10yxtpc2rn5b" path="res://Personagens/MissEile/projectile/boss_projectile.gd" id="1_proj"]
-[ext_resource type="Texture2D" path="res://Personagens/Enemy1/projetil/prato.png" id="2_prato"]
+[ext_resource type="Texture2D" path="res://Personagens/Enemy1/projetil/quadro0000.png" id="2_q0"]
+[ext_resource type="Texture2D" path="res://Personagens/Enemy1/projetil/quadro0001.png" id="3_q1"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_prato"]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_prato"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_q0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_q1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
 [node name="PratoProjetil" type="Area3D"]
 script = ExtResource("1_proj")
-angulo_rabo_desenho = 212.0
-tremulacao = 0.4
-espelhar_para_esquerda = true
+tremulacao = 0.3
+seguir_direcao = false
+girar_graus_por_segundo = 540.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_prato")
 
-[node name="Fogo" type="Sprite3D" parent="."]
-pixel_size = 0.005
+[node name="Fogo" type="AnimatedSprite3D" parent="."]
+pixel_size = 0.0032
 shaded = false
 alpha_cut = 0
 texture_filter = 3
-texture = ExtResource("2_prato")
+sprite_frames = SubResource("SpriteFrames_prato")
+autoplay = "default"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

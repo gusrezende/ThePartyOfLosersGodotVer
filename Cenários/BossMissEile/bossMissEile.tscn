@@ -3,9 +3,16 @@
 [ext_resource type="PackedScene" uid="uid://c5mste5xg54bn" path="res://Personagens/PlayerMage/player.tscn" id="1_4qoim"]
 [ext_resource type="PackedScene" uid="uid://ctgksfe5gr648" path="res://Cenários/DungeonTeste/modelo/MapaBOSS.glb" id="1_rcceg"]
 [ext_resource type="PackedScene" uid="uid://bmwihea3gmy11" path="res://Personagens/MissEile/miss_eile.tscn" id="2_8jn4o"]
-[ext_resource type="Script" path="res://Cenários/BossMissEile/colisao_mapa.gd" id="2_x72e8"]
+[ext_resource type="Script" uid="uid://bomwqj4h8d5ry" path="res://Cenários/BossMissEile/colisao_mapa.gd" id="2_x72e8"]
 [ext_resource type="PackedScene" uid="uid://b4flc54piu4pc" path="res://UI/Life Hearts UI/lifeHeartsUI.tscn" id="3_52jy6"]
 [ext_resource type="Script" uid="uid://c0b8omxeyavhi" path="res://Personagens/PlayerMage/camera_3d.gd" id="4_2s2v4"]
+[ext_resource type="Script" uid="uid://bk0xp6pct7l88" path="res://Mecânicas/ZonaCamera/zona_camera.gd" id="7_rvfwa"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cu1ub"]
+size = Vector3(9, 4, 17)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rs83b"]
+size = Vector3(29, 4, 32)
 
 [node name="Node3D" type="Node3D" unique_id=701580891]
 
@@ -17,16 +24,44 @@ script = ExtResource("2_x72e8")
 transform = Transform3D(1, 0, 0, 0, 0.80904245, 0.5877502, 0, -0.58775026, 0.8090424, 0.004323079, 9.287528, 8.573594)
 
 [node name="Player" parent="." unique_id=1477526133 instance=ExtResource("1_4qoim")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4919219, -0.3, 14.8910675)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 35.5)
 
 [node name="MissEile" parent="." unique_id=1731039629 instance=ExtResource("2_8jn4o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5025947, 0.016088367, -4.5163717)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5025947, 0.016088367, 5.1857395)
 arena_min = Vector2(-13, -8)
 arena_max = Vector2(13, 22)
 
 [node name="Hearts" parent="." unique_id=520576831 instance=ExtResource("3_52jy6")]
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=452996514]
-transform = Transform3D(1, 0, 0, 0, 0.6993348, 0.7147943, 0, -0.7147943, 0.6993348, -0.59398174, 8.585146, 20.20568)
+transform = Transform3D(1, 0, 0, 0, 0.6993348, 0.7147943, 0, -0.7147943, 0.6993348, -0.1022598, 8.585146, 40.814613)
 fov = 55.15981
 script = ExtResource("4_2s2v4")
+
+[node name="ZonasCamera" type="Node3D" parent="." unique_id=1810173978]
+
+[node name="Caminho" type="Area3D" parent="ZonasCamera" unique_id=664248745]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 30)
+collision_layer = 0
+collision_mask = 0
+monitoring = false
+monitorable = false
+script = ExtResource("7_rvfwa")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ZonasCamera/Caminho" unique_id=821660871]
+shape = SubResource("BoxShape3D_cu1ub")
+debug_color = Color(0.2, 0.6, 1, 0.25)
+
+[node name="Arena" type="Area3D" parent="ZonasCamera" unique_id=107448020]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 7)
+collision_layer = 0
+collision_mask = 0
+monitoring = false
+monitorable = false
+script = ExtResource("7_rvfwa")
+camera_fixa = true
+ajuste_fixa = Vector2(0, -4)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ZonasCamera/Arena" unique_id=1340201678]
+shape = SubResource("BoxShape3D_rs83b")
+debug_color = Color(0.2, 0.6, 1, 0.25)

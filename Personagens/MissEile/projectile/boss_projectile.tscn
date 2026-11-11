@@ -1,18 +1,20 @@
 [gd_scene format=3 uid="uid://6tx8ivkv67ye"]
 
 [ext_resource type="Script" uid="uid://d10yxtpc2rn5b" path="res://Personagens/MissEile/projectile/boss_projectile.gd" id="1_l2kl3"]
-[ext_resource type="Texture2D" path="res://Personagens/MissEile/projectile/bola_de_fogo.png" id="2_fogo"]
+[ext_resource type="Texture2D" path="res://Personagens/MissEile/projectile/missEile_projetil.png" id="2_fogo"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_g4v7s"]
 
 [node name="BossProjectile" type="Area3D" unique_id=1166333533]
 script = ExtResource("1_l2kl3")
+seguir_direcao = false
+girar_graus_por_segundo = 220.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1732535943]
 shape = SubResource("SphereShape3D_g4v7s")
 
 [node name="Fogo" type="Sprite3D" parent="."]
-pixel_size = 0.0045
+pixel_size = 0.0034
 shaded = false
 alpha_cut = 0
 texture_filter = 3

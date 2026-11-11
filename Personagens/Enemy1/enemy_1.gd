@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+const Sons = preload("res://Músicas/sons.gd")
+
 const SPEED = 2.5
 const MAX_HP = 10
 const ATTACK_RANGE = 1.5
@@ -78,6 +80,7 @@ func take_damage(amount: int) -> void:
 
 func morrer() -> void:
 	morto = true
+	Sons.tocar(self, Sons.COGUMELO_MORRE)
 	set_physics_process(false)
 	velocity = Vector3.ZERO
 

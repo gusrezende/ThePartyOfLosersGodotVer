@@ -97,6 +97,10 @@ func _process(delta: float) -> void:
 
 ## Onde a câmera deveria estar: atrás do player, mas sem passar dos limites do mapa.
 func _alvo_limitado() -> Vector3:
+	if _zona_atual != null and is_instance_valid(_zona_atual) and _zona_atual.get("camera_fixa"):
+		var r: Rect2 = _zona_atual.retangulo().grow(_zona_atual.folga_fixa)
+		r.position += _zona_atual.ajuste_fixa
+		return _alvo_fixo(r)
 	var alvo := player.global_position + offset * _zoom
 	if not _tem_limites:
 		return alvo
@@ -313,6 +317,31 @@ func _zoom_da_zona() -> float:
 	var altura_cabe: float = _zona_atual.retangulo().size.x / largura_por_m
 	var z: float = (altura_cabe - 1.0) / offset.y
 	return clampf(z, _zona_atual.zoom_minimo, 1.0)
+
+
+## Câmera fixa: fração da altura da tela, em cima, que fica livre (barra de vida, chefe alta)
+const FAIXA_TOPO_FIXA := 0.1
+
+## CÂMERA FIXA: posição que mostra o retângulo inteiro (olhando de cima), sem seguir o player.
+func _alvo_fixo(r: Rect2) -> Vector3:
+	var tam := get_viewport().get_visible_rect().size
+	var chao_y := player.global_position.y - 1.0
+	# chão visível para 1 m de altura de câmera
+	var perto := _no_chao(Vector2(tam.x * 0.5, tam.y), 1.0)        # embaixo da tela
+	# deixa uma faixa livre em cima: lá ficam a barra de vida e os personagens altos
+	var longe := _no_chao(Vector2(tam.x * 0.5, tam.y * FAIXA_TOPO_FIXA), 1.0)
+	var esq := _no_chao(Vector2(0.0, tam.y * 0.5), 1.0)
+	var dir := _no_chao(Vector2(tam.x, tam.y * 0.5), 1.0)
+	var fundo_por_m := perto.y - longe.y
+	var largura_por_m := dir.x - esq.x
+	if fundo_por_m <= 0.01 or largura_por_m <= 0.01:
+		return global_position
+	# altura que faz caber a profundidade e a largura da zona
+	var h := maxf(r.size.y / fundo_por_m, r.size.x / largura_por_m)
+	var centro := r.get_center()
+	var meio_z := (perto.y + longe.y) * 0.5
+	var meio_x := (esq.x + dir.x) * 0.5
+	return Vector3(centro.x - meio_x * h, chao_y + h, centro.y - meio_z * h)
 
 
 ## Distância (X, Z) da câmera até o ponto do chão que aparece nesse pixel da tela.

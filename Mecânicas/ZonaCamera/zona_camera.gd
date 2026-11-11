@@ -20,6 +20,14 @@ extends Area3D
 @export var aproximar_se_estreito := true
 ## O máximo que ela pode se aproximar (0.6 = fica a 60% da distância normal).
 @export_range(0.3, 1.0) var zoom_minimo := 0.6
+## CÂMERA FIXA: enquanto o player está nesta zona, a câmera para de segui-lo e
+## mostra a zona INTEIRA de uma vez (afasta o quanto precisar). Ótimo para arenas.
+@export var camera_fixa := false
+## Folga em volta da zona quando a câmera é fixa (metros)
+@export var folga_fixa := 1.0
+## Empurra o enquadramento da câmera fixa (metros, X e Z do mundo).
+## Ex.: (0, -3) mostra mais o fundo da arena e menos a entrada.
+@export var ajuste_fixa := Vector2.ZERO
 
 
 func _enter_tree() -> void:

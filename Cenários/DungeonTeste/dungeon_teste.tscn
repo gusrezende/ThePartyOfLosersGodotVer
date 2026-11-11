@@ -202,9 +202,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0.6, 6.9)
 
 [node name="Inimigos" type="Node3D" parent="." unique_id=1348244522]
 
-[node name="Enemy1" parent="Inimigos" unique_id=1396215999 groups=["enemy"] instance=ExtResource("9_7c124")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0.8, 1.1)
-
 [node name="Enemy2" parent="Inimigos" unique_id=1957935873 groups=["enemy"] instance=ExtResource("9_7c124")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.457408, 0.8, -0.9901285)
 

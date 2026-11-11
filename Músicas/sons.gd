@@ -15,6 +15,10 @@ const COGUMELO := preload("res://Músicas/Efeitos/cogumelo.mp3")              # 
 const JOGANDO_COGUMELO := preload("res://Músicas/Efeitos/jogando_cogumelo.mp3")  # jogou o cogumelo
 const NPC := preload("res://Músicas/Efeitos/npc_interacao.mp3")              # conversa com NPC
 const EXPLOSAO := preload("res://Músicas/Efeitos/explosao.mp3")              # explosões
+const COGUMELO_MORRE := preload("res://Músicas/Efeitos/cogumelo_morre.mp3")  # inimigo cogumelo morreu
+const COMIDA := preload("res://Músicas/Efeitos/comida.mp3")                  # cogumelo atirador jogou um prato
+const HIT := preload("res://Músicas/Efeitos/hit.mp3")                        # tiro do mago acertou um inimigo
+const FIREBALL := preload("res://Músicas/Efeitos/fireball.mp3")              # MissEile atirou bola de fogo
 
 ## VOLUME GERAL de todos os efeitos (dB). Vale para todos de uma vez, além do volume
 ## de cada um abaixo. -6 = metade da força, -12 = um quarto, 0 = sem mudança.
@@ -29,6 +33,10 @@ const VOLUMES := {
 	JOGANDO_COGUMELO: 0.0,
 	NPC: 6.0,          # o arquivo é bem baixinho
 	EXPLOSAO: -2.0,
+	COGUMELO_MORRE: 0.0,
+	COMIDA: -2.0,
+	HIT: -9.0,         # mais baixo: toca muitas vezes
+	FIREBALL: -3.0,
 }
 
 ## Quantas cópias do MESMO som podem tocar ao mesmo tempo (evita estourar o volume).
