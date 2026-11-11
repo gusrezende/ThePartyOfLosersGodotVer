@@ -27,7 +27,7 @@ transform = Transform3D(1, 0, 0, 0, 0.80904245, 0.5877502, 0, -0.58775026, 0.809
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 35.5)
 
 [node name="MissEile" parent="." unique_id=1731039629 instance=ExtResource("2_8jn4o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5025947, 0.016088367, 5.1857395)
+transform = Transform3D(1.322972, 0, 0, 0, 1.3046603, 0.17758201, 0, -0.242423, 0.95570225, 0.5025947, 0.016088367, 2.9435425)
 arena_min = Vector2(-13, -8)
 arena_max = Vector2(13, 22)
 

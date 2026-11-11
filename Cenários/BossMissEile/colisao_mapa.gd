@@ -21,6 +21,36 @@ extends Node3D
 ## Mostra as paredes invisíveis em vermelho (só para conferir; deixe desligado no jogo)
 @export var mostrar_paredes := false
 
+@export_group("Base escura")
+## Escurece tudo que fica ABAIXO do chão (os barrancos/base da plataforma),
+## num gradiente que vai até o preto.
+@export var escurecer_base := true
+## Onde o escuro COMEÇA, em fração da altura da base
+## (0 = logo abaixo do chão, 0.5 = na metade da base, 1 = lá embaixo)
+@export_range(0.0, 1.0, 0.05) var comeco_escuro := 0.5
+## Onde o escuro fica TOTAL, em fração da altura da base (1 = só no fundo)
+@export_range(0.0, 1.0, 0.05) var fim_escuro := 1.0
+## Cor do escuro (preto = some no fundo)
+@export var cor_escuro := Color(0, 0, 0)
+
+const SHADER_BASE := """
+shader_type spatial;
+render_mode unshaded, blend_mix, depth_draw_never, cull_disabled;
+uniform float topo;
+uniform float inicio;
+uniform float altura;
+uniform vec3 cor : source_color;
+varying float y_mundo;
+void vertex() {
+	y_mundo = (MODEL_MATRIX * vec4(VERTEX, 1.0)).y;
+}
+void fragment() {
+	float k = smoothstep(topo - inicio, topo - inicio - altura, y_mundo);
+	ALBEDO = cor;
+	ALPHA = k;
+}
+"""
+
 
 func _ready() -> void:
 	var faces := PackedVector3Array()
@@ -44,6 +74,9 @@ func _ready() -> void:
 
 	corpo.add_child(_forma(faces))
 
+	if escurecer_base:
+		_aplicar_base_escura(faces)
+
 	if paredes_invisiveis:
 		var paredes := _paredes_na_borda(faces)
 		if not paredes.is_empty():
@@ -52,6 +85,26 @@ func _ready() -> void:
 			corpo.add_child(cs)
 			if mostrar_paredes:
 				_desenhar(paredes)
+
+
+## Coloca um "véu" escuro por cima das malhas, que só aparece abaixo do chão
+func _aplicar_base_escura(faces: PackedVector3Array) -> void:
+	var topo := -INF
+	var fundo := INF
+	for v in faces:
+		topo = maxf(topo, v.y)
+		fundo = minf(fundo, v.y)
+	var altura_base := topo - fundo
+	var shader := Shader.new()
+	shader.code = SHADER_BASE
+	var mat := ShaderMaterial.new()
+	mat.shader = shader
+	mat.set_shader_parameter("topo", topo)
+	mat.set_shader_parameter("inicio", altura_base * comeco_escuro)
+	mat.set_shader_parameter("altura", maxf(altura_base * (fim_escuro - comeco_escuro), 0.01))
+	mat.set_shader_parameter("cor", Vector3(cor_escuro.r, cor_escuro.g, cor_escuro.b))
+	for mi in find_children("*", "MeshInstance3D", true, false):
+		(mi as MeshInstance3D).material_overlay = mat
 
 
 func _forma(faces: PackedVector3Array) -> CollisionShape3D:
