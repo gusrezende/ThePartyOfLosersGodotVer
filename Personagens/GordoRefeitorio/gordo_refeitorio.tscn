@@ -1,0 +1,85 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Personagens/GordoRefeitorio/gordo_refeitorio.gd" id="1_gordo"]
+[ext_resource type="Texture2D" path="res://Personagens/GordoRefeitorio/sprites/gordo_1.png" id="2_i1"]
+[ext_resource type="Texture2D" path="res://Personagens/GordoRefeitorio/sprites/gordo_2.png" id="3_i2"]
+[ext_resource type="Texture2D" path="res://Personagens/GordoRefeitorio/sprites/gordo_raiva_1.png" id="4_r1"]
+[ext_resource type="Texture2D" path="res://Personagens/GordoRefeitorio/sprites/gordo_raiva_2.png" id="5_r2"]
+[ext_resource type="Texture2D" path="res://Personagens/GordoRefeitorio/sprites/gordo_jogando_1.png" id="6_j1"]
+[ext_resource type="Texture2D" path="res://Personagens/GordoRefeitorio/sprites/gordo_jogando_2.png" id="7_j2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gordo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_i1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_i2")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_r1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_r2")
+}],
+"loop": true,
+"name": &"raiva",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_j1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_j2")
+}],
+"loop": false,
+"name": &"jogando",
+"speed": 3.0
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_corpo"]
+size = Vector3(4.4, 2.4, 2.8)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_conversa"]
+radius = 3.4
+
+[node name="GordoRefeitorio" type="CharacterBody3D"]
+script = ExtResource("1_gordo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, -0.9)
+shape = SubResource("BoxShape3D_corpo")
+
+[node name="Sprite" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9252, 0.3795, 0, -0.3795, 0.9252, 0, 1.45, 0)
+pixel_size = 0.026
+sprite_frames = SubResource("SpriteFrames_gordo")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="AreaConversa" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.8)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AreaConversa"]
+shape = SubResource("SphereShape3D_conversa")
+
+[node name="Dica" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.9, 0.3)
+pixel_size = 0.009
+billboard = 1
+no_depth_test = true
+modulate = Color(1, 0.92, 0.7, 1)
+outline_modulate = Color(0.12, 0.04, 0.18, 1)
+text = "[E] Falar"
+font_size = 40
+outline_size = 12
+
+[node name="Mao" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0.9)
