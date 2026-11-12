@@ -340,3 +340,12 @@ script = ExtResource("16_s73jb")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ZonasCamera/Refeitorio" unique_id=73421670]
 shape = SubResource("BoxShape3D_tswpf")
 debug_color = Color(0.2, 0.6, 1, 0.25)
+
+[node name="Enemy5" parent="." unique_id=1396215999 groups=["enemy"] instance=ExtResource("9_7c124")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.8947554, 0.8, -20.35)
+
+[node name="Enemy6" parent="." unique_id=1911699993 groups=["enemy"] instance=ExtResource("9_7c124")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.018301, 0.8, -23.006695)
+
+[node name="Enemy4" parent="." unique_id=1718902020 groups=["enemy"] instance=ExtResource("9_7c124")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.568904, 0.8, -10.95)

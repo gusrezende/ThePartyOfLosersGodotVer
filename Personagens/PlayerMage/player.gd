@@ -22,7 +22,7 @@ var is_holding_mushroom := false
 
 const PROJECTILE_SCENE = preload("res://Mecânicas/Projectile/projectile.tscn")
 ## Tempo mínimo entre um tiro e outro (segundos)
-const INTERVALO_TIRO = 0.20
+const INTERVALO_TIRO = 0.15
 var _pode_atirar := true   # false durante o cooldown
 const MUSHROOM_PROJECTILE_SCENE = preload("res://Mecânicas/MashroomProjectile/mashroom_projectile.tscn")
 
