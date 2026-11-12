@@ -3,7 +3,7 @@ extends CharacterBody3D
 const Sons = preload("res://Músicas/sons.gd")
 
 const SPEED = 2.5
-const MAX_HP = 10
+const MAX_HP = 5   # era 10
 const ATTACK_RANGE = 1.5
 const ATTACK_DAMAGE = 1
 const ATTACK_COOLDOWN = 1.0

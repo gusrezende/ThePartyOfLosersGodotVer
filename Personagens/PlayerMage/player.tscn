@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cytxnlbnfkmxe" path="res://Personagens/PlayerMage/assets/1000259008.png" id="7_606se"]
 [ext_resource type="Texture2D" uid="uid://gxdu5eyfrru3" path="res://Personagens/PlayerMage/assets/1000259010.png" id="8_u1c27"]
 [ext_resource type="Texture2D" uid="uid://ccgrq2ghaw14s" path="res://Personagens/PlayerMage/assets/1000259011.png" id="9_op7ga"]
-[ext_resource type="Texture2D" uid="uid://blnmivcq6aeij" path="res://Mecânicas/MashroomProjectile/asset/ExplosiveMashroom.png" id="10_c3bqx"]
+[ext_resource type="Texture2D" uid="uid://bdev4lh5qegla" path="res://Mecânicas/MashroomProjectile/asset/131893.png" id="10_iswnk"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
 
@@ -85,6 +85,6 @@ frame_progress = 0.10760876
 speed_scale = 2.0
 
 [node name="HeldMushroom" type="Sprite3D" parent="." unique_id=784663824]
-transform = Transform3D(1.91383, 0, 0, 0, 1.6309448, 1.0013813, 0, -1.0013813, 1.6309448, 0, 0.95317197, 0)
+transform = Transform3D(0.35026214, 0, 0, 0, 0.2958773, 0.42209548, 0, -0.18166526, 0.68746483, 0, 0.95317197, 0)
 visible = false
-texture = ExtResource("10_c3bqx")
+texture = ExtResource("10_iswnk")

@@ -3,19 +3,20 @@ extends Area3D
 const Sons = preload("res://Músicas/sons.gd")
 
 const SPEED = 15.0
-const LIFETIME = 3.0
 const DAMAGE = 1
+## ALCANCE do tiro, em metros: depois dessa distância a bola some
+const ALCANCE = 9.0
 ## Nome da animação a tocar. Se deixar "" (vazio), toca a animação que estiver
 ## selecionada no AnimatedSprite3D no Inspetor.
 const ANIMACAO = "Fire Ball"
 
 var direction := Vector3.ZERO
+var _percorrido := 0.0
+var _sumindo := false
 
 
 func _ready() -> void:
 	_tocar_animacao()
-	await get_tree().create_timer(LIFETIME).timeout
-	queue_free()
 
 
 func _physics_process(delta: float) -> void:
@@ -39,6 +40,9 @@ func _physics_process(delta: float) -> void:
 			_destruir_na_parede(acerto["position"], acerto["normal"])   # parede: se desfaz
 		return
 	global_position = depois
+	_percorrido += SPEED * delta
+	if _percorrido >= ALCANCE and not _sumindo:
+		_sumir_no_ar()
 
 
 func launch(dir: Vector3) -> void:
@@ -55,8 +59,48 @@ func _on_body_entered(body: Node3D) -> void:
 		_acertou = true
 		Sons.tocar(self, Sons.HIT)
 		if body.has_method("take_damage"):
+			var vida_antes = body.get("hp")
 			body.take_damage(DAMAGE)
+			# só treme se o dano pegou (a MissEile às vezes está invulnerável)
+			if vida_antes == null or body.get("hp") != vida_antes:
+				tremer(body)
 		queue_free()
+
+
+# ---------------------------------------------------------------- TREMIDA
+## Força da tremida, em metros (para os lados)
+const TREMIDA_FORCA = 0.12
+## Quanto tempo a tremida dura, em segundos
+const TREMIDA_TEMPO = 0.25
+
+## Faz o desenho do inimigo tremer para os lados por um instante.
+## Mexe só no desenho (o "offset" do sprite), então não atrapalha o movimento nem a colisão.
+static func tremer(corpo: Node) -> void:
+	if corpo == null or not is_instance_valid(corpo):
+		return
+	for s in corpo.find_children("*", "SpriteBase3D", true, false):
+		var sprite := s as SpriteBase3D
+		# se já estava tremendo, para a tremida anterior e volta ao lugar certo
+		if sprite.has_meta("tremida"):
+			var antiga: Tween = sprite.get_meta("tremida")
+			if antiga and antiga.is_valid():
+				antiga.kill()
+			sprite.offset = sprite.get_meta("offset_original")
+		else:
+			sprite.set_meta("offset_original", sprite.offset)
+		var base: Vector2 = sprite.get_meta("offset_original")
+		var forca := TREMIDA_FORCA / maxf(sprite.pixel_size, 0.0001)   # metros -> pixels do desenho
+		var passos := 6
+		var tw := sprite.create_tween()
+		for i in passos:
+			var lado := 1.0 if i % 2 == 0 else -1.0
+			var k := 1.0 - float(i) / passos   # vai diminuindo
+			tw.tween_property(sprite, "offset", base + Vector2(lado * forca * k, randf_range(-0.3, 0.3) * forca * k), TREMIDA_TEMPO / passos)
+		tw.tween_property(sprite, "offset", base, TREMIDA_TEMPO / passos)
+		tw.tween_callback(func():
+			if is_instance_valid(sprite):
+				sprite.remove_meta("tremida"))
+		sprite.set_meta("tremida", tw)
 
 
 ## Acha o AnimatedSprite3D do projétil (qualquer nome) e toca a animação.
@@ -144,3 +188,13 @@ class Faiscas extends Node3D:
 		_mat_clarao.albedo_color.a = 0.6 * (1.0 - k)
 		if _t >= DURACAO:
 			queue_free()
+
+
+## Chegou no alcance máximo: encolhe rapidinho e some
+func _sumir_no_ar() -> void:
+	_sumindo = true
+	set_physics_process(false)
+	set_deferred("monitoring", false)
+	var tw := create_tween()
+	tw.tween_property(self, "scale", Vector3.ONE * 0.05, 0.12)
+	tw.tween_callback(queue_free)

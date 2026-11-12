@@ -22,6 +22,11 @@ extends Camera3D
 ## ZONAS DE CÂMERA: quantos metros ANTES da borda da zona a câmera já troca para a
 ## próxima, olhando para onde o player está andando. 0 = só troca encostando na borda.
 @export_range(0.0, 8.0, 0.1) var antecipacao_zona := 3.0
+## OLHAR PARA ONDE ANDA: andando para CIMA a câmera vai um pouco para cima,
+## andando para BAIXO ela vai um pouco para baixo. Quantos metros ela adianta (0 = desliga).
+@export_range(0.0, 6.0, 0.1) var olhar_frente := 2.0
+## Quão rápido a câmera vai para frente / volta ao centro (menor = mais suave)
+@export_range(0.5, 10.0, 0.1) var olhar_velocidade := 2.5
 
 ## Abre um "buraco" (efeito de pontinhos) na parte das paredes que fica entre a
 ## câmera e o player, pra dar pra ver o player atrás delas. O chão nunca some.
@@ -45,6 +50,7 @@ var _zonas: Array = []        # zonas de câmera da cena
 var _zona_atual: Node = null
 var _direcao_suave := Vector3.ZERO   # direção em que o player está andando (suavizada)
 var _zoom := 1.0              # 1 = distância normal; menor = mais perto do player
+var _olhar_z := 0.0           # quanto a câmera está adiantada para cima/baixo agora
 
 var _conversa: Array = []     # player + NPC quando a tela de diálogo está aberta
 var _modo_antes_conversa := Node.PROCESS_MODE_INHERIT
@@ -88,6 +94,7 @@ func _process(delta: float) -> void:
 		_atualizar_paredes()
 		return
 	_atualizar_zona(delta, false)
+	_atualizar_olhar(delta)
 	alvo = _alvo_limitado()
 	# atraso suave que não depende do FPS
 	peso = 1.0 - exp(-suavidade * delta)
@@ -102,6 +109,7 @@ func _alvo_limitado() -> Vector3:
 		r.position += _zona_atual.ajuste_fixa
 		return _alvo_fixo(r)
 	var alvo := player.global_position + offset * _zoom
+	alvo.z += _olhar_z   # adianta para cima/baixo conforme o player anda
 	if not _tem_limites:
 		return alvo
 
@@ -134,6 +142,20 @@ func _alvo_limitado() -> Vector3:
 	# prioridade: o player nunca pode sumir da tela
 	alvo = _garantir_player_visivel(alvo, livre)
 	return alvo
+
+
+## Calcula o quanto a câmera adianta para cima/baixo, seguindo a direção em que o
+## player está ANDANDO (parado = volta devagar para o centro).
+func _atualizar_olhar(delta: float) -> void:
+	var vel := Vector3.ZERO
+	if "velocity" in player:
+		vel = player.velocity
+	vel.y = 0.0
+	var alvo_z := 0.0
+	if vel.length() > 0.5:
+		# z negativo = para cima na tela; z positivo = para baixo
+		alvo_z = vel.normalized().z * olhar_frente
+	_olhar_z = lerpf(_olhar_z, alvo_z, 1.0 - exp(-olhar_velocidade * delta))
 
 
 ## Se o limite do mapa empurrou o player pra muito perto da borda da tela,

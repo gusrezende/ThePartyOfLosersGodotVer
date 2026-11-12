@@ -3,10 +3,10 @@ shader_type canvas_item;
 
 uniform sampler2D tela : hint_screen_texture, filter_linear_mipmap;
 
-uniform float curvatura : hint_range(0.0, 0.3) = 0.06;         // tela "abaulada"
+uniform float curvatura : hint_range(0.0, 0.3) = 0.03;         // tela "abaulada" (era 0.06)
 uniform float linhas_intensidade : hint_range(0.0, 1.0) = 0.22; // linhas de varredura
 uniform float linhas_quantidade = 240.0;                        // quantas linhas na tela
-uniform float aberracao : hint_range(0.0, 4.0) = 1.2;           // cores "vazando" (vermelho/azul separados)
+uniform float aberracao : hint_range(0.0, 4.0) = 0.6;           // (era 1.2) cores "vazando" (vermelho/azul separados)
 uniform float vinheta : hint_range(0.0, 1.0) = 0.35;            // bordas mais escuras
 uniform float mascara_rgb : hint_range(0.0, 0.5) = 0.08;        // grade de fósforo R G B
 uniform float tremulacao : hint_range(0.0, 0.2) = 0.025;        // brilho piscando de leve

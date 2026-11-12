@@ -21,6 +21,9 @@ var is_holding_mushroom := false
 @onready var held_mushroom: Node3D = $HeldMushroom
 
 const PROJECTILE_SCENE = preload("res://Mecânicas/Projectile/projectile.tscn")
+## Tempo mínimo entre um tiro e outro (segundos)
+const INTERVALO_TIRO = 0.20
+var _pode_atirar := true   # false durante o cooldown
 const MUSHROOM_PROJECTILE_SCENE = preload("res://Mecânicas/MashroomProjectile/mashroom_projectile.tscn")
 
 
@@ -81,6 +84,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func shoot() -> void:
+	if not _pode_atirar:
+		return   # ainda em cooldown
 	var target_point = get_mouse_world_position()
 	if target_point == null:
 		return
@@ -95,6 +100,9 @@ func shoot() -> void:
 	get_tree().current_scene.add_child(projectile)
 	projectile.global_position = global_position
 	projectile.launch(shoot_direction)
+	# cooldown contado no tempo do jogo (para junto quando o jogo pausa)
+	_pode_atirar = false
+	get_tree().create_timer(INTERVALO_TIRO, false).timeout.connect(func(): _pode_atirar = true)
 
 
 func pick_up_mushroom() -> void:
