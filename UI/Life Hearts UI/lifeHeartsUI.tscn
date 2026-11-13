@@ -10,9 +10,12 @@
 script = ExtResource("1_613kq")
 
 [node name="HeartsContainer" type="HBoxContainer" parent="HUD" unique_id=356958251]
-offset_top = -1.0
-offset_right = 200.0
-offset_bottom = 63.0
+offset_left = 18.0
+offset_top = 20.0
+offset_right = 218.0
+offset_bottom = 84.0
+scale = Vector2(1.6, 1.6)
+theme_override_constants/separation = 6
 
 [node name="Heart1" type="TextureProgressBar" parent="HUD/HeartsContainer" unique_id=884335791]
 layout_mode = 2

@@ -27,7 +27,16 @@ float sd_estrela(vec2 p, float r, float n, float m) {
 
 void fragment() {
 	vec2 p = (UV - centro) * vec2(tamanho_tela.x / tamanho_tela.y, 1.0);
-	float raio = mix(3.0, 0.0, progress);
+	// tamanho exato para a estrela, aberta, cobrir até o canto mais longe da tela
+	// (assim ela aparece desde o comecinho da animação, sem "pular" parte dela)
+	vec2 asp = vec2(tamanho_tela.x / tamanho_tela.y, 1.0);
+	float longe = 0.0;
+	longe = max(longe, length((vec2(0.0, 0.0) - centro) * asp));
+	longe = max(longe, length((vec2(1.0, 0.0) - centro) * asp));
+	longe = max(longe, length((vec2(0.0, 1.0) - centro) * asp));
+	longe = max(longe, length((vec2(1.0, 1.0) - centro) * asp));
+	float raio_max = estrela ? longe / 0.45 : longe * 1.02;   // 0.45 = "cintura" da estrela
+	float raio = mix(raio_max, 0.0, progress);
 	float d;
 	if (estrela) {
 		float a = progress * 2.5;               // a estrela gira enquanto fecha
@@ -38,6 +47,7 @@ void fragment() {
 	}
 	float alpha = smoothstep(-0.003, 0.003, d);
 	if (progress > 0.995) alpha = 1.0;
+	if (progress < 0.005) alpha = 0.0;      // aberta: não sobra nada na tela
 	COLOR = vec4(0.0, 0.0, 0.0, alpha);
 }
 """
@@ -61,6 +71,7 @@ func _ready() -> void:
 	_rect.material = _mat
 	_rect.set_anchors_preset(Control.PRESET_FULL_RECT)
 	_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_rect.visible = false
 	add_child(_rect)
 
 
@@ -77,6 +88,7 @@ func _centro_do_player() -> Vector2:
 
 
 func _preparar() -> void:
+	_rect.visible = true
 	_mat.set_shader_parameter("centro", _centro_do_player())
 	_mat.set_shader_parameter("tamanho_tela", get_viewport().get_visible_rect().size)
 	_mat.set_shader_parameter("estrela", usar_estrela)
@@ -87,6 +99,8 @@ func _animar(alvo: float, duracao: float, easing: Tween.EaseType) -> void:
 	tween.set_trans(Tween.TRANS_QUAD).set_ease(easing)
 	tween.tween_property(_mat, "shader_parameter/progress", alvo, duracao)
 	await tween.finished
+	if alvo <= 0.0:
+		_rect.visible = false   # terminou de abrir: esconde de vez a camada preta
 
 
 func ir_para(destino, duracao := 0.8) -> void:

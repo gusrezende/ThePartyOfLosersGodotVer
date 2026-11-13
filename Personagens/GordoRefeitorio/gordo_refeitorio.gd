@@ -30,7 +30,7 @@ const GOROROBA = preload("res://Personagens/GordoRefeitorio/gororoba.tscn")
 
 enum Estado { OCUPADO, CALMO, CONVERSANDO, AMIGO, BRAVO, MORTO }
 
-@export var nome := "Gordo do Refeitório"
+@export var nome := "Chefe do Refeitório"
 
 @export_group("Mini chefe")
 ## Vida do mini chefe (o tiro do mago tira 1, o cogumelo explosivo tira 3)
@@ -48,8 +48,20 @@ enum Estado { OCUPADO, CALMO, CONVERSANDO, AMIGO, BRAVO, MORTO }
 @export var velocidade := 1.3
 
 @export_group("Arena")
+## Ligado: só dá para falar com ele / atacar ele depois de matar os inimigos do refeitório.
+## Desligado: dá para falar ou atacar desde o começo.
+@export var esperar_arena_limpa := false
 ## Usado só se ele não estiver dentro de uma Zona de Câmera
 @export var raio_arena := 16.0
+
+@export_group("Barreira")
+## Parede invisível ATRÁS dele, para ninguém passar por trás e chegar na porta.
+## Some quando ele sai da frente (sopa) ou morre.
+@export var barreira := true
+## Quantos metros para trás a barreira vai (pode entrar na parede, sem problema)
+@export var barreira_profundidade := 8.0
+## Largura extra para cada lado, além do corpo dele e do quanto ele anda
+@export var barreira_folga := 0.5
 
 @export_group("Depois da sopa")
 ## Para onde ele anda (a partir de onde está) para liberar a porta
@@ -68,6 +80,7 @@ var _atacando := false
 var _recarga_encostar := 0.0
 var _barra: CanvasLayer
 var _checar := 0.0
+var _barreira: StaticBody3D
 var _gravidade: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @onready var sprite: AnimatedSprite3D = $Sprite
@@ -91,6 +104,38 @@ func _ready() -> void:
 			_zona_arena = z
 			break
 	_atualizar_estado_arena()
+	if barreira:
+		_criar_barreira()
+
+
+# ---------------------------------------------------------------- BARREIRA
+
+## Cria a parede invisível atrás dele (fica parada, mesmo quando ele anda para os lados)
+func _criar_barreira() -> void:
+	var corpo := $CollisionShape3D as CollisionShape3D
+	var caixa := corpo.shape as BoxShape3D if corpo else null
+	var largura := (caixa.size.x if caixa else 4.4) + passeio_lateral * 2.0 + barreira_folga * 2.0
+	var costas := (corpo.position.z - caixa.size.z * 0.5) if caixa else -2.3   # onde fica as costas dele
+	var forma := BoxShape3D.new()
+	forma.size = Vector3(largura, 4.0, barreira_profundidade)
+	var cs := CollisionShape3D.new()
+	cs.shape = forma
+	_barreira = StaticBody3D.new()
+	_barreira.name = "BarreiraAtras"
+	_barreira.top_level = true
+	_barreira.collision_layer = 1
+	_barreira.add_child(cs)
+	add_child(_barreira)
+	# começa um pouquinho dentro do corpo dele, para não sobrar fresta
+	_barreira.global_transform = global_transform * Transform3D(Basis.IDENTITY,
+		Vector3(0, 2.0, costas + 0.3 - barreira_profundidade * 0.5))
+	add_collision_exception_with(_barreira)   # ele mesmo não bate nela
+
+
+func _remover_barreira() -> void:
+	if _barreira and is_instance_valid(_barreira):
+		_barreira.queue_free()
+	_barreira = null
 
 
 # ---------------------------------------------------------------- ARENA
@@ -114,7 +159,7 @@ func _tem_inimigos_na_arena() -> bool:
 func _atualizar_estado_arena() -> void:
 	if estado != Estado.OCUPADO:
 		return
-	if not _tem_inimigos_na_arena():
+	if not esperar_arena_limpa or not _tem_inimigos_na_arena():
 		estado = Estado.CALMO
 		add_to_group("enemy")   # agora os tiros acertam ele (e deixam ele bravo)
 		_atualizar_dica()
@@ -258,6 +303,7 @@ func _ficar_bravo(grito: String) -> void:
 
 func _morrer() -> void:
 	estado = Estado.MORTO
+	_remover_barreira()
 	remove_from_group("enemy")
 	_dica.visible = false
 	if _barra and is_instance_valid(_barra):
@@ -443,6 +489,7 @@ func _curar_player() -> void:
 ## Depois da sopa: fica amigo e sai da frente da porta
 func _virar_amigo() -> void:
 	estado = Estado.AMIGO
+	_remover_barreira()
 	remove_from_group("enemy")
 	sprite.play("idle")
 	var tw := create_tween()
