@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 const Sons = preload("res://Músicas/sons.gd")
+const TelaMorte = preload("res://UI/TelaMorte/tela_morte.gd")
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -164,9 +165,7 @@ func take_damage(amount: int, source_position = null) -> void:
 		print("Player morreu!")
 		GameState.player_hp = -1  # ao recarregar a cena, volta com a vida cheia
 		QuestManager.resetar_missao()  # a missão das plantas começa de novo
-		get_tree().call_deferred("reload_current_scene")
-
-
+		TelaMorte.mostrar(get_tree())  # animação de morte; ela mesma recomeça a fase
 func apply_knockback(source_position: Vector3) -> void:
 	var direction = global_position - source_position
 	direction.y = 0
